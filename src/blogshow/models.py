@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*
+
 from appengine_django.models import BaseModel
 from google.appengine.ext import db
 
