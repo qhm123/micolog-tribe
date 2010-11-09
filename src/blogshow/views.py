@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 def index(request):
     template = loader.get_template('index.html')
     context = Context({
-        
     })
     
     return HttpResponse(template.render(context))
