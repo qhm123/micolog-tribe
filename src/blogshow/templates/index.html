@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="Keywords" content="micolog,gae,tribe,group" />
+	<meta name="Description" content="micolog部落" />
+	<link type="image/x-icon" rel="icon" href="/static/favicon.ico" />
+	<link type="text/css" rel="stylesheet" href="/static/blogshow.css" />
+	<title>博客秀</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function($){
+		    $('#c1').click(function(){
+					$('#showcontent').load('/static/bloglist.html .1').hide().fadeIn('slow');
+		    });
+		    $('#c2').click(function(){
+		            $('#showcontent').load('/static/bloglist.html .2').hide().fadeIn('slow');
+		    });
+		    $('#c3').click(function(){
+		            $('#showcontent').load('/static/bloglist.html .3').hide().fadeIn('slow');
+		    });
+		    $('#c4').click(function(){
+		            $('#showcontent').load('/static/bloglist.html .4').hide().fadeIn('slow');
+		    });
+		});
+	</script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div id="logo">
+			<a href="{{ blog.baseurl }}"><img src="/static/images/genericlogo.png" alt="micolog logo" /></a>
+			<h1><a href="{{ blog.baseurl }}">博客秀</a></h1>
+			<div id="desc">micolog博客秀</div>
+		</div><!-- /logo -->
+		
+		<div id="headerbanner">
+			<p>大家好！感谢浏览Micolog博客秀，欢迎到处看看!</p>
+		</div>
+	</div>
+	
+	<div id="catnav">
+		<ul id="nav">
+			<li class="cat-item">
+				<a id="c1" href="#" title="happy">
+					<div><img src="/static/images/happy.jpg" alt="happy"/></div>
+					<div><span>快乐</span></div>
+				</a>
+			</li>
+			<li id="c2" class="cat-item">
+				<a href="#" title="knowledge">
+					<div><img src="/static/images/knowledge.jpg" alt="knowledge"/></div>
+					<div><span>技术</span></div>
+				</a>
+			</li>
+			<li id="c3" class="cat-item">
+				<a href="#" title="workhard">
+					<div><img src="/static/images/workhard.jpg" alt="workhard"/></div>
+					<div><span>学习</span></div>
+				</a>
+			</li>
+			<li id="c4" class="cat-item">
+				<a href="#" title="warm">
+					<div><img src="/static/images/warm.jpg" alt="warm"/></div>
+					<div><span>生活</span></div>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div id="main">
+		<div id="content">
+			<ul id="showcontent">
+				<!-- bloglist load content -->
+			</ul>
+		</div>
+	</div>
+	
+	<div id="footer"></div>
+	
+	<div id="credits">
+		<div id="creditsleft">Copyright &copy; 2010 <a href="http://qhm123.appspot.com" target="_blank">鸣</a>, Powered By GAE, All Right Reserved.</div>
+		<div id="creditsright"><a href="#top">&#91; 返回顶部 &#93;</a></div>
+	
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-19590743-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
+	</div><!-- /credits -->	
+</div>
+</body>
