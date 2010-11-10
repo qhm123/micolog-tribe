@@ -11,16 +11,16 @@
 	<script type="text/javascript">
 		$(document).ready(function($){
 		    $('#c1').click(function(){
-					$('#showcontent').load('/static/bloglist.html .1').hide().fadeIn('slow');
+					$('#showcontent').load('{% url blogshow.views.bloglist %} .1').hide().fadeIn('slow');
 		    });
 		    $('#c2').click(function(){
-		            $('#showcontent').load('/static/bloglist.html .2').hide().fadeIn('slow');
+		            $('#showcontent').load('{% url blogshow.views.bloglist %} .2').hide().fadeIn('slow');
 		    });
 		    $('#c3').click(function(){
-		            $('#showcontent').load('/static/bloglist.html .3').hide().fadeIn('slow');
+		            $('#showcontent').load('{% url blogshow.views.bloglist %} .3').hide().fadeIn('slow');
 		    });
 		    $('#c4').click(function(){
-		            $('#showcontent').load('/static/bloglist.html .4').hide().fadeIn('slow');
+		            $('#showcontent').load('{% url blogshow.views.bloglist %} .4').hide().fadeIn('slow');
 		    });
 		});
 	</script>
@@ -35,7 +35,7 @@
 		</div><!-- /logo -->
 		
 		<div id="headerbanner">
-			<p>大家好！感谢浏览Micolog部落——博客秀，欢迎到处看看，并在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>!（注：当前仅限演示，所有博客为随机添加，可能部分信息错误或者您的博客没有出现，我表示抱歉。）</p>
+			<p>大家好！感谢浏览Micolog部落——博客秀，欢迎到处看看，点击<a href="/blogshow/add">这里添加</a>你的博客。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
 		</div>
 	</div>
 	
