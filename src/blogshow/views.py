@@ -19,6 +19,9 @@ def index(request):
 def add(request):
     if request.method == 'GET':
         user = users.get_current_user()
+        if not user:
+            login_url = users.create_login_url(reverse('blogshow.views.add'))
+            return HttpResponseRedirect(login_url)
         blog = models.Blog.all().filter('user =', user).get()
         
         template = loader.get_template('add.html')
@@ -50,8 +53,7 @@ def add(request):
                 if pic:
                     pic = images.resize(pic.read(), 190, 130)
                     blog.update_pic(pic)
-        else:
-            users.create_login_url(get_referer_url(request))
+            
         return HttpResponseRedirect(reverse('blogshow.views.add'))
 
 def bloglist(request):
@@ -72,11 +74,3 @@ def img(request, blog_id):
         return HttpResponse(blog.pic, content_type="image/jepg")
     else:
         return HttpResponse(blog.pic)
-    
-def get_referer_url(request):
-    """获得请求页的url"""
-    referer_url = request.META.get('HTTP_REFERER', '/')
-    host = request.META['HTTP_HOST']
-    if referer_url.startswith('http') and host not in referer_url:
-        referer_url = '/' # 避免外站直接跳到登录页而发生跳转错误
-    return referer_url
