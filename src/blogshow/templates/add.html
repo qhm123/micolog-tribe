@@ -1,31 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://gmpg.org/xfn/11">
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<meta name="Keywords" content="micolog,gae,tribe,group" />
-	<meta name="Description" content="micolog部落" />
-	<link type="image/x-icon" rel="icon" href="/static/favicon.ico" />
-	<link type="text/css" rel="stylesheet" href="/static/blogshow.css" />
-	<title>博客秀 | Micolog部落</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script type="text/javasctipt">
-		
-	</script>
-</head>
-<body>
-<div id="wrapper">
-	<div id="header">
-		<div id="logo">
-			<a href="{{ blog.baseurl }}"><img src="/static/images/genericlogo.png" alt="micolog logo" /></a>
-			<h1><a href="{{ blog.baseurl }}">Micolog部落</a></h1>
-			<div id="desc">博客秀</div>
-		</div><!-- /logo -->
-		
-		<div id="headerbanner">
-			<p>大家好！感谢浏览Micolog部落——博客秀，欢迎到处看看，并在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>!（注：当前仅限演示，所有博客为随机添加，可能部分信息错误或者您的博客没有出现，我表示抱歉。）</p>
-		</div>
-	</div>
-	
+{% extends "base.html" %}
+
+{% block head %}
+<title>博客秀 | Micolog部落</title>
+{% endblock %}
+
+{% block content %}
 	<div id="main">
 		<div id="content">
 			<form action="add" method="post" enctype="multipart/form-data">
@@ -42,10 +21,12 @@
 						<td>链接*：</td>
 						<td><input id="link" name="link" type="text" value="{{ blog.link }}" /></td>
 					</tr>
+					<!-- 
 					<tr>
 						<td>标签：</td>
 						<td><input id="tags" name="tags" type="text" value="{{ blog.tags }}" /></td>
 					</tr>
+					-->
 					<tr>
 						<td>图片*：</td>
 						<td><input id="file" name="file" type="file" /></td>
@@ -61,24 +42,4 @@
 			</form>
 		</div>
 	</div>
-	
-	<div id="footer"></div>
-	
-	<div id="credits">
-		<div id="creditsleft">Copyright &copy; 2010 <a href="http://qhm123.appspot.com" target="_blank">鸣</a>, Powered By GAE, All Right Reserved.</div>
-		<div id="creditsright"><a href="#top">&#91; 返回顶部 &#93;</a></div>
-	
-		<script type="text/javascript">
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-19590743-1']);
-		  _gaq.push(['_trackPageview']);
-		
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-		</script>
-	</div><!-- /credits -->	
-</div>
-</body>
+{% endblock %}

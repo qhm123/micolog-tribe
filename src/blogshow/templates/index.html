@@ -1,44 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head profile="http://gmpg.org/xfn/11">
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<meta name="Keywords" content="micolog,gae,tribe,group" />
-	<meta name="Description" content="micolog部落" />
-	<link type="image/x-icon" rel="icon" href="/static/favicon.ico" />
-	<link type="text/css" rel="stylesheet" href="/static/blogshow.css" />
+{% extends "base.html" %}
+
+{% block head %}
 	<title>博客秀 | Micolog部落</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function($){
 		    $('#c1').click(function(){
-					$('#showcontent').load('{% url blogshow.views.bloglist %} .1').hide().fadeIn('slow');
+					$('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 1).hide().fadeIn('slow');
 		    });
 		    $('#c2').click(function(){
-		            $('#showcontent').load('{% url blogshow.views.bloglist %} .2').hide().fadeIn('slow');
+		            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 2).hide().fadeIn('slow');
 		    });
 		    $('#c3').click(function(){
-		            $('#showcontent').load('{% url blogshow.views.bloglist %} .3').hide().fadeIn('slow');
+		            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 3).hide().fadeIn('slow');
 		    });
 		    $('#c4').click(function(){
-		            $('#showcontent').load('{% url blogshow.views.bloglist %} .4').hide().fadeIn('slow');
+		            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 4).hide().fadeIn('slow');
 		    });
 		});
 	</script>
-</head>
-<body>
-<div id="wrapper">
-	<div id="header">
-		<div id="logo">
-			<a href="{{ blog.baseurl }}"><img src="/static/images/genericlogo.png" alt="micolog logo" /></a>
-			<h1><a href="{{ blog.baseurl }}">Micolog部落</a></h1>
-			<div id="desc">博客秀</div>
-		</div><!-- /logo -->
-		
-		<div id="headerbanner">
-			<p>大家好！感谢浏览Micolog部落——博客秀，欢迎到处看看，点击<a href="/blogshow/add">这里添加</a>你的博客。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
-		</div>
-	</div>
-	
+{% endblock %}
+
+{% block content %}
 	<div id="catnav">
 		<ul id="nav">
 			<li class="cat-item">
@@ -75,24 +58,4 @@
 			</ul>
 		</div>
 	</div>
-	
-	<div id="footer"></div>
-	
-	<div id="credits">
-		<div id="creditsleft">Copyright &copy; 2010 <a href="http://qhm123.appspot.com" target="_blank">鸣</a>, Powered By GAE, All Right Reserved.</div>
-		<div id="creditsright"><a href="#top">&#91; 返回顶部 &#93;</a></div>
-	
-		<script type="text/javascript">
-		  var _gaq = _gaq || [];
-		  _gaq.push(['_setAccount', 'UA-19590743-1']);
-		  _gaq.push(['_trackPageview']);
-		
-		  (function() {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		  })();
-		</script>
-	</div><!-- /credits -->	
-</div>
-</body>
+{% endblock %}

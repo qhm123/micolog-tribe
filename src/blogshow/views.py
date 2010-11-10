@@ -55,7 +55,8 @@ def add(request):
         return HttpResponseRedirect(reverse('blogshow.views.add'))
 
 def bloglist(request):
-    blogs = models.Blog.all().order('add_date').fetch(limit=1000)
+    cateid = request.GET.get('cateid')
+    blogs = models.Blog.all().filter('category =', cateid).order('add_date').fetch(limit=1000)
     
     template = loader.get_template('bloglist.html')
     context = Context({
