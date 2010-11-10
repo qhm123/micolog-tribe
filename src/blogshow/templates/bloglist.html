@@ -1,0 +1,3 @@
+{% for blog in blogs %}
+	<li class="{{ blog.category }}"><a target="_blank" href="{{ blog.link }}"> <img src="/blogshow/img/{{ blog.key.id }}" alt="" height="130" width="190" /><span>{{ blog.name }}</span></a></li>
+{% endfor %}
