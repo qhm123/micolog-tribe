@@ -10,7 +10,7 @@ import models
 
 
 def index(request):
-    template = loader.get_template('index.html')
+    template = loader.get_template('blogshow/templates/index.html')
     context = Context({
     })
     
@@ -24,7 +24,7 @@ def add(request):
             return HttpResponseRedirect(login_url)
         blog = models.Blog.all().filter('user =', user).get()
         
-        template = loader.get_template('add.html')
+        template = loader.get_template('blogshow/templates/add.html')
         context = Context({
             "blog": blog,
         })
