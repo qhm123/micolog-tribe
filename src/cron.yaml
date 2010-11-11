@@ -1,0 +1,4 @@
+cron:
+- description: daily fetch feed job
+  url: /rssa/fetch_feed
+  schedule: every 2 hours

@@ -1,4 +1,38 @@
 from appengine_django.models import BaseModel
 from google.appengine.ext import db
+from xmlrpclib import datetime
 
-# Create your models here.
+class Feed(BaseModel):
+    user = db.UserProperty(required=True)
+    feed_url = db.StringProperty(required=True)
+    title = db.StringProperty()
+    subtitle = db.StringProperty()
+    link = db.StringProperty()
+    
+    @classmethod
+    def add(cls, user, url, title='', subtitle='', link=''):
+        blog = Feed(user=user, feed_url=url)
+        blog.title = title
+        blog.subtitle = subtitle
+        blog.link = link
+        blog.put()
+
+class Entry(BaseModel):
+    title = db.StringProperty()
+    link = db.StringProperty()
+    date = db.DateTimeProperty()
+    description = db.StringProperty()
+    content = db.TextProperty()
+    feed = db.ReferenceProperty(Feed)
+    
+    @classmethod
+    def add(cls, title, link, updated, description, content, feed):
+        entry = Entry()
+        entry.title = title
+        entry.link = link
+        #Tue, 09 Nov 2010 08:33:11 +0000
+        entry.date = datetime.datetime.strptime(updated, '%a, %d %b %Y %H:%M:%S +0000')
+        entry.description = description
+        entry.content = content
+        entry.feed = feed
+        entry.put()
