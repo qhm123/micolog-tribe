@@ -10,11 +10,11 @@
 			<form action="add" method="post" enctype="multipart/form-data">
 				<table>
 					<tr>
-						<td>名称*：</td>
+						<td>名称<span style="color:red">*</span>：</td>
 						<td><input id="name" name="name" type="text" value="{{ blog.name }}" /></td>
 					</tr>
 					<tr>
-						<td>类别*：</td>
+						<td>类别<span style="color:red">*</span>：</td>
 						<td>
 							<input type="radio" name="category" value="1" {% ifequal blog.category '1' %}checked="true"{% endifequal %} />快乐
 							<input type="radio" name="category" value="2" {% ifequal blog.category '2' %}checked="true"{% endifequal %} />技术
@@ -24,7 +24,7 @@
 						<!-- <td><input id="category" name="category" type="text" value="{{ blog.category }}" /></td> -->
 					</tr>
 					<tr>
-						<td>链接*：</td>
+						<td>链接<span style="color:red">*</span>：</td>
 						<td><input id="link" name="link" type="text" value="{{ blog.link }}" /></td>
 					</tr>
 					<!-- 
@@ -34,7 +34,7 @@
 					</tr>
 					-->
 					<tr>
-						<td>图片*：</td>
+						<td>图片<span style="color:red">*</span>：</td>
 						<td><input id="file" name="file" type="file" /></td>
 					</tr>
 					<tr>
