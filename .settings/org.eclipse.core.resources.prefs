@@ -1,9 +1,11 @@
-#Thu Nov 11 16:00:34 CST 2010
+#Fri Nov 12 10:34:20 CST 2010
 eclipse.preferences.version=1
 encoding//src/blogshow/models.py=utf-8
 encoding//src/blogshow/urls.py=utf-8
 encoding//src/blogshow/views.py=utf-8
 encoding//src/rssa/urls.py=utf-8
 encoding//src/rssa/views.py=utf-8
+encoding//src/welcome/urls.py=utf-8
+encoding//src/welcome/views.py=utf-8
 encoding/<project>=UTF-8
 encoding/Micolog\ Tribe=UTF-8

@@ -103,6 +103,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
      'appengine_django',
+     'welcome',
      'blogshow',
      'rssa',
 #    'django.contrib.auth',
