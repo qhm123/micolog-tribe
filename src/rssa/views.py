@@ -41,10 +41,9 @@ def add(request):
 def fetch_feed(request):
     feeds = models.Feed.all().fetch(limit=1000)
 
-    # TODO: 添加已添加文章过滤
     for feed in feeds:
         fp = FeedParser(feed.feed_url)
         for e in fp.entries:
-            models.Entry.add(e.title, e.link, e.updated, e.description, e.content, feed)
+            models.Entry.add(e.id, e.title, e.link, e.updated, e.description, e.content, feed)
 
     return HttpResponse()

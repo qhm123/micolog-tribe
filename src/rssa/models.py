@@ -18,6 +18,7 @@ class Feed(BaseModel):
         blog.put()
 
 class Entry(BaseModel):
+    perid = db.StringProperty()
     title = db.StringProperty()
     link = db.StringProperty()
     date = db.DateTimeProperty()
@@ -26,13 +27,16 @@ class Entry(BaseModel):
     feed = db.ReferenceProperty(Feed)
     
     @classmethod
-    def add(cls, title, link, updated, description, content, feed):
-        entry = Entry()
-        entry.title = title
-        entry.link = link
-        #Tue, 09 Nov 2010 08:33:11 +0000
-        entry.date = datetime.datetime.strptime(updated, '%a, %d %b %Y %H:%M:%S +0000')
-        entry.description = description
-        entry.content = content
-        entry.feed = feed
-        entry.put()
+    def add(cls, perid, title, link, updated, description, content, feed):
+        entry = Entry.all().filter('perid =', perid).get()
+        if not entry:
+            entry = Entry()
+            entry.perid = perid
+            entry.title = title
+            entry.link = link
+            #Tue, 09 Nov 2010 08:33:11 +0000
+            entry.date = datetime.datetime.strptime(updated, '%a, %d %b %Y %H:%M:%S +0000')
+            entry.description = description
+            entry.content = content
+            entry.feed = feed
+            entry.put()

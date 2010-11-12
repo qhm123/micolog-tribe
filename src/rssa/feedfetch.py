@@ -10,11 +10,12 @@ class FeedParser():
         self.title = feed.channel.title
         self.subtitle = feed.channel.subtitle
         self.link = feed.channel.link
-        self.entries = (Entry(entry.title,
-                            entry.link,
-                            entry.updated,
-                            entry.description,
-                            entry.content[0].value) for entry in feed.entries)
+        self.entries = (Entry(entry.id,
+                              entry.title,
+                              entry.link,
+                              entry.updated,
+                              entry.description,
+                              entry.content[0].value) for entry in feed.entries)
             
 class Entry():
     
