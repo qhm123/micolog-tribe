@@ -309,8 +309,8 @@ form label.subscribe-label {
 
 #header #headerbanner {
 	float: right;
-	width: 468px;
-	margin: 30px 0 10px 0;
+	width: 390px;
+	margin: 30px 86px 10px 0;
 	text-align: left;
 	padding: 10px;
 	background: url(images/whitetrans.png);
@@ -1291,7 +1291,7 @@ li#tagbox a:hover {
 	background: url(images/blacktrans.png);
 	clear: both;
 	overflow: hidden;
-	width: 100%;
+	width: 893px;
 	font-size: 0.8em;
 }
 
@@ -1374,7 +1374,7 @@ li#tagbox a:hover {
 #credits {
 	clear: both;
 	overflow: hidden;
-	width: 100%;
+	width: 893px;
 	margin-top: .7em;
 	font-size: 0.7em;
 	line-height: 1.4em;
@@ -1391,7 +1391,7 @@ li#tagbox a:hover {
 
 #credits #creditsleft {
 	float: left;
-	width: 600px;
+	width: 500px;
 	color: #aaa;
 }
 
@@ -1498,5 +1498,15 @@ ul#showcontent li span {
 	margin: 0 auto;
 	text-align: center;
 	padding: 5px 0;
-	color: #AC8B72
+	color: #AC8B72;
+}
+
+/************************************************
+* welcome *
+************************************************/
+#footer ul li {
+	float: left;
+	padding: 5px;
+	margin-bottom: 0px;
+	background: none;
 }

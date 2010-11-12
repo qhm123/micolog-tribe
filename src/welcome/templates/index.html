@@ -28,4 +28,15 @@
 			</li>
 		</ul>
 	</div>
+	
+	<div id="main">
+		<h2 id="contentdesc">Micolog <span>全家福</span> »</h2>
+		<div id="footer">
+			<ul id="avatar-wall">
+				{% for people in peoples %}
+					<li><a target="_blank" href="{{ people.blog_url }}" title=""><img src="{{ people.avatar_url }}" alt="avatar" /></a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
 {% endblock %}
