@@ -10,8 +10,15 @@ import models
 
 
 def index(request):
+    # TODO: 考虑重构，现在有点恶心……
+    cate_count = [models.Blog.all().filter('category =', str(cateid)).count(limit=1000) for cateid in range(1, 5)]
+    
     template = loader.get_template('blogshow/templates/index.html')
     context = Context({
+        "happy_count": cate_count[0],
+        "tech_count": cate_count[1],
+        "study_count": cate_count[2],
+        "life_count": cate_count[3],
     })
     
     return HttpResponse(template.render(context))

@@ -29,3 +29,8 @@ class Blog(BaseModel):
     def update_pic(self, pic):
         self.pic = db.Blob(pic)
         self.put()
+        
+class Category(BaseModel):
+    cateid = db.IntegerProperty()
+    name = db.StringProperty()
+    blog = db.ReferenceProperty(Blog)
