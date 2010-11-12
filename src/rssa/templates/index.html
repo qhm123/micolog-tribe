@@ -3,6 +3,20 @@
 {% block head %}
 	<title>博客聚合 | Micolog部落</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function($){
+			
+		});
+		function toggleItemByID(id) {
+			//var fld = $('entrycontent-' + id);
+			var fld = document.getElementById('entrycontent-' + id)
+			if (fld.style.display == "none") {
+				fld.style.display = "block";
+			} else {
+				fld.style.display = "none";
+			}
+		}
+	</script>
 {% endblock %}
 
 {% block pagetitle %}
@@ -10,9 +24,25 @@
 {% endblock %}
 
 {% block headerbanner %}
-<p>大家好！感谢浏览Micolog部落——RSS聚合，欢迎到处看看，点击<a href="/blogshow/add">这里添加</a>你的博客。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
+<p>感谢浏览Micolog部落——RSS聚合，欢迎到处看看，点击<a href="/blogshow/add">这里添加</a>你的博客。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
 {% endblock %}
 
 {% block content %}
-hello rssa.
+{% for entry in entries %}
+	<div class="post" id="post-{{ entry.key.id }}">
+		<div class="posttop">
+			<div class="postmetatop">
+				<div class="categs"><a href="#" onclick="toggleItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
+				<div class="date"><span>{{ entry.date|date:"Y.m.d h:m" }}</span></div>
+			</div>
+		</div>
+
+		<div class="postmetabottom" id="entrycontent-{{ entry.key.id }}" style="display:none;">
+			<div class="postcontent">
+			{{ entry.content|safe|truncatewords_html:"20" }}
+			</div>
+			<div class="readmore"><span><a href="{{ entry.link }}">Read more</a></span></div>
+		</div>
+	</div><!-- /post -->
+{% endfor %}
 {% endblock %}

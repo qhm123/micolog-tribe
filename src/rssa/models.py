@@ -22,7 +22,7 @@ class Entry(BaseModel):
     title = db.StringProperty()
     link = db.StringProperty()
     date = db.DateTimeProperty()
-    description = db.StringProperty()
+    description = db.TextProperty()
     content = db.TextProperty()
     feed = db.ReferenceProperty(Feed)
     

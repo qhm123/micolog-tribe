@@ -19,7 +19,8 @@ class FeedParser():
             
 class Entry():
     
-    def __init__(self, title, link, updated, description, content):
+    def __init__(self, id, title, link, updated, description, content):
+        self.id = id;
         self.title = title
         self.link = link
         self.updated = updated

@@ -7,11 +7,18 @@ from django.core.urlresolvers import reverse
 from google.appengine.api import users
 
 import models
+from blogshow.models import Blog
 from feedfetch import FeedParser
+from common.helper import requires_admin
 
 def index(request):
+    
+    # 只显示最新的20个RSS内容
+    entries = models.Entry.all().order('-date').fetch(limit=20)
+    
     template = loader.get_template('rssa/templates/index.html')
     context = Context({
+        "entries": entries,
     })
     
     return HttpResponse(template.render(context))
@@ -38,6 +45,7 @@ def add(request):
             models.Feed.add(user, url, feed.title, feed.subtitle, feed.link)
         return HttpResponseRedirect(reverse('rssa.views.add'))
 
+@requires_admin
 def fetch_feed(request):
     feeds = models.Feed.all().fetch(limit=1000)
 
@@ -46,4 +54,22 @@ def fetch_feed(request):
         for e in fp.entries:
             models.Entry.add(e.id, e.title, e.link, e.updated, e.description, e.content, feed)
 
+    return HttpResponse()
+
+@requires_admin
+def add_all(request):
+    added_link = [feed.link for feed in models.Feed.all().fetch(limit=1000)]
+    
+    for blog in Blog.all().fetch(limit=1000):
+        if blog.link not in added_link:
+            feed_url = blog.link + '/feed'
+            
+            fp = None
+            try:
+                fp = FeedParser(feed_url)
+            except:
+                pass
+            if fp:
+                models.Feed.add(blog.user, feed_url, fp.title, fp.subtitle, fp.link)
+            
     return HttpResponse()

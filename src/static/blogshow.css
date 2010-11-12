@@ -181,7 +181,7 @@ form label.subscribe-label {
 	margin: 15px auto 10px auto;
 	padding: 0;
 	text-align: left;
-	width: 980px;
+	width: 893px;
 }
 
 .clear {
@@ -310,7 +310,7 @@ form label.subscribe-label {
 #header #headerbanner {
 	float: right;
 	width: 390px;
-	margin: 30px 86px 10px 0;
+	margin: 30px 0px 10px 0;
 	text-align: left;
 	padding: 10px;
 	background: url(images/whitetrans.png);
@@ -333,7 +333,6 @@ form label.subscribe-label {
 }
 
 #catnav {
-	width: 893px;
 	background: url(images/blacktrans.png);
 }
 
@@ -429,7 +428,7 @@ h2#contentdesc span {
 }
 
 .post {
-	padding: 0 0 35px 0;
+	padding: 0 0 10px 0;
 }
 
 .sticky {
@@ -457,7 +456,7 @@ h2#contentdesc span {
 	overflow: hidden;
 	width: 100%;
 	font-size: 0.7em;
-	padding-top: 8px;
+	padding-top: 0px;
 	line-height: 1.5em;
 }
 
@@ -475,7 +474,6 @@ h2#contentdesc span {
 
 .postmetatop .date {
 	float: right;
-	width: 130px;
 	text-align: right;
 }
 
@@ -554,10 +552,9 @@ h2#contentdesc span {
 	background: url(images/whitetrans.png);
 	overflow: hidden;
 	width: 100%;
-	padding: 10px 0;
+	padding: 0px 0 10px;
 	font-size: 0.8em;
 	line-height: 1.1em;
-	margin-top: 15px;
 }
 
 .postmetabottom a {
