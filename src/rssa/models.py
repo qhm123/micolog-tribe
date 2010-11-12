@@ -35,7 +35,8 @@ class Entry(BaseModel):
             entry.title = title
             entry.link = link
             #Tue, 09 Nov 2010 08:33:11 +0000
-            entry.date = datetime.datetime.strptime(updated, '%a, %d %b %Y %H:%M:%S +0000')
+            #entry.date = datetime.datetime.strptime(updated, '%a, %d %b %Y %H:%M:%S +0000')
+            entry.date = datetime.datetime(updated[0], updated[1], updated[2], updated[3], updated[4], updated[5])
             entry.description = description
             entry.content = content
             entry.feed = feed

@@ -13,7 +13,7 @@ class FeedParser():
         self.entries = (Entry(entry.id,
                               entry.title,
                               entry.link,
-                              entry.updated,
+                              entry.updated_parsed,
                               entry.description,
                               entry.content[0].value) for entry in feed.entries)
             
