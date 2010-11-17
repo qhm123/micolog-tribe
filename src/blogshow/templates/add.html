@@ -15,12 +15,18 @@
 {% block content %}
 	<div id="main">
 		<div id="content">
-			<form action="add" method="post" enctype="multipart/form-data">
+			<form action="{% if showmail %}admin_add{% else %}add{% endif %}" method="post" enctype="multipart/form-data">
 				<table>
 					<tr>
 						<td>名称<span style="color:red">*</span>：</td>
 						<td><input id="name" name="name" type="text" value="{{ blog.name }}" /></td>
 					</tr>
+					{% if showmail %}
+					<tr>
+						<td>邮箱<span style="color:red">*</span>：</td>
+						<td><input id="mail" name="mail" type="text" value="" /></td>
+					</tr>
+					{% endif %}
 					<tr>
 						<td>类别<span style="color:red">*</span>：</td>
 						<td>

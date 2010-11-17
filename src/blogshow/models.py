@@ -17,6 +17,10 @@ class Blog(BaseModel):
         blog = Blog(user=user, name=name, category=category, link=link, pic=pic)
         blog.tags = tags;
         blog.put()
+    
+    @classmethod
+    def admin_add(cls, mail, name, category, link, pic, tags=''):
+        Blog.add(db.users.User(mail) ,name, category, link, pic, tags)
         
     def update(self, name, category, link, tags):
         """更新博客信息，如果图片数据为空则不更新信息，否则更新图片信息"""
