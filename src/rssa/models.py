@@ -1,6 +1,10 @@
+# -*- coding: utf-8 -*
+
 from appengine_django.models import BaseModel
 from google.appengine.ext import db
 from xmlrpclib import datetime
+
+from common.timezone import UTC0, to_utc8
 
 class Feed(BaseModel):
     user = db.UserProperty(required=True)
@@ -36,7 +40,9 @@ class Entry(BaseModel):
             entry.link = link
             #Tue, 09 Nov 2010 08:33:11 +0000
             #entry.date = datetime.datetime.strptime(updated, '%a, %d %b %Y %H:%M:%S +0000')
-            entry.date = datetime.datetime(updated[0], updated[1], updated[2], updated[3], updated[4], updated[5])
+            
+            # NOTE: Micolog默认feed是utc0， 所以这里对应转换成utc8， 考虑改进
+            entry.date = to_utc8(datetime.datetime(updated[0], updated[1], updated[2], updated[3], updated[4], updated[5], tzinfo=UTC0()))
             entry.description = description
             entry.content = content
             entry.feed = feed

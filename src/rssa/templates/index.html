@@ -33,7 +33,7 @@
 		<div class="posttop">
 			<div class="postmetatop">
 				<div class="categs"><a href="#" onclick="toggleItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
-				<div class="date"><span>{{ entry.date|date:"Y.m.d h:m" }}</span></div>
+				<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>
 			</div>
 		</div>
 
@@ -41,7 +41,7 @@
 			<div class="postcontent">
 			{{ entry.content|safe|truncatewords_html:"20" }}
 			</div>
-			<div class="readmore"><span><a href="{{ entry.link }}">Read more</a></span></div>
+			<div class="readmore"><span><a target="_blank" href="{{ entry.link }}">Read more</a></span></div>
 		</div>
 	</div><!-- /post -->
 {% endfor %}

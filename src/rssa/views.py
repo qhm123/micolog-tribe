@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*
 
+import logging
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
@@ -45,14 +47,17 @@ def add(request):
             models.Feed.add(user, url, feed.title, feed.subtitle, feed.link)
         return HttpResponseRedirect(reverse('rssa.views.add'))
 
-@requires_admin
+#@requires_admin
 def fetch_feed(request):
     feeds = models.Feed.all().fetch(limit=1000)
 
     for feed in feeds:
-        fp = FeedParser(feed.feed_url)
-        for e in fp.entries:
-            models.Entry.add(e.id, e.title, e.link, e.updated, e.description, e.content, feed)
+        try:
+            fp = FeedParser(feed.feed_url)
+            for e in fp.entries:
+                models.Entry.add(e.id, e.title, e.link, e.updated, e.description, e.content, feed)
+        except:
+            logging.error("fetch feed failed, url: %s.", feed.feed_url)
 
     return HttpResponse()
 
