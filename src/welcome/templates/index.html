@@ -2,7 +2,6 @@
 
 {% block head %}
 	<title>Micolog部落</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 {% endblock %}
 
 {% block pagetitle %}
@@ -10,33 +9,40 @@
 {% endblock %}
 
 {% block headerbanner %}
-<p>大家好！感谢浏览Micolog部落，欢迎到处看看，点击<a href="/blogshow/add">这里添加</a>你的博客。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
+<p>大家好！感谢浏览Micolog部落，欢迎到处看看，点击<a href="/blogshow/add">这里添加/修改</a>你的博客信息。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
 {% endblock %}
 
 {% block content %}
 	<div id="catnav">
 		<ul id="nav">
 			<li class="cat-item">
-				<a id="c1" href="/blogshow" title="happy">
+				<a href="/blogshow" title="博客秀">
 					博客秀
 				</a>
 			</li>
-			<li id="c2" class="cat-item">
-				<a href="/rssa" title="knowledge">
+			<li class="cat-item">
+				<a href="/rssa" title="RSS聚合">
 					RSS聚合
+				</a>
+			</li>
+			<li class="cat-item">
+				<a href="/about" title="部落手册">
+					部落手册
 				</a>
 			</li>
 		</ul>
 	</div>
 	
 	<div id="main">
-		<h2 id="contentdesc">Micolog <span>全家福</span> »</h2>
+		<h2 id="contentdesc">Micolog <span>全家福[{{ people_count }}]</span> »</h2>
 		<div id="footer">
 			<ul id="avatar-wall">
 				{% for people in peoples %}
 					<li><a target="_blank" href="{{ people.blog_url }}" title=""><img src="{{ people.avatar_url }}" alt="avatar" /></a></li>
 				{% endfor %}
 			</ul>
+		</div>
+		<div>
 		</div>
 	</div>
 {% endblock %}

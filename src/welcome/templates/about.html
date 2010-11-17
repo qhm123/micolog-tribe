@@ -1,0 +1,23 @@
+{% extends "common/templates/base.html" %}
+
+{% block head %}
+	<title>关于 | Micolog部落</title>
+{% endblock %}
+
+{% block pagetitle %}
+<a href="/about">关于</a>
+{% endblock %}
+
+{% block headerbanner %}
+<p>感谢浏览Micolog部落，欢迎到处看看，点击<a href="/blogshow/add">这里添加</a>你的博客。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
+{% endblock %}
+
+{% block content %}
+	<div id="main">
+		<div id="content">
+			<div class="post">
+				<div class="postcontent">{{ manual|safe }}</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -15,7 +15,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    (r'^$', include('welcome.urls')),
+    (r'^', include('welcome.urls')),
     (r'^blogshow/', include('blogshow.urls')),
     (r'^rssa/', include('rssa.urls')),
 )

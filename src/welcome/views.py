@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
 
+from common.models import Tribe
 import blogshow.models as models
 import helper
 
@@ -13,6 +14,17 @@ def index(request):
     template = loader.get_template('welcome/templates/index.html')
     context = Context({
         "peoples": peoples,
+        "people_count": len(peoples),
+    })
+    
+    return HttpResponse(template.render(context))
+
+def about(request):
+    manual = Tribe.getManual()
+    
+    template = loader.get_template('welcome/templates/about.html')
+    context = Context({
+        'manual': manual,
     })
     
     return HttpResponse(template.render(context))

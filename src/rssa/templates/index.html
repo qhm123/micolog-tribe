@@ -2,18 +2,11 @@
 
 {% block head %}
 	<title>博客聚合 | Micolog部落</title>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function($){
-			
-		});
-		function toggleItemByID(id) {
-			//var fld = $('entrycontent-' + id);
-			var fld = document.getElementById('entrycontent-' + id)
-			if (fld.style.display == "none") {
-				fld.style.display = "block";
-			} else {
-				fld.style.display = "none";
+		function toggleItemByID(id){
+			var fld = $('#entrycontent-' + id);
+			if(fld){
+				fld.slideToggle();
 			}
 		}
 	</script>

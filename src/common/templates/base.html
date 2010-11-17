@@ -6,6 +6,11 @@
 	<meta name="Description" content="micolog部落" />
 	<link type="image/x-icon" rel="icon" href="/static/favicon.ico" />
 	<link type="text/css" rel="stylesheet" href="/static/blogshow.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/jquery.lazyload.mini.js"></script>
+	<script type="text/javascript">
+		$(function(){$("img").lazyload({effect: "fadeIn",});});
+	</script>
 	{% block head %}{% endblock %}
 </head>
 <body>
