@@ -1,68 +1,53 @@
-{% extends "common/templates/base.html" %}
+<div id="catnav">
+	<ul id="nav">
+		<li class="cat-item">
+			<a id="c1" href="#" title="happy">
+				<div><img src="/static/images/happy.jpg" alt="happy"/></div>
+				<div><span>快乐[{{ happy_count }}]</span></div>
+			</a>
+		</li>
+		<li id="c2" class="cat-item">
+			<a href="#" title="knowledge">
+				<div><img src="/static/images/knowledge.jpg" alt="knowledge"/></div>
+				<div><span>技术[{{ tech_count }}]</span></div>
+			</a>
+		</li>
+		<li id="c3" class="cat-item">
+			<a href="#" title="workhard">
+				<div><img src="/static/images/workhard.jpg" alt="workhard"/></div>
+				<div><span>学习[{{ study_count }}]</span></div>
+			</a>
+		</li>
+		<li id="c4" class="cat-item">
+			<a href="#" title="warm">
+				<div><img src="/static/images/warm.jpg" alt="warm"/></div>
+				<div><span>生活[{{ life_count }}]</span></div>
+			</a>
+		</li>
+	</ul>
+</div>
 
-{% block head %}
-	<title>博客秀 | Micolog部落</title>
-	<script type="text/javascript">
-		$(document).ready(function($){
-		    $('#c1').click(function(){
-					$('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 1).hide().fadeIn('slow');
-		    });
-		    $('#c2').click(function(){
-		            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 2).hide().fadeIn('slow');
-		    });
-		    $('#c3').click(function(){
-		            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 3).hide().fadeIn('slow');
-		    });
-		    $('#c4').click(function(){
-		            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 4).hide().fadeIn('slow');
-		    });
-		});
-	</script>
-{% endblock %}
-
-{% block pagetitle %}
-<a href="/blogshow">博客秀</a>
-{% endblock %}
-
-{% block headerbanner %}
-<p>感谢浏览Micolog部落——博客秀，点击<a href="/blogshow/add">这里添加/修改</a>你的博客。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
-{% endblock %}
-
-{% block content %}
-	<div id="catnav">
-		<ul id="nav">
-			<li class="cat-item">
-				<a id="c1" href="#" title="happy">
-					<div><img src="/static/images/happy.jpg" alt="happy"/></div>
-					<div><span>快乐[{{ happy_count }}]</span></div>
-				</a>
-			</li>
-			<li id="c2" class="cat-item">
-				<a href="#" title="knowledge">
-					<div><img src="/static/images/knowledge.jpg" alt="knowledge"/></div>
-					<div><span>技术[{{ tech_count }}]</span></div>
-				</a>
-			</li>
-			<li id="c3" class="cat-item">
-				<a href="#" title="workhard">
-					<div><img src="/static/images/workhard.jpg" alt="workhard"/></div>
-					<div><span>学习[{{ study_count }}]</span></div>
-				</a>
-			</li>
-			<li id="c4" class="cat-item">
-				<a href="#" title="warm">
-					<div><img src="/static/images/warm.jpg" alt="warm"/></div>
-					<div><span>生活[{{ life_count }}]</span></div>
-				</a>
-			</li>
+<div id="main">
+	<div id="content">
+		<ul id="showcontent">
+			<!-- bloglist load content -->
 		</ul>
 	</div>
-	
-	<div id="main">
-		<div id="content">
-			<ul id="showcontent">
-				<!-- bloglist load content -->
-			</ul>
-		</div>
-	</div>
-{% endblock %}
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function($){
+	    $('#c1').click(function(){
+				$('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 1);
+	    });
+	    $('#c2').click(function(){
+	            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 2);
+	    });
+	    $('#c3').click(function(){
+	            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 3);
+	    });
+	    $('#c4').click(function(){
+	            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 4);
+	    });
+	});
+</script>

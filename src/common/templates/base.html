@@ -27,13 +27,67 @@
 		</div>
 	</div>
 	
+	<div id="catnav">
+		<ul id="nav">
+			<li class="cat-item">
+				<a id="cat_blogshow" href="#" title="博客秀">
+					博客秀
+				</a>
+			</li>
+			<li class="cat-item">
+				<a id="cat_rssa" href="#" title="RSS聚合">
+					RSS聚合
+				</a>
+			</li>
+			<li class="cat-item">
+				<a id="cat_about" href="#" title="部落手册">
+					部落手册
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	
+	<div id="main">
+		<div id="spinner"></div>
+		<div id="content">
+			
+		</div>
+	</div>
+	
 	{% block content %}{% endblock %}
 	
-	<div id="footer"></div>
+	<div id="footer">
+		<ul id="avatar-wall">
+			{% for people in peoples %}
+				<li><a target="_blank" href="{{ people.blog_url }}" title=""><img src="{{ people.avatar_url }}" alt="avatar" /></a></li>
+			{% endfor %}
+		</ul>
+	</div>
 	
 	<div id="credits">
 		<div id="creditsleft">Copyright &copy; 2010 <a href="http://qhm123.appspot.com" target="_blank">鸣</a>, Powered By GAE, All Right Reserved.</div>
 		<div id="creditsright"><a href="#top">&#91; 返回顶部 &#93;</a></div>
+	
+		<script type="text/javascript">	
+			$(document).ready(function($){
+			    $('#cat_blogshow').click(function(){
+					$('#content').load('{% url blogshow.views.index %}');
+			    });
+			    $('#cat_rssa').click(function(){
+					$('#content').load('{% url rssa.views.index %}');
+			    });
+			    $('#cat_about').click(function(){
+					$('#content').load('{% url welcome.views.about %}');
+			    });
+			});
+			
+			$(document).ajaxStart(function(){
+				$('#spinner').fadeIn();
+			}).ajaxStop(function(){
+				$('#spinner').fadeOut();
+			});			
+		</script>
 	
 		<script type="text/javascript">
 		  var _gaq = _gaq || [];

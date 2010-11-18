@@ -1480,7 +1480,7 @@ ul#showcontent li img {
 	margin: 8px auto 0;
 }
 
-ul#showcontent li a:hover img {	
+ul#showcontent li a:hover img {
 	opacity: 1.0;
 }
 
@@ -1506,4 +1506,15 @@ ul#showcontent li span {
 	padding: 5px;
 	margin-bottom: 0px;
 	background: none;
+}
+
+#spinner {
+	width: 128px;
+	height: 15px;
+	position: absolute;
+	background: url(/static/spinner.gif);
+	top: 175px;
+	left: 50%;
+	margin-left: -64px;
+	display: none;
 }

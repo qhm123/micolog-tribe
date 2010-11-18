@@ -1,41 +1,26 @@
-{% extends "common/templates/base.html" %}
-
-{% block head %}
-	<title>博客聚合 | Micolog部落</title>
-	<script type="text/javascript">
-		function toggleItemByID(id){
-			var fld = $('#entrycontent-' + id);
-			if(fld){
-				fld.slideToggle();
-			}
-		}
-	</script>
-{% endblock %}
-
-{% block pagetitle %}
-<a href="/rssa">RSS聚合</a>
-{% endblock %}
-
-{% block headerbanner %}
-<p>感谢浏览Micolog部落——RSS聚合，欢迎到处看看，点击<a href="/blogshow/add">这里添加</a>你的博客。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
-{% endblock %}
-
-{% block content %}
 {% for entry in entries %}
-	<div class="post" id="post-{{ entry.key.id }}">
-		<div class="posttop">
-			<div class="postmetatop">
-				<div class="categs"><a href="#" onclick="toggleItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
-				<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>
-			</div>
+<div class="post" id="post-{{ entry.key.id }}">
+	<div class="posttop">
+		<div class="postmetatop">
+			<div class="categs"><a href="#" onclick="toggleItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
+			<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>
 		</div>
+	</div>
 
-		<div class="postmetabottom" id="entrycontent-{{ entry.key.id }}" style="display:none;">
-			<div class="postcontent">
-			{{ entry.content|safe|truncatewords_html:"20" }}
-			</div>
-			<div class="readmore"><span><a target="_blank" href="{{ entry.link }}">Read more</a></span></div>
+	<div class="postmetabottom" id="entrycontent-{{ entry.key.id }}" style="display:none;">
+		<div class="postcontent">
+		{{ entry.content|safe|truncatewords_html:"20" }}
 		</div>
-	</div><!-- /post -->
+		<div class="readmore"><span><a target="_blank" href="{{ entry.link }}">Read more</a></span></div>
+	</div>
+</div><!-- /post -->
 {% endfor %}
-{% endblock %}
+
+<script type="text/javascript">
+	function toggleItemByID(id){
+		var fld = $('#entrycontent-' + id);
+		if(fld){
+			fld.slideToggle();
+		}
+	}
+</script>
