@@ -29,6 +29,13 @@ def about(request):
     
     return HttpResponse(template.render(context))
 
+def gtalk(request):  
+    template = loader.get_template('welcome/templates/chat.html')
+    context = Context({
+    })
+    
+    return HttpResponse(template.render(context))
+
 def deal_link(link):
     if not link.startswith('http://'):
         link = 'http://' + link
