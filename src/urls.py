@@ -13,8 +13,13 @@
 # limitations under the License.
 
 from django.conf.urls.defaults import *
+from django.conf import settings
 
 urlpatterns = patterns('',
+    (r'^smedia/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT}),    
+)
+
+urlpatterns += patterns('',
     (r'^', include('welcome.urls')),
     (r'^blogshow/', include('blogshow.urls')),
     (r'^rssa/', include('rssa.urls')),

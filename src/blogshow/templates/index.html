@@ -34,7 +34,7 @@
 		</ul>
 	</div>
 </div>
-
+<script type="text/javascript" src="/static/jquery.raty.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function($){
 	    $('#c1').click(function(){
@@ -49,5 +49,15 @@
 	    $('#c4').click(function(){
 	            $('#showcontent').load('{% url blogshow.views.bloglist %}?cateid=' + 4);
 	    });
+	    
+	    $('.showrate').each(function(i){this.raty({
+		  //scoreName:'score'+$(this).id[4:],
+		  number:5,
+		  onClick: function(score) {
+		    alert('score: ' + score);
+		  },
+		  path:'/static/'
+		});
+		});
 	});
 </script>

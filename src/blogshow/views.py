@@ -105,6 +105,9 @@ def img(request, blog_id):
     blog = models.Blog.get_by_id(int(blog_id))
     if blog.pic:
         #request.POST.headers['Content-Type'] = "image/jepg"
-        return HttpResponse(blog.pic, content_type="image/jepg")
+        response = HttpResponse(blog.pic, content_type="image/jepg")
+        response['Expires'] = 'Thu, 15 Apr 3010 20:00:00 GMT'
+        response['Cache-Control'] = 'max-age=3600,public'
+        return response
     else:
         return HttpResponse(blog.pic)

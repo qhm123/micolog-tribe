@@ -460,11 +460,19 @@ h2#contentdesc span {
 	line-height: 1.5em;
 }
 
+.icon {
+	float: left;
+}
+
+.icon img {
+	width: 16px;
+	height: 16px;
+}
+
 .postmetatop .categs {
 	float: left;
 	width: 450px;
-	background: url(images/categ.png) left 2px no-repeat;
-	padding-left: 20px;
+	padding-left: 5px;
 	line-height: 16px;
 }
 
@@ -1517,4 +1525,8 @@ ul#showcontent li span {
 	left: 50%;
 	margin-left: -64px;
 	display: none;
+}
+
+.showrate {
+	
 }
