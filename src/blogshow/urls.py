@@ -9,4 +9,5 @@ urlpatterns = patterns('blogshow.views',
     (r'^img/(?P<blog_id>\d+)$', 'img'),
     (r'^bloglist$', 'bloglist'),
     (r'^rate', 'rate'),
+    (r'^refresh_db_blog', 'refresh_db_blog'),
 )

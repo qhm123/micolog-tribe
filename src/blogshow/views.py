@@ -13,7 +13,7 @@ from common.helper import requires_admin
 
 def index(request):
     # TODO: 考虑重构，现在有点恶心……
-    cate_count = [models.Blog.all().filter('category =', str(cateid)).order('-rate').order('-rate_count').count(limit=1000) for cateid in range(1, 5)]
+    cate_count = [models.Blog.all().filter('category =', str(cateid)).count(limit=1000) for cateid in range(1, 5)]
     
     template = loader.get_template('blogshow/templates/index.html')
     context = Context({
@@ -118,6 +118,15 @@ def bloglist(request):
     })
     
     return HttpResponse(template.render(context))
+
+@requires_admin
+def refresh_db_blog(request):
+    for blog in models.Blog.all().fetch(limit=1000):
+        blog.rate = 0.0
+        blog.rate_count = 0
+        blog.rate_ips = []
+        blog.put()
+    return HttpResponse()
 
 def img(request, blog_id):
     blog = models.Blog.get_by_id(int(blog_id))
