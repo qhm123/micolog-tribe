@@ -29,6 +29,8 @@ class Entry(BaseModel):
     description = db.TextProperty()
     content = db.TextProperty()
     feed = db.ReferenceProperty(Feed)
+    rate_count = db.IntegerProperty(default=0)
+    rate_ips = db.StringListProperty(default=None)
     
     @classmethod
     def add(cls, perid, title, link, updated, description, content, feed):

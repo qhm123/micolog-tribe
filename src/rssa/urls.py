@@ -7,4 +7,5 @@ urlpatterns = patterns('rssa.views',
     (r'^add$', 'add'),
     (r'^add_all$', 'add_all'),
     (r'^fetch_feed$', 'fetch_feed'),
+    (r'^refresh_db_feedentry', 'refresh_db_feedentry'),
 )

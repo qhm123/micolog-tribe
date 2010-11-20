@@ -469,6 +469,25 @@ h2#contentdesc span {
 	height: 16px;
 }
 
+.thumbup {
+	float: left;
+	position: relative;
+	width: 16px;
+	height: 16px;
+}
+
+.thumbup a {
+	background: url(/static/thumbs16.png) no-repeat;
+	cursor: pointer;
+	display: block;
+	width: 16px;
+	height: 16px;
+}
+
+.thumbup a:hover {
+	background-position: 0px -32px;
+}
+
 .postmetatop .categs {
 	float: left;
 	width: 450px;

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 
 import logging
+from datetime import datetime
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
@@ -17,13 +18,24 @@ def index(request):
     
     # 只显示最新的20个RSS内容
     entries = models.Entry.all().order('-date').fetch(limit=20)
+    #hotentries = models.Entry.all().filter('date >', datetime.today()).order('-rate_count').fetch(limit=3)
     
     template = loader.get_template('rssa/templates/index.html')
     context = Context({
         "entries": entries,
+        #"hotentries": hotentries,
     })
     
     return HttpResponse(template.render(context))
+
+@requires_admin
+def refresh_db_feedentry(request):
+    for entry in models.Entry.all().fetch(limit=1000):
+        entry.rate_count = 0;
+        entry.rate_ips = []
+        entry.put()
+        
+    return HttpResponse()
 
 def add(request):
     user = users.get_current_user()

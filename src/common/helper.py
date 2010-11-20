@@ -20,9 +20,9 @@ def requires_admin(method):
     def wrapper(self, *args, **kwargs):
         user = users.get_current_user()
         if not user:
-            return HttpResponseRedirect(users.create_login_url(get_referer_url(self.request)))
+            return HttpResponseRedirect(users.create_login_url(get_referer_url(self.META["HTTP_HOST"] + self.path)))
         elif not users.is_current_user_admin():
-            return HttpResponseRedirect(users.create_login_url(get_referer_url(self.request)))
+            return HttpResponseRedirect(users.create_login_url(get_referer_url(self.META["HTTP_HOST"] + self.path)))
         else:
             return method(self, *args, **kwargs)
     return wrapper

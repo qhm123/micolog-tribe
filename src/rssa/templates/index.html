@@ -1,8 +1,30 @@
+<div>每日推荐：</div>
+{% for entry in hotentries %}
+<div class="post" id="hotpost-{{ entry.key.id }}">
+	<div class="posttop">
+		<div class="postmetatop">
+			<div class="thumbup"><a></a></div>
+			<!-- <div class="icon"><img src="{{ entry.feed.link }}/favicon.ico" alt="icon" /></div> -->
+			<div class="categs"><a href="#" onclick="toggleItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
+			<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>
+		</div>
+	</div>
+
+	<div class="postmetabottom" id="entrycontent-{{ entry.key.id }}" style="display:none;">
+		<div class="postcontent">
+		{{ entry.content|safe|truncatewords_html:"20" }}
+		</div>
+		<div class="readmore"><span><a target="_blank" href="{{ entry.link }}">Read more</a></span></div>
+	</div>
+</div>
+{% endfor %}
+
 {% for entry in entries %}
 <div class="post" id="post-{{ entry.key.id }}">
 	<div class="posttop">
 		<div class="postmetatop">
-			<div class="icon"><img src="{{ entry.feed.link }}/favicon.ico" alt="icon" /></div>
+			<div class="thumbup"><a></a></div>
+			<!-- <div class="icon"><img src="{{ entry.feed.link }}/favicon.ico" alt="icon" /></div> -->
 			<div class="categs"><a href="#" onclick="toggleItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
 			<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>
 		</div>
