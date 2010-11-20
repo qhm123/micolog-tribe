@@ -11,6 +11,9 @@ class Blog(BaseModel):
     pic = db.BlobProperty(required=True)
     tags = db.StringProperty(default='')
     add_date = db.DateTimeProperty(auto_now_add=True)
+    rate = db.FloatProperty(default=0.0)
+    rate_count = db.IntegerProperty(default=0)
+    rate_ips = db.StringListProperty(default=None)
     
     @classmethod
     def add(cls, user, name, category, link, pic, tags=''):
@@ -33,6 +36,17 @@ class Blog(BaseModel):
     def update_pic(self, pic):
         self.pic = db.Blob(pic)
         self.put()
+        
+    def add_rate(self, score, ip):
+        """投票"""
+        if ip in self.rate_ips:
+            return None
+        self.rate_ips.append(ip)
+        self.rate = (self.rate * self.rate_count + score) / (self.rate_count + 1)
+        self.rate_count += 1
+        self.put()
+        
+        return {"rate": self.rate, "rate_count": self.rate_count}
         
 class Category(BaseModel):
     cateid = db.IntegerProperty()

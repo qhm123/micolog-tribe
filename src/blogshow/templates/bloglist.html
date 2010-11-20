@@ -1,9 +1,9 @@
 {% for blog in blogs %}
 	<li>
+		<div id="blog-{{ blog.key.id }}" class="showrate" title="{{ blog.rate }}"></div><div id="rate_count-{{ blog.key.id }}">{{ blog.rate_count }}人投票</div>
 		<a target="_blank" href="{{ blog.link }}">
-			<img src="/blogshow/img/{{ blog.key.id }}" alt="" height="130" width="190" />
+			<img src="/blogshow/img/{{ blog.key.id }}" alt="{{ blog.name }}" height="130" width="190" />
 			<span>{{ blog.name }}</span>
-			<div id="blog-{{ blog.key.id }}" class="showrate"></div>
 		</a>
 	</li>
 {% endfor %}

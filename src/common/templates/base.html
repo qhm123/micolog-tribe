@@ -98,6 +98,36 @@
 			$(document).ajaxStart(function(){
 				$('#spinner').fadeIn();
 			}).ajaxStop(function(){
+				$('.showrate').each(function(){
+					if($(this).attr("innerHTML").length > 0)
+						return;
+					$(this).raty({
+					  start: $(this).attr("title"),
+					  showHalf: true,
+					  number: 5,
+					  path: '/static/',
+					  onClick: function(score){
+					  	var id = $(this).attr("id");
+					  	var blogid = $(this).attr("id").substring(5, id.length)
+					    //alert('id ' + blogid + 'score: ' + score);
+					    $.post(
+					    	"/blogshow/rate",
+					    	{ blogid: blogid, score: score },
+					    	function(date){
+					    	  if(date.success){
+								  alert("投票成功");
+								  $("#rate_count-"+date.blogid).html(date.rate_count+"人投票");
+								  $.fn.raty.start(date.rate, '#blog-'+date.blogid);
+							  }
+							  else{
+							  	alert("您已经透过票啦！");
+							  }
+							}
+					    );
+					  }
+					});
+				});
+				
 				$('#spinner').fadeOut();
 			});			
 		</script>

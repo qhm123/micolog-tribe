@@ -8,4 +8,5 @@ urlpatterns = patterns('blogshow.views',
     (r'^admin_add$', 'admin_add'),
     (r'^img/(?P<blog_id>\d+)$', 'img'),
     (r'^bloglist$', 'bloglist'),
+    (r'^rate', 'rate'),
 )

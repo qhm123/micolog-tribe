@@ -14,3 +14,20 @@ indexes:
   properties:
   - name: category
   - name: add_date
+
+- kind: Blog
+  properties:
+  - name: category
+  - name: rate
+    direction: desc
+  - name: rate_count
+    direction: desc
+
+- kind: Blog
+  properties:
+  - name: category
+  - name: rate
+    direction: desc
+  - name: rate_count
+    direction: desc
+  - name: add_date

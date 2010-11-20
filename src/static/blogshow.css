@@ -1474,6 +1474,15 @@ ul#showcontent {
 }
 
 ul#showcontent li {
+/*	background: url(images/image-shadow2.png) no-repeat center center;*/
+	min-width: 204px;
+	width: 25% !important;;
+/*	height: 142px;*/
+	float: left;
+/*	margin-bottom: 4em;*/
+}
+
+ul#showcontent li a {
 	background: url(images/image-shadow2.png) no-repeat center center;
 	min-width: 204px;
 	width: 25% !important;;
@@ -1506,6 +1515,16 @@ ul#showcontent li span {
 	color: #AC8B72;
 }
 
+ul#showcontent li div {
+	color:#AC8B72;
+	display:inline;
+	float:left;
+	font-size:12px;
+	height:20px;
+	line-height:30px;
+	margin:0 0 0 20px;
+}
+
 /************************************************
 * welcome *
 ************************************************/
@@ -1527,6 +1546,6 @@ ul#showcontent li span {
 	display: none;
 }
 
-.showrate {
-	
+.showrate img{
+	float: left;
 }

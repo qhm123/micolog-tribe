@@ -3,6 +3,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
+from django.utils import simplejson
 
 from google.appengine.api import users, images
 
@@ -12,7 +13,7 @@ from common.helper import requires_admin
 
 def index(request):
     # TODO: 考虑重构，现在有点恶心……
-    cate_count = [models.Blog.all().filter('category =', str(cateid)).count(limit=1000) for cateid in range(1, 5)]
+    cate_count = [models.Blog.all().filter('category =', str(cateid)).order('-rate').order('-rate_count').count(limit=1000) for cateid in range(1, 5)]
     
     template = loader.get_template('blogshow/templates/index.html')
     context = Context({
@@ -89,10 +90,27 @@ def admin_add(request):
         models.Blog.admin_add(mail, name, category, link, pic)
             
         return HttpResponseRedirect(reverse('blogshow.views.admin_add')) 
+    
+def rate(request):
+    blogid = request.POST.get('blogid')
+    if blogid is None:
+        return HttpResponse(status=400)
+    score = request.POST.get('score')
+    if score is None:
+        return HttpResponse(status=400)
+    ip = request.META['REMOTE_ADDR']
+    blog = models.Blog.get_by_id(int(blogid))
+    if blog is None:
+        return HttpResponse(status=400)
+    rate = blog.add_rate(int(score), ip)
+    if rate != None:
+        return HttpResponse(simplejson.dumps({"success": True, "rate": rate['rate'], "rate_count": rate['rate_count'], "blogid": blogid}), mimetype='application/json')
+    else:
+        return HttpResponse(simplejson.dumps({"success": False}), mimetype='application/json')
 
 def bloglist(request):
     cateid = request.GET.get('cateid')
-    blogs = models.Blog.all().filter('category =', cateid).order('add_date').fetch(limit=1000)
+    blogs = models.Blog.all().filter('category =', cateid).order('-rate').order('-rate_count').order('add_date').fetch(limit=1000)
     
     template = loader.get_template('bloglist.html')
     context = Context({
