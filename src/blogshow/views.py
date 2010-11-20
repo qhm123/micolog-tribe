@@ -103,10 +103,10 @@ def rate(request):
     if blog is None:
         return HttpResponse(status=400)
     rate = blog.add_rate(int(score), ip)
-    if rate != None:
+    if rate["success"]:
         return HttpResponse(simplejson.dumps({"success": True, "rate": rate['rate'], "rate_count": rate['rate_count'], "blogid": blogid}), mimetype='application/json')
     else:
-        return HttpResponse(simplejson.dumps({"success": False}), mimetype='application/json')
+        return HttpResponse(simplejson.dumps({"success": False, "rate": rate['rate'], "rate_count": rate['rate_count'], "blogid": blogid}), mimetype='application/json')
 
 def bloglist(request):
     cateid = request.GET.get('cateid')

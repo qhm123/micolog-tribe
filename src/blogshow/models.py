@@ -40,13 +40,13 @@ class Blog(BaseModel):
     def add_rate(self, score, ip):
         """投票"""
         if ip in self.rate_ips:
-            return None
+            return {"success": False, "rate": self.rate, "rate_count": self.rate_count}
         self.rate_ips.append(ip)
         self.rate = (self.rate * self.rate_count + score) / (self.rate_count + 1)
         self.rate_count += 1
         self.put()
         
-        return {"rate": self.rate, "rate_count": self.rate_count}
+        return {"success": True, "rate": self.rate, "rate_count": self.rate_count}
         
 class Category(BaseModel):
     cateid = db.IntegerProperty()
