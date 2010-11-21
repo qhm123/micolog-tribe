@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
@@ -18,12 +18,13 @@ def index(request):
     
     # 只显示最新的20个RSS内容
     entries = models.Entry.all().order('-date').fetch(limit=20)
-    #hotentries = models.Entry.all().filter('date >', datetime.today()).order('-rate_count').fetch(limit=3)
+    weekago = datetime.today() + timedelta(days=-7)
+    hotentries = models.Entry.all().order('-rate_count').filter('date >', weekago).order('-date').fetch(limit=3)
     
     template = loader.get_template('rssa/templates/index.html')
     context = Context({
         "entries": entries,
-        #"hotentries": hotentries,
+        "hotentries": hotentries,
     })
     
     return HttpResponse(template.render(context))
@@ -58,6 +59,20 @@ def add(request):
             feed = FeedParser(url)
             models.Feed.add(user, url, feed.title, feed.subtitle, feed.link)
         return HttpResponseRedirect(reverse('rssa.views.add'))
+    
+def rate(request):
+    entryid = request.POST.get('entryid')
+    if entryid is None:
+        return HttpResponse(status=400)
+    entry = models.Entry.get_by_id(int(entryid))
+    if entry is None:
+        return HttpResponse(status=400)
+    ip = request.META['REMOTE_ADDR']
+    success = entry.add_rate(ip)
+    if success:
+        return HttpResponse(success)
+    else:
+        return HttpResponse(success)
 
 #@requires_admin
 def fetch_feed(request):

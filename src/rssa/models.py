@@ -49,3 +49,11 @@ class Entry(BaseModel):
             entry.content = content
             entry.feed = feed
             entry.put()
+            
+    def add_rate(self, ip):
+        if ip in self.rate_ips:
+            return False
+        self.rate_count += 1
+        self.rate_ips.append(ip)
+        self.put()
+        return True
