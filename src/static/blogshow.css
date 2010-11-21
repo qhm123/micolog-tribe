@@ -420,7 +420,7 @@ form label.subscribe-label {
 h2#contentdesc {
 	font-weight: normal;
 	font-size: 1.3em;
-	padding-bottom: 15px;
+	padding: 10px 0 2px;
 }
 
 h2#contentdesc span {
@@ -474,6 +474,10 @@ h2#contentdesc span {
 	position: relative;
 	width: 16px;
 	height: 16px;
+}
+
+.thumbup .thumbupclicked {
+	background-position: 0px -32px;
 }
 
 .thumbup a {

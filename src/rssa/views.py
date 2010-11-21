@@ -19,7 +19,7 @@ def index(request):
     # 只显示最新的20个RSS内容
     entries = models.Entry.all().order('-date').fetch(limit=20)
     weekago = datetime.today() + timedelta(days=-7)
-    hotentries = models.Entry.all().order('-rate_count').filter('date >', weekago).order('-date').fetch(limit=3)
+    hotentries = models.Entry.all().filter('date >', weekago).fetch(limit=3)
     
     template = loader.get_template('rssa/templates/index.html')
     context = Context({
