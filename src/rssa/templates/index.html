@@ -3,7 +3,7 @@
 <div class="post" id="hotpost-{{ entry.key.id }}">
 	<div class="posttop">
 		<div class="postmetatop">
-			<div class="thumbup"><a id="hotthumbup-{{ entry.key.id }}" class="thumba"></a></div>
+			<div class="thumbup"><a id="hotthumbup-{{ entry.key.id }}" class="thumba"></a><span>[{{ entry.rate_count}}票]</span></div>
 			<!-- <div class="icon"><img src="{{ entry.feed.link }}/favicon.ico" alt="icon" /></div> -->
 			<div class="categs"><a href="#" onclick="toggleHotItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
 			<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>
@@ -24,7 +24,7 @@
 <div class="post" id="post-{{ entry.key.id }}">
 	<div class="posttop">
 		<div class="postmetatop">
-			<div class="thumbup"><a id="thumbup-{{ entry.key.id }}" class="thumba"></a></div>
+			<div class="thumbup"><a id="thumbup-{{ entry.key.id }}" class="thumba"></a><span>[{{ entry.rate_count}}票]</span></div>
 			<!-- <div class="icon"><img src="{{ entry.feed.link }}/favicon.ico" alt="icon" /></div> -->
 			<div class="categs"><a href="#" onclick="toggleItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
 			<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>

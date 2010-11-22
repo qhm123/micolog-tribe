@@ -16,15 +16,19 @@ from common.helper import requires_admin
 
 def index(request):
     
-    # 只显示最新的20个RSS内容
-    entries = models.Entry.all().order('-date').fetch(limit=20)
+    # 因为GAE必须在采用其他排序顺序之前对不等式过滤器中的属性进行排序，所以采用手动排序
     weekago = datetime.today() + timedelta(days=-7)
-    hotentries = models.Entry.all().filter('date >', weekago).fetch(limit=3)
+    hotentries = models.Entry.all().filter('date >', weekago).fetch(limit=1000)
+    top3 = sorted(hotentries, key=lambda e:(e.rate_count, e.date), reverse=True)[0:3]
+    
+    # 只显示最新的20个左右（根据实际过滤个数决定，考虑到用户不会注意到下边到底有几个）
+    # RSS内容（过滤掉最热的）
+    entries = [e for e in models.Entry.all().order('-date').fetch(limit=20) if e not in top3]
     
     template = loader.get_template('rssa/templates/index.html')
     context = Context({
         "entries": entries,
-        "hotentries": hotentries,
+        "hotentries": top3,
     })
     
     return HttpResponse(template.render(context))

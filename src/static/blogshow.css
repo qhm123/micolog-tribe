@@ -472,7 +472,7 @@ h2#contentdesc span {
 .thumbup {
 	float: left;
 	position: relative;
-	width: 16px;
+	width: 50px;
 	height: 16px;
 }
 
@@ -486,6 +486,14 @@ h2#contentdesc span {
 	display: block;
 	width: 16px;
 	height: 16px;
+	float: left;
+}
+
+.thumbup span {
+	color: #294;
+	float: left;
+	margin-top: -2px;
+	width: 30px;
 }
 
 .thumbup a:hover {
@@ -1497,12 +1505,12 @@ ul#showcontent {
 }
 
 ul#showcontent li {
-/*	background: url(images/image-shadow2.png) no-repeat center center;*/
+	/*	background: url(images/image-shadow2.png) no-repeat center center;*/
 	min-width: 204px;
 	width: 25% !important;;
-/*	height: 142px;*/
+	/*	height: 142px;*/
 	float: left;
-/*	margin-bottom: 4em;*/
+	/*	margin-bottom: 4em;*/
 }
 
 ul#showcontent li a {
@@ -1539,13 +1547,13 @@ ul#showcontent li span {
 }
 
 ul#showcontent li div {
-	color:#AC8B72;
-	display:inline;
-	float:left;
-	font-size:12px;
-	height:20px;
-	line-height:30px;
-	margin:0 0 0 20px;
+	color: #AC8B72;
+	display: inline;
+	float: left;
+	font-size: 12px;
+	height: 20px;
+	line-height: 30px;
+	margin: 0 0 0 20px;
 }
 
 /************************************************
@@ -1569,6 +1577,6 @@ ul#showcontent li div {
 	display: none;
 }
 
-.showrate img{
+.showrate img {
 	float: left;
 }

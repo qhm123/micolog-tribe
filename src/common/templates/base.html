@@ -22,9 +22,9 @@
 <div id="wrapper">
 	<div id="header">
 		<div id="logo">
-			<a href="/"><img src="/static/images/genericlogo.png" alt="micolog logo" /></a>
+			<a href="/"><img src="/static/micologlogo.png" alt="micolog logo" /></a>
 			<h1><a href="/">Micolog部落</a></h1>
-			<div id="desc">{% block pagetitle %}{% endblock %}</div>
+			<div id="desc">Micoloer的聚集地</div>
 		</div><!-- /logo -->
 		
 		<div id="headerbanner">
@@ -44,6 +44,7 @@
 					RSS聚合
 				</a>
 			</li>
+			<!-- too slow
 			<li class="cat-item">
 				<a id="cat_chat" href="#" title="RSS聚合">
 					GTalk群聊
@@ -54,6 +55,7 @@
 					部落手册
 				</a>
 			</li>
+			 -->
 			<li class="cat-item">
 				<a id="cat_bbs" target="_blank" href="http://xm.appspot.com/" title="Micolog论坛">
 					Micolog论坛
@@ -107,42 +109,12 @@
 			
 			$(document).ajaxStart(function(){
 				$('#spinner').fadeIn();
-			}).ajaxStop(function(){
-				$('.showrate').each(function(){
-					if($(this).attr("innerHTML").length > 0)
-						return;
-					$(this).raty({
-					  start: $(this).attr("title"),
-					  showHalf: true,
-					  number: 5,
-					  path: '/static/',
-					  onClick: function(score){
-					  	var id = $(this).attr("id");
-					  	var blogid = $(this).attr("id").substring(5, id.length)
-					    //alert('id ' + blogid + 'score: ' + score);
-					    $.post(
-					    	"/blogshow/rate",
-					    	{ blogid: blogid, score: score },
-					    	function(date){
-					    	  if(date.success){
-								  $("#rate_count-"+date.blogid).html(date.rate_count+"人投票");
-								  $.fn.raty.start(date.rate, '#blog-'+date.blogid);
-								  alert("投票成功");
-							  }
-							  else{
-							  	$.fn.raty.start(date.rate, '#blog-'+date.blogid);
-							  	alert("您已经透过票啦！");
-							  }
-							}
-					    );
-					  }
-					});
-				});
-				
+			}).ajaxStop(function(){			
 				$('#spinner').fadeOut();
 			});			
 		</script>
 	
+		<!-- load too slow
 		<script type="text/javascript">
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-19590743-1']);
@@ -154,6 +126,7 @@
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 		</script>
+		 -->
 	</div><!-- /credits -->
 </div>
 </body>
