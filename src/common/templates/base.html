@@ -24,7 +24,7 @@
 		<div id="logo">
 			<a href="/"><img src="/static/micologlogo.png" alt="micolog logo" /></a>
 			<h1><a href="/">Micolog部落</a></h1>
-			<div id="desc">Micoloer的聚集地</div>
+			<div id="desc">Micologer的聚集地</div>
 		</div><!-- /logo -->
 		
 		<div id="headerbanner">
@@ -69,15 +69,16 @@
 		</ul>
 	</div>
 	
-	
+	<h2 id="slogon">Micolog部落，期待你的<a href="/blogshow/add">加入</a>。</h2>
+		
 	<div id="main">
 		<div id="spinner"></div>
 		<div id="content">
-			
+{% block content %}{% endblock %}
 		</div>
 	</div>
 	
-	{% block content %}{% endblock %}
+
 	
 	<div id="footer">
 		<ul id="avatar-wall">
@@ -114,7 +115,6 @@
 			});			
 		</script>
 	
-		<!-- load too slow
 		<script type="text/javascript">
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-19590743-1']);
@@ -126,7 +126,6 @@
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 		</script>
-		 -->
 	</div><!-- /credits -->
 </div>
 </body>

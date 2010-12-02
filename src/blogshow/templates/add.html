@@ -9,57 +9,53 @@
 {% endblock %}
 
 {% block headerbanner %}
-<p>欢迎添加您的博客，添加后你可以再次进入此页面修改您的博客信息。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>
+<!--<p>欢迎添加您的博客，添加后你可以再次进入此页面修改您的博客信息。有问题可以在<a target="_blank" href="http://qhm123.appspot.com/2010/11/9/micolog-tribe-a-micologer-place.html">这里留言</a>。</p>-->
 {% endblock %}
 
 {% block content %}
-	<div id="main">
-		<div id="content">
-			<form action="{% if showmail %}admin_add{% else %}add{% endif %}" method="post" enctype="multipart/form-data">
-				<table>
-					<tr>
-						<td>名称<span style="color:red">*</span>：</td>
-						<td><input id="name" name="name" type="text" value="{{ blog.name }}" /></td>
-					</tr>
-					{% if showmail %}
-					<tr>
-						<td>邮箱<span style="color:red">*</span>：</td>
-						<td><input id="mail" name="mail" type="text" value="" /></td>
-					</tr>
-					{% endif %}
-					<tr>
-						<td>类别<span style="color:red">*</span>：</td>
-						<td>
-							<input type="radio" name="category" value="1" {% ifequal blog.category '1' %}checked="true"{% endifequal %} />快乐
-							<input type="radio" name="category" value="2" {% ifequal blog.category '2' %}checked="true"{% endifequal %} />技术
-							<input type="radio" name="category" value="3" {% ifequal blog.category '3' %}checked="true"{% endifequal %} />学习
-							<input type="radio" name="category" value="4" {% ifequal blog.category '4' %}checked="true"{% endifequal %} />生活
-						</td>
-						<!-- <td><input id="category" name="category" type="text" value="{{ blog.category }}" /></td> -->
-					</tr>
-					<tr>
-						<td>链接<span style="color:red">*</span>：</td>
-						<td><input id="link" name="link" type="text" value="{{ blog.link }}" /></td>
-					</tr>
-					<!-- 
-					<tr>
-						<td>标签：</td>
-						<td><input id="tags" name="tags" type="text" value="{{ blog.tags }}" /></td>
-					</tr>
-					-->
-					<tr>
-						<td>图片<span style="color:red">*</span>：</td>
-						<td><input id="file" name="file" type="file" /></td>
-					</tr>
-					<tr>
-						<td>当前截图：</td>
-						<td><img id="curimg" src="/blogshow/img/{{ blog.key.id }}" alt="当前截图" width="190px" height="130px" /></td>
-					</tr>
-					<tr>
-						<td colspan="2"><input id="submit" name="submit" type="submit" value="提交" /></td>
-					</tr>
-				</table>
-			</form>
-		</div>
-	</div>
+	<form action="{% if showmail %}admin_add{% else %}add{% endif %}" method="post" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>名称<span style="color:red">*</span>：</td>
+				<td><input id="name" name="name" type="text" value="{{ blog.name }}" /></td>
+			</tr>
+			{% if showmail %}
+			<tr>
+				<td>邮箱<span style="color:red">*</span>：</td>
+				<td><input id="mail" name="mail" type="text" value="" /></td>
+			</tr>
+			{% endif %}
+			<tr>
+				<td>类别<span style="color:red">*</span>：</td>
+				<td>
+					<input type="radio" name="category" value="1" {% ifequal blog.category '1' %}checked="true"{% endifequal %} />快乐
+					<input type="radio" name="category" value="2" {% ifequal blog.category '2' %}checked="true"{% endifequal %} />技术
+					<input type="radio" name="category" value="3" {% ifequal blog.category '3' %}checked="true"{% endifequal %} />学习
+					<input type="radio" name="category" value="4" {% ifequal blog.category '4' %}checked="true"{% endifequal %} />生活
+				</td>
+				<!-- <td><input id="category" name="category" type="text" value="{{ blog.category }}" /></td> -->
+			</tr>
+			<tr>
+				<td>链接<span style="color:red">*</span>：</td>
+				<td><input id="link" name="link" type="text" value="{{ blog.link }}" /></td>
+			</tr>
+			<!-- 
+			<tr>
+				<td>标签：</td>
+				<td><input id="tags" name="tags" type="text" value="{{ blog.tags }}" /></td>
+			</tr>
+			-->
+			<tr>
+				<td>图片<span style="color:red">*</span>：</td>
+				<td><input id="file" name="file" type="file" /></td>
+			</tr>
+			<tr>
+				<td>当前截图：</td>
+				<td><img id="curimg" src="/blogshow/img/{{ blog.key.id }}" alt="当前截图" width="190px" height="130px" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input id="submit" name="submit" type="submit" value="提交" /></td>
+			</tr>
+		</table>
+	</form>
 {% endblock %}
