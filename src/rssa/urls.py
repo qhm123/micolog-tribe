@@ -9,4 +9,5 @@ urlpatterns = patterns('rssa.views',
     (r'^fetch_feed$', 'fetch_feed'),
     (r'^refresh_db_feedentry', 'refresh_db_feedentry'),
     (r'^rate', 'rate'),
+    (r'^feed', 'feed'),
 )

@@ -109,3 +109,13 @@ def add_all(request):
                 models.Feed.add(blog.user, feed_url, fp.title, fp.subtitle, fp.link)
             
     return HttpResponse()
+
+def feed(request):
+    entries = models.Entry.all().order('-date').fetch(10)
+        
+    template = loader.get_template('rssa/templates/rss.xml')
+    context = Context({
+        "entries": entries,
+    })
+    
+    return HttpResponse(template.render(context), mimetype='application/rss+xml; charset=utf8')
