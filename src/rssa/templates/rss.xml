@@ -25,8 +25,8 @@
 				<pubDate>{{entry.date|date:"Y.m.d H:i"}}</pubDate>
 				<dc:creator>{{entry.feed.title|escape}}</dc:creator>
 				<guid isPermaLink="false">{{entry.link|escape}}</guid>
-				<description><![CDATA[{{entry.description}}]]></description>
-				<content:encoded><![CDATA[{{entry.content}}]]></content:encoded>
+				<description><![CDATA[{{entry.description|escape}}]]></description>
+				<content:encoded><![CDATA[{{entry.content|safe}}]]></content:encoded>
 				<wfw:commentRss>{{ entry.feed.feed_url }}/comments</wfw:commentRss>
 				<slash:comments></slash:comments>
 			</item>

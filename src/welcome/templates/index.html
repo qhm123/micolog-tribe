@@ -14,3 +14,11 @@
 
 {% block content %}	
 {% endblock %}
+
+{% block footer %}
+	<script type="text/javascript">
+	$(document).ready(function($){
+	    $('#content').load('{% url blogshow.views.index %}');
+	});
+	</script>
+{% endblock %}
