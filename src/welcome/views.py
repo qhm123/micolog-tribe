@@ -63,6 +63,7 @@ def add(request):
             pic = request.FILES.get('file')
             tags = request.POST.get('tags')
             feedurl = request.POST.get('feedurl')
+            tt = tags.encode('utf8')
             
             blog = models.Blog.all().filter('user =', user).get()
             

@@ -163,8 +163,8 @@ class Taggable:
         import types
         if type(tags) is types.UnicodeType:
             # Convert unicode to a plain string
-            tags = str(tags)
-        if type(tags) is types.StringType:
+            #tags = str(tags.encode("utf-8"))
+        #if type(tags) is types.StringType:
             # Tags is a string, split it on tag_seperator into a list
             tags = string.split(tags, self.tag_separator)
         if type(tags) is types.ListType:

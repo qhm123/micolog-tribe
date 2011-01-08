@@ -90,15 +90,16 @@ def convert_category_to_tag(request):
     """批量将原来的category转换为tag。"""
     
     for blog in models.Blog.all().fetch(limit=1000):
-        if blog.category == '1':
-            blog.tags = u'快乐'
-        elif blog.category == '2':
-            blog.tags = u'技术'
-        elif blog.category == '3':
-            blog.tags = u'学习'
-        elif blog.category == '4':
-            blog.tags = u'生活'
-        blog.put()
+        if blog.tags is None or len(blog.tags) == 0:
+            if blog.category == '1':
+                blog.tags = u'快乐'
+            elif blog.category == '2':
+                blog.tags = u'技术'
+            elif blog.category == '3':
+                blog.tags = u'学习'
+            elif blog.category == '4':
+                blog.tags = u'生活'
+            blog.put()
         
     return HttpResponse()
 
