@@ -24,3 +24,6 @@ urlpatterns += patterns('',
     (r'^blogshow/', include('blogshow.urls')),
     (r'^rssa/', include('rssa.urls')),
 )
+
+handler404 = 'common.views.common_404'
+handler500 = 'common.views.common_500'
