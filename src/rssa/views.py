@@ -33,31 +33,6 @@ def index(request):
     
     return HttpResponse(template.render(context))
 
-def add(request):
-    """添加Feed，这个可能不用了，考虑删除。"""
-    # TODO: 考虑删除
-    
-    user = users.get_current_user()
-    if not user:
-        login_url = users.create_login_url(reverse('rssa.views.add'))
-        return HttpResponseRedirect(login_url)
-        
-    if request.method == 'GET':
-        feed = models.Feed.all().filter('user =', user).get()
-        
-        template = loader.get_template('rssa/templates/add.html')
-        context = Context({
-            "feed": feed,
-        })
-        
-        return HttpResponse(template.render(context))
-    else:
-        url = request.POST.get('feed_url')
-        if url:
-            feed = FeedParser(url)
-            models.Feed.add(user, url, feed.title, feed.subtitle, feed.link)
-        return HttpResponseRedirect(reverse('rssa.views.add'))
-    
 def rate(request):
     """投票。"""
     

@@ -31,3 +31,11 @@ indexes:
   - name: rate_count
     direction: desc
   - name: add_date
+
+- kind: Blog
+  properties:
+  - name: rate
+    direction: desc
+  - name: rate_count
+    direction: desc
+  - name: add_date
