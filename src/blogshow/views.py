@@ -26,6 +26,8 @@ def index(request):
     return HttpResponse(template.render(context))
 
 def add(request):
+    """添加一个博客。"""
+    
     if request.method == 'GET':
         user = users.get_current_user()
         if not user:
@@ -44,54 +46,33 @@ def add(request):
         user = users.get_current_user()
         if user:
             name = request.POST.get('name', '')
-            category = request.POST.get('category', '')
+            # TODO: 去掉category
+            category = "1"
             link = request.POST.get('link', '')
             if 'http://' not in link:
                 link = 'http://' + link
             pic = request.FILES.get('file')
-            tags = ''
+            tags = request.POST.get('tags')
+            feedurl = request.POST.get('feedurl')
             
             blog = models.Blog.all().filter('user =', user).get()
             
             # 如果当前用户博客为空，且图片不为空，则添加博客上传图片
             if not blog and pic:
                 pic = images.resize(pic.read(), 190, 130)
-                models.Blog.add(user, name, category, link, pic)
+                models.Blog.add(user, name, category, link, pic, tags, feedurl)
             # 如果当前用户博客不为空，则更新博客信息
             elif blog:
-                blog.update(name, category, link, tags)
+                blog.update(name, category, link, tags, feedurl)
                 if pic:
                     pic = images.resize(pic.read(), 190, 130)
                     blog.update_pic(pic)
             
         return HttpResponseRedirect(reverse('blogshow.views.add'))
-
-@requires_admin
-def admin_add(request):
-    if request.method == 'GET':
-        template = loader.get_template('blogshow/templates/add.html')
-        context = Context({
-            'showmail': True,
-        })
-        
-        return HttpResponse(template.render(context))
-    else:
-        name = request.POST.get('name', '')
-        mail = request.POST.get('mail', '')
-        category = request.POST.get('category', '')
-        link = request.POST.get('link', '')
-        if 'http://' not in link:
-            link = 'http://' + link
-        pic = request.FILES.get('file')
-        tags = ''
-        
-        # 如果当前用户博客为空，且图片不为空，则添加博客上传图片
-        pic = images.resize(pic.read(), 190, 130)
-        models.Blog.admin_add(mail, name, category, link, pic)
-            
-        return HttpResponseRedirect(reverse('blogshow.views.admin_add')) 
     
 def rate(request):
+    """给博客投票。"""
+    
     blogid = request.POST.get('blogid')
     if blogid is None:
         return HttpResponse(status=400)
@@ -109,6 +90,8 @@ def rate(request):
         return HttpResponse(simplejson.dumps({"success": False, "rate": rate['rate'], "rate_count": rate['rate_count'], "blogid": blogid}), mimetype='application/json')
 
 def bloglist(request):
+    """博客列表。"""
+    
     cateid = request.GET.get('cateid')
     blogs = models.Blog.all().filter('category =', cateid).order('-rate').order('-rate_count').order('add_date').fetch(limit=1000)
     
@@ -119,16 +102,9 @@ def bloglist(request):
     
     return HttpResponse(template.render(context))
 
-@requires_admin
-def refresh_db_blog(request):
-    for blog in models.Blog.all().fetch(limit=1000):
-        blog.rate = 0.0
-        blog.rate_count = 0
-        blog.rate_ips = []
-        blog.put()
-    return HttpResponse()
-
 def img(request, blog_id):
+    """img请求应答函数。"""
+    
     blog = models.Blog.get_by_id(int(blog_id))
     if blog.pic:
         #request.POST.headers['Content-Type'] = "image/jepg"
@@ -138,3 +114,43 @@ def img(request, blog_id):
         return response
     else:
         return HttpResponse(blog.pic)
+    
+@requires_admin
+def admin_add(request):
+    """管理员专用：管理员添加博客。"""
+    
+    if request.method == 'GET':
+        template = loader.get_template('blogshow/templates/add.html')
+        context = Context({
+            'showmail': True,
+        })
+        
+        return HttpResponse(template.render(context))
+    else:
+        name = request.POST.get('name', '')
+        mail = request.POST.get('mail', '')
+        # TODO: 去掉category
+        category = "1"
+        link = request.POST.get('link', '')
+        if 'http://' not in link:
+            link = 'http://' + link
+        pic = request.FILES.get('file')
+        tags = request.POST.get('tags')
+        feedurl = request.POST.get('feedurl')
+        
+        # 如果当前用户博客为空，且图片不为空，则添加博客上传图片
+        pic = images.resize(pic.read(), 190, 130)
+        models.Blog.admin_add(mail, name, category, link, pic, tags, feedurl)
+            
+        return HttpResponseRedirect(reverse('blogshow.views.admin_add'))
+    
+@requires_admin
+def refresh_db_blog(request):
+    """慎用！管理员专用，更新Blog所有实体的投票数和投票IP列表。"""
+    
+    for blog in models.Blog.all().fetch(limit=1000):
+        blog.rate = 0.0
+        blog.rate_count = 0
+        blog.rate_ips = []
+        blog.put()
+    return HttpResponse()

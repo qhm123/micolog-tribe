@@ -14,6 +14,7 @@ from feedfetch import FeedParser
 from common.helper import requires_admin
 
 def index(request):
+    """RSSA聚合首页。"""
     
     # 因为GAE必须在采用其他排序顺序之前对不等式过滤器中的属性进行排序，所以采用手动排序
     weekago = datetime.today() + timedelta(days=-7)
@@ -32,16 +33,10 @@ def index(request):
     
     return HttpResponse(template.render(context))
 
-@requires_admin
-def refresh_db_feedentry(request):
-    for entry in models.Entry.all().fetch(limit=1000):
-        entry.rate_count = 0;
-        entry.rate_ips = []
-        entry.put()
-        
-    return HttpResponse()
-
 def add(request):
+    """添加Feed，这个可能不用了，考虑删除。"""
+    # TODO: 考虑删除
+    
     user = users.get_current_user()
     if not user:
         login_url = users.create_login_url(reverse('rssa.views.add'))
@@ -64,6 +59,8 @@ def add(request):
         return HttpResponseRedirect(reverse('rssa.views.add'))
     
 def rate(request):
+    """投票。"""
+    
     entryid = request.POST.get('entryid')
     if entryid is None:
         return HttpResponse(status=400)
@@ -77,8 +74,22 @@ def rate(request):
     else:
         return HttpResponse(success)
 
+def feed(request):
+    """最新文章订阅。"""
+    
+    entries = models.Entry.all().order('-date').fetch(10)
+        
+    template = loader.get_template('rssa/templates/rss.xml')
+    context = Context({
+        "entries": entries,
+    })
+    
+    return HttpResponse(template.render(context), mimetype='application/rss+xml; charset=utf8')
+
 #@requires_admin
 def fetch_feed(request):
+    """管理员和cron用，更新抓取所有Feed的文章。"""
+    
     feeds = models.Feed.all().fetch(limit=1000)
 
     for feed in feeds:
@@ -93,6 +104,8 @@ def fetch_feed(request):
 
 @requires_admin
 def add_all(request):
+    """管理员专用，根据博客信息，自动寻找Feed地址，并添加所有Feed信息到数据库。"""
+    
     added_link = [feed.link for feed in models.Feed.all().fetch(limit=1000)]
     
     for blog in models.Blog.all().fetch(limit=1000):
@@ -105,16 +118,16 @@ def add_all(request):
             except:
                 pass
             if fp:
-                models.Feed.add(blog.user, feed_url, fp.title, fp.subtitle, fp.link)
+                models.Feed.add(blog.user, feed_url, fp.title, fp.subtitle, fp.link, blog)
             
     return HttpResponse()
 
-def feed(request):
-    entries = models.Entry.all().order('-date').fetch(10)
+@requires_admin
+def refresh_db_feedentry(request):
+    """慎用！管理员专用，更新Entry所有实体的投票数和投票IP列表。"""
+    for entry in models.Entry.all().fetch(limit=1000):
+        entry.rate_count = 0;
+        entry.rate_ips = []
+        entry.put()
         
-    template = loader.get_template('rssa/templates/rss.xml')
-    context = Context({
-        "entries": entries,
-    })
-    
-    return HttpResponse(template.render(context), mimetype='application/rss+xml; charset=utf8')
+    return HttpResponse()

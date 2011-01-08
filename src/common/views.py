@@ -8,7 +8,6 @@ from django.template import Context, loader
 from django.core.urlresolvers import reverse
 
 def common_404(request):
-    # You need to create a 404.html template.
     template = loader.get_template('common/templates/404.html')
     context = Context({})
     return HttpResponseNotFound(template.render(context))

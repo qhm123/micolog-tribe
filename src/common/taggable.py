@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*
 
+from appengine_django.models import BaseModel
 from google.appengine.ext import db
 import string
     
-class Tag(db.Model):
+class Tag(BaseModel):
     "Google AppEngine model for store of tags."
     
     tag = db.StringProperty(required=True)
