@@ -9,8 +9,7 @@ from django.core.urlresolvers import reverse
 
 from google.appengine.api import users
 
-import models
-from blogshow.models import Blog
+from common import models
 from feedfetch import FeedParser
 from common.helper import requires_admin
 
@@ -96,7 +95,7 @@ def fetch_feed(request):
 def add_all(request):
     added_link = [feed.link for feed in models.Feed.all().fetch(limit=1000)]
     
-    for blog in Blog.all().fetch(limit=1000):
+    for blog in models.Blog.all().fetch(limit=1000):
         if blog.link not in added_link:
             feed_url = blog.link + '/feed'
             

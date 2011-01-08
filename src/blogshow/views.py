@@ -7,7 +7,7 @@ from django.utils import simplejson
 
 from google.appengine.api import users, images
 
-import models
+from common import models
 from common.helper import requires_admin
 
 
