@@ -336,7 +336,18 @@ form label.subscribe-label {
 	background: url(images/blacktrans.png);
 }
 
+#catnav-tag {
+	background: url(images/blacktrans.png);
+}
+
 #nav li {
+	float: left;
+	background: url(images/blacktrans.png);
+	line-height: 2em;
+	margin: 5px 0 5px 5px;
+}
+
+#nav-tag li {
 	float: left;
 	background: url(images/blacktrans.png);
 	line-height: 2em;
@@ -347,15 +358,37 @@ form label.subscribe-label {
 	background: url(images/blacktrans2.png);
 }
 
+#nav-tag li:hover {
+	background: url(images/blacktrans2.png);
+}
+
 #nav li a {
 	display: block;
 	margin: 0;
 	font-size: 0.8em;
-	color: #fff;
 	padding: 0 13px;
 }
 
+#nav-tag li a {
+	display: block;
+	margin: 0;
+	font-size: 0.8em;
+	padding: 0 13px;
+}
+
+.nav-selected {
+	color: #afdaff;
+	text-decoration: none;
+	display: block;
+}
+
 #nav li a:hover {
+	color: #afdaff;
+	text-decoration: none;
+	display: block;
+}
+
+#nav-tag li a:hover {
 	color: #afdaff;
 	text-decoration: none;
 	display: block;

@@ -8,14 +8,19 @@ from django.utils import simplejson
 from google.appengine.api import users, images
 
 from common import models
+from common.taggable import Tag
 from common.helper import requires_admin
+from django.core.context_processors import request
 
 
 def index(request):
     """博客秀首页。"""
     
+    tags = Tag.all().fetch(limit=1000)
+    
     template = loader.get_template('blogshow/templates/index.html')
     context = Context({
+        "tags": tags,
     })
     
     return HttpResponse(template.render(context))
@@ -23,7 +28,12 @@ def index(request):
 def bloglist(request):
     """博客列表。"""
     
-    blogs = models.Blog.all().order('-rate').order('-rate_count').order('add_date').fetch(limit=1000)
+    tagkey = request.GET.get('tagkey')
+    if tagkey:
+        taggeds = Tag.get(tagkey).tagged
+        blogs = (models.Blog.get(tagged) for tagged in taggeds)
+    else:
+        blogs = models.Blog.all().order('-rate').order('-rate_count').order('add_date').fetch(limit=1000)
     
     template = loader.get_template('bloglist.html')
     context = Context({
@@ -74,3 +84,21 @@ def refresh_db_blog(request):
         blog.rate_ips = []
         blog.put()
     return HttpResponse()
+
+@requires_admin
+def convert_category_to_tag(request):
+    """批量将原来的category转换为tag。"""
+    
+    for blog in models.Blog.all().fetch(limit=1000):
+        if blog.category == '1':
+            blog.tags = u'快乐'
+        elif blog.category == '2':
+            blog.tags = u'技术'
+        elif blog.category == '3':
+            blog.tags = u'学习'
+        elif blog.category == '4':
+            blog.tags = u'生活'
+        blog.put()
+        
+    return HttpResponse()
+
