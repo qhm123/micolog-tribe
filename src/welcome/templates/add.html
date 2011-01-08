@@ -13,7 +13,7 @@
 
 {% block content %}
 	<form action="{% if showmail %}admin_add{% else %}add{% endif %}" method="post" enctype="multipart/form-data">
-		<table>
+		<table id="addblogtable">
 			<tr>
 				<td>名称<span style="color:red">*</span>：</td>
 				<td><input id="name" name="name" type="text" value="{{ blog.name }}" /></td>

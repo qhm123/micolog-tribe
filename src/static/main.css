@@ -1621,3 +1621,7 @@ ul#showcontent li div {
 .showrate img {
 	float: left;
 }
+
+#addblogtable input{
+	width: 400px;
+}

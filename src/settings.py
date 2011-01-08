@@ -19,7 +19,7 @@ import os
 if os.environ['SERVER_SOFTWARE'] == 'Development/1.0':
     DEBUG = True
 else:
-    DEBUG = False
+    DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
