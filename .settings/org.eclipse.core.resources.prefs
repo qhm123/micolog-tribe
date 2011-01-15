@@ -1,14 +1,18 @@
-#Mon Nov 15 16:52:48 CST 2010
+#Sat Jan 08 13:35:59 CST 2011
 eclipse.preferences.version=1
 encoding//src/blogshow/models.py=utf-8
 encoding//src/blogshow/urls.py=utf-8
 encoding//src/blogshow/views.py=utf-8
 encoding//src/common/helper.py=utf-8
+encoding//src/common/models.py=utf-8
+encoding//src/common/taggable.py=utf-8
 encoding//src/common/timezone.py=utf-8
+encoding//src/common/views.py=utf-8
 encoding//src/rssa/models.py=utf-8
 encoding//src/rssa/urls.py=utf-8
 encoding//src/rssa/views.py=utf-8
 encoding//src/welcome/helper.py=utf-8
+encoding//src/welcome/models.py=utf-8
 encoding//src/welcome/urls.py=utf-8
 encoding//src/welcome/views.py=utf-8
 encoding/<project>=UTF-8
