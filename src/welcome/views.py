@@ -40,7 +40,7 @@ def add(request):
     if request.method == 'GET':
         user = users.get_current_user()
         if not user:
-            login_url = users.create_login_url(reverse('blogshow.views.add'))
+            login_url = users.create_login_url(reverse('welcome.views.add'))
             return HttpResponseRedirect(login_url)
         blog = models.Blog.all().filter('user =', user).get()
         
@@ -63,7 +63,6 @@ def add(request):
             pic = request.FILES.get('file')
             tags = request.POST.get('tags')
             feedurl = request.POST.get('feedurl')
-            tt = tags.encode('utf8')
             
             blog = models.Blog.all().filter('user =', user).get()
             
