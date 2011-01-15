@@ -1623,5 +1623,11 @@ ul#showcontent li div {
 }
 
 #addblogtable input{
-	width: 400px;
+	width: 390px;
+}
+
+.text-center{
+	float: left;
+	height: 130px;
+	line-height: 130px;
 }

@@ -63,6 +63,8 @@ def add(request):
             pic = request.FILES.get('file')
             tags = request.POST.get('tags')
             feedurl = request.POST.get('feedurl')
+            if 'http://' not in feedurl:
+                feedurl = 'http://' + feedurl
             
             blog = models.Blog.all().filter('user =', user).get()
             

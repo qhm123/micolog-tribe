@@ -85,7 +85,9 @@ def fetch_feed(request):
 
 @requires_admin
 def add_all(request):
-    """管理员专用，根据博客信息，自动寻找Feed地址，并添加所有Feed信息到数据库。"""
+    """管理员专用，根据博客信息，自动寻找Feed地址，并添加所有Feed信息到数据库。
+    ---已废弃---。
+    """
     
     added_link = [feed.link for feed in models.Feed.all().fetch(limit=1000)]
     
