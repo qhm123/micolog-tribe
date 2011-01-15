@@ -5,7 +5,7 @@ from django.template import Context, loader
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
 
-from google.appengine.api import users, images
+from google.appengine.api import users, images, memcache
 
 from common import models
 from common.taggable import Tag
@@ -64,15 +64,15 @@ def rate(request):
 def img(request, blog_id):
     """img请求应答函数。"""
     
-    blog = models.Blog.get_by_id(int(blog_id))
-    if blog.pic:
-        #request.POST.headers['Content-Type'] = "image/jepg"
-        response = HttpResponse(blog.pic, content_type="image/png")
-        response['Expires'] = 'Thu, 15 Apr 3010 20:00:00 GMT'
-        response['Cache-Control'] = 'max-age=36000,public'
-        return response
-    else:
-        return HttpResponse(blog.pic)
+    pic = memcache.get(key='pic-%s' % blog_id)
+    if pic is None:
+        blog = models.Blog.get_by_id(int(blog_id))
+        memcache.add(key='pic-%s' % blog_id, value=blog.pic)
+
+    response = HttpResponse(pic, content_type="image/png")
+    response['Expires'] = 'Thu, 15 Apr 3010 20:00:00 GMT'
+    response['Cache-Control'] = 'max-age=36000,public'
+    return response
     
 @requires_admin
 def refresh_db_blog(request):

@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
 
-from google.appengine.api import users
+from google.appengine.api import users, memcache
 
 from common import models
 from feedfetch import FeedParser
@@ -16,14 +16,20 @@ from common.helper import requires_admin
 def index(request):
     """RSSA聚合首页。"""
     
-    # 因为GAE必须在采用其他排序顺序之前对不等式过滤器中的属性进行排序，所以采用手动排序
-    weekago = datetime.today() + timedelta(days=-7)
-    hotentries = models.Entry.all().filter('date >', weekago).fetch(limit=1000)
-    top3 = sorted(hotentries, key=lambda e:(e.rate_count, e.date), reverse=True)[0:3]
+    top3 = memcache.get('top3')
+    if top3 is None:
+        # 因为GAE必须在采用其他排序顺序之前对不等式过滤器中的属性进行排序，所以采用手动排序
+        weekago = datetime.today() + timedelta(days=-7)
+        hotentries = models.Entry.all().filter('date >', weekago).fetch(limit=1000)
+        top3 = sorted(hotentries, key=lambda e:(e.rate_count, e.date), reverse=True)[0:3]
+        memcache.add('top3', top3)
     
-    # 只显示最新的20个左右（根据实际过滤个数决定，考虑到用户不会注意到下边到底有几个）
-    # RSS内容（过滤掉最热的）
-    entries = [e for e in models.Entry.all().order('-date').fetch(limit=20) if e not in top3]
+    entries = memcache.get('entries')
+    if entries is None:
+        # 只显示最新的20个左右（根据实际过滤个数决定，考虑到用户不会注意到下边到底有几个）
+        # RSS内容（过滤掉最热的）
+        entries = [e for e in models.Entry.all().order('-date').fetch(limit=20) if e not in top3]
+        memcache.add('entries', entries)
     
     template = loader.get_template('rssa/templates/index.html')
     context = Context({
