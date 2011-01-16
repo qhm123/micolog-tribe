@@ -67,7 +67,8 @@ def img(request, blog_id):
     pic = memcache.get(key='pic-%s' % blog_id)
     if pic is None:
         blog = models.Blog.get_by_id(int(blog_id))
-        memcache.add(key='pic-%s' % blog_id, value=blog.pic)
+        pic = blog.pic
+        memcache.add(key='pic-%s' % blog_id, value=pic)
 
     response = HttpResponse(pic, content_type="image/png")
     response['Expires'] = 'Thu, 15 Apr 3010 20:00:00 GMT'
