@@ -4,10 +4,12 @@ import logging
 from datetime import datetime, timedelta
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django import http
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
 
-from google.appengine.api import users, memcache
+from google.appengine.api import users, memcache, taskqueue
+from google.appengine.ext import db
 
 from common import models
 from feedfetch import FeedParser
@@ -69,19 +71,40 @@ def feed(request):
 
 #@requires_admin
 def fetch_feed(request):
-    """管理员和cron用，更新抓取所有Feed的文章。"""
+    """管理员和cron用，更新抓取所有Feed的文章。使用TaskQueue机制。"""   
     
     feeds = models.Feed.all().fetch(limit=1000)
-
-    for feed in feeds:
-        try:
-            fp = FeedParser(feed.feed_url)
-            for e in fp.entries:
-                models.Entry.add(e.id, e.title, e.link, e.updated, e.description, e.content, feed)
-        except:
-            logging.error("fetch feed failed, url: %s.", feed.feed_url)
+    if len(feeds) > 0:
+        memcache.set('feeds', feeds)
+        queue = taskqueue.Queue('feed-fetch-queue')
+        queue.add(taskqueue.Task(url='/rssa/fetch_feed_worker'))
 
     return HttpResponse()
+
+def fetch_feed_worker(request):
+    """task队列worker，更新一个Feed的所有Entry。"""
+
+    feeds = memcache.get('feeds')
+    if len(feeds) > 0:
+        feed = feeds.pop()
+    if len(feeds) > 0:
+        memcache.set('feeds', feeds)
+        queue = taskqueue.Queue('feed-fetch-queue')
+        queue.add(taskqueue.Task(url='/rssa/fetch_feed_worker'))
+    else:
+#        memcache.delete('feeds')
+        memcache.delete('top3')
+        memcache.delete('entries')
+        
+    try:
+        fp = FeedParser(feed.feed_url)
+        for e in fp.entries:
+            models.Entry.add(e.id, e.title, e.link, e.updated, e.description, e.content, feed)
+    except Exception, e:
+        logging.error("fetch feed failed, url: %s.", feed.feed_url)
+        return http.HttpResponse()  # mock，返回抓取成功，不再retry。可以考虑设置task属性。
+    
+    return http.HttpResponse()
 
 @requires_admin
 def add_all(request):
