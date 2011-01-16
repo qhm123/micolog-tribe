@@ -1,0 +1,20 @@
+{% for message in messages %}
+  <div class="chat_transcript_name">
+    <img 
+        class="small_channel_img"
+        title="Message sent from jabber/google talk"
+        src="/static/images/gtalk_icon_small_whitebg.gif">
+    {{ message.user }}
+    <span class="chat_transcript_info">
+      sent an instant message
+    </span>
+    <span class="chat_transcript_info" id="msg_info_35">
+      {{ message.time }}
+    </span>
+  </div>
+  <div class="chat_transcript_msg">
+    <span id="msg_content_35">
+      {{ message.msg }}
+    </span>
+  </div>
+{% endfor %}

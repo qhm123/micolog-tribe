@@ -1,4 +1,4 @@
-#Sat Jan 15 18:08:41 CST 2011
+#Sun Jan 16 19:30:04 CST 2011
 eclipse.preferences.version=1
 encoding//src/blogshow/models.py=utf-8
 encoding//src/blogshow/urls.py=utf-8
@@ -11,9 +11,10 @@ encoding//src/common/views.py=utf-8
 encoding//src/rssa/models.py=utf-8
 encoding//src/rssa/urls.py=utf-8
 encoding//src/rssa/views.py=utf-8
+encoding//src/talk/grouptalk.py=utf-8
+encoding//src/talk/models.py=utf-8
 encoding//src/talk/urls.py=utf-8
 encoding//src/talk/views.py=utf-8
-encoding//src/talk/xmpp.py=utf-8
 encoding//src/welcome/helper.py=utf-8
 encoding//src/welcome/models.py=utf-8
 encoding//src/welcome/urls.py=utf-8

@@ -1,1 +1,73 @@
-<a href="/talk/send">send</a>
+<link type="text/css" rel="stylesheet" href="/static/chat.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/chat.js"></script>
+
+<div id="group" style="height: 433px; ">
+
+  <div id="group_chat_container" class="group_chat_container_default" style="height: 398px; ">
+    
+    <div id="chat_transcript" style="height: 334px; ">
+	{% for message in messages %}
+	  <div class="chat_transcript_name">
+	    <img 
+	        class="small_channel_img"
+	        title="Message sent from jabber/google talk"
+	        src="/static/images/gtalk_icon_small_whitebg.gif">
+	    {{ message.user }}
+	    <span class="chat_transcript_info">
+	      sent an instant message
+	    </span>
+	    <span class="chat_transcript_info" id="msg_info_35">
+	      {{ message.time }}
+	    </span>
+	  </div>
+	  <div class="chat_transcript_msg">
+	    <span id="msg_content_35">
+	      {{ message.msg }}
+	    </span>
+	  </div>
+	{% endfor %}
+    </div>
+    
+    <div id="chat_input_container">
+      <table id="chat_input_table">
+        <tbody>
+          <tr>
+            <td style="width: 100%;">
+              <textarea id="chat_input"></textarea>
+            </td>
+            <td style="padding-left: 10px;">
+              <button id="chat_input_button" style="height: 33px; width: 70px;">
+                send
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="group_members" style="height: 398px; ">
+    <div id="group_member_table_container">
+      <table id="group_members_table" cellpadding="0" cellspacing="0">
+        <tbody>
+        {% for user in users %}
+          <tr title="{{ user.user }}">
+            <td class="group_member_img_cell group_members_dark">
+              <div class="group_member_img">
+                <img title="receiving messages by jabber/google talk" src="/static/images/gtalk_icon_small.gif">
+              </div>
+            </td>
+            <td class="group_members_dark">
+              <div class="group_member ">
+                {{ user.nickname }}
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

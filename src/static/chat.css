@@ -1,0 +1,2200 @@
+/*******************************************************************
+ * Header
+ */
+
+button
+{
+    font-family: helvetica;
+    
+    color: #ffffff;
+    font-size: 1em;
+    border: 1px solid #333333;
+    
+    background: url("/static/images/button_background.png") repeat-x scroll left top;
+    height: 25px;
+}
+
+button.action_button
+{
+    border: 1px solid #be8211;
+    background: url("/static/images/action_item_button_background.png") repeat-x scroll left top;
+}
+
+button.action_button:hover
+{
+    background: url("/static/images/action_item_button_background_hover.png") repeat-x scroll left top;
+}
+
+*.green_button
+{
+    background: url("/static/images/splash/button_bg_large.png") repeat-x scroll left top;
+    border: 1px solid #249000;
+}
+
+*.green_button:hover
+{
+    background: url("/static/images/splash/button_bg_large_hover.png") repeat-x scroll left top;
+}
+
+button:hover
+{
+    background: url("/static/images/button_background_hover.png") repeat-x scroll left top;
+}
+ 
+#logo_container
+{
+    float: left;
+    padding: 5px 0px 0px 0px;
+}
+
+#login_logout_bar
+{
+    margin-top: 3px;
+    float: right;
+    font-size: 0.9em;
+}
+
+#login_logout_bar li
+{
+    margin-left: 10px;
+    display: inline;
+}
+
+#nav_bar_container
+{
+    width: 249px;
+    margin: auto;
+}
+
+#nav_bar
+{
+    font-family: "Lucida Grande";
+    list-style-type: none;
+}
+
+#nav_bar li
+{
+    border-top: 1px solid #264362;
+    float: left;
+    background: url("/static/images/navbar.gif") repeat-x;
+    cursor: pointer;
+    padding: 15px 0px 10px 0px;
+}
+
+
+
+#nav_bar li a, #nav_bar li a:visited
+{
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 15px 10px 15px;
+}
+
+#nav_bar li.selected
+{
+    background: url("/static/images/navbar_selected.gif") repeat-x;
+}
+
+#nav_bar li:hover
+{
+    background: url("/static/images/navbar_selected.gif") repeat-x;
+}
+#nav_bar li a:hover
+{
+    text-decoration: underline;
+}
+
+#nav_bar li.left_tab
+{
+    border-left: 1px solid #264362;
+    border-bottom: 1px solid #264362;
+}
+
+#nav_bar li.left_and_right_tab
+{
+    border-left: 1px solid #264362;
+    border-right: 1px solid #264362;
+    border-bottom: 1px solid #264362;
+}
+
+
+
+/*******************************************************************
+ * Tabs
+ */
+
+
+#tabs
+{
+    font-family: "Lucida Grande";
+    list-style-type: none;
+    font-size: .9em;
+
+} 
+
+#tabs li
+{
+    margin-right: 3px;
+    height: 30px;
+    float: left;
+    vertical-align: middle;
+    background: #b2c4d7;
+    border-top: 1px solid #daedf3;
+    cursor: pointer;
+}
+
+#tabs li.hover_tab
+{
+    background:#4e83bb;
+}
+
+#tabs li.mousedown_tab 
+{
+    background: #ce4f00;
+}
+
+#tabs li img
+{
+    margin-top: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#tabs li span.close_span
+{
+    width: 11px;
+    height: 11px;
+}
+
+#tabs li span.close_span img
+{
+    margin: 0px 0px 0px 5px;
+    position: relative;
+    top: 2px;
+}
+
+#tabs li div
+{
+    padding: 7px 10px 7px 10px;
+}
+
+#tabs li div span
+{
+    color: #333333;
+}
+
+#tabs li.hover_tab div span
+{
+    color: #ffffff;
+}
+
+#tabs li.mousedown_tab div span
+{
+    color: #ffffff;
+}
+
+#tabs li.focused div 
+{
+    background: #f3f1f1;
+    padding: 7px 10px 9px 10px;
+}
+
+#tabs li.focused div span
+{
+    color: #ce4f00;
+    font-weight: bold;   
+}
+
+#tabs li.focused
+{
+
+
+    border-top: 1px solid #bbbbbb;
+    border-right: 1px solid #bbbbbb;
+    border-left: 1px solid #bbbbbb;
+
+    
+    position: relative;
+    top: 1px;
+}
+
+#home_tab.home_focused
+{
+    color: white;
+    background: #666666;
+}
+
+#home_tab.hover_tab
+{
+    background:#4e83bb;
+}
+
+#home_tab.mousedown_tab 
+{
+    background: #ce4f00;
+}
+
+
+
+/*******************************************************************
+ * Tab notifications
+ */
+
+*.notifications
+{
+    background-image: url("/static/images/notification_arrows.gif");
+    background-position:0pt bottom;
+    background-repeat:no-repeat;
+    font-size:0.7em;
+    height:0.9em;
+    margin-left:0.3em;
+    margin-top:-0.6em;
+    position:absolute;
+    width:1em;
+}
+
+#tabs li div span.notification_count
+{
+    color:#FFFFFF;
+    -moz-border-radius-bottomleft:3px;
+    -moz-border-radius-bottomright:3px;
+    -moz-border-radius-topleft:3px;
+    -moz-border-radius-topright:3px;
+    display:block;
+    height:1.4em;
+    line-height:1.4em;
+    padding:0pt 0.6em;
+    position:absolute;
+    right:0pt;
+    top:-0.9em;
+    font-size:1.1em;
+    
+    text-decoration: none;
+    font-weight: normal;
+    background-color:#D54E21;
+}
+
+/*******************************************************************
+ * Home content
+ */
+
+#home
+{
+    border: 10px solid #666666;
+    background: white;
+    padding: 5px 10px 10px 10px;
+}
+
+#group
+{
+    border: 12px solid #f3f1f1;
+    height: 100%;
+    background: #f3f1f1;
+}
+
+#groups
+{
+    margin: auto;
+}
+ 
+#groups *.group_container
+{
+    vertical-align: top;
+    width: 30%;
+    float: left;
+    padding: 10px 2% 10px 1%;
+}
+
+
+*.group
+{
+    font-size: 0.9em;
+    border-bottom: 1px solid #cccccc;
+    padding: 10px 0px 10px 10px;
+}
+
+*.group:hover
+{
+    background: #edf8fb;
+}
+
+*.group button
+{
+    font-size: 1em;
+    height: 23px;
+    border: 1px solid #cccccc;
+    font-weight: bold;
+    background: url("/static/images/splash/button_bg_large.png") repeat-x scroll left top;
+
+}
+
+*.group button:hover
+{
+   background: url("/static/images/splash/button_bg_large_hover.png") repeat-x scroll left top;
+}
+
+
+*.main_banner_container
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    width: 95%;
+
+}
+
+*.main_banner
+{
+    padding: 12px 15px 5px 15px;    
+    background: #fbf9e2;    
+    /*border-bottom: 1px solid #EBAE7F;    */
+    border: 1px solid #f3e56b;
+}
+
+*.main_banner button
+{
+    background: #ce4f00;
+    border: 2px solid #f6e800;
+    padding: 10px 15px 10px 15px;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff;
+    height: 42px;
+}
+
+*.main_banner li
+{
+    list-style-type: disc;
+    margin-left: 25px;
+}
+
+*.action_item_list div
+{
+    margin-bottom: 15px;
+}
+
+*.action_item_list li div span
+{
+    font-size: 0.8em;
+}
+
+*.home_content_button
+{
+    font-weight: bold;
+    font-size: 1.5em;
+    height: 40px;
+    background: url("/static/images/action_item_button_background.png") repeat-x scroll left top;
+    border: 1px solid #be8211;
+    width: 200px;
+}
+
+*.home_content_button:hover
+{
+    background: url("/static/images/action_item_button_background_hover.png") repeat-x scroll left top;    
+}
+
+#home_content_add_contact_list
+{
+    padding: 10px 10px 10px 10px; 
+    border: 1px solid #bbbbbb; 
+    background: #99ccff;
+    float: left;
+    text-align: center;
+
+}
+
+#home_content_container
+{
+    float: left;
+    margin-right: 20px;
+    width: 61%;
+ }
+
+*.action_item_container
+{
+    margin-bottom: 10px;
+    margin-top: 5px;
+    float: left;
+    width: 36%;
+}
+
+#home_content_contact_add
+{
+
+}
+
+#home_content_contact_add input
+{
+    height: 18px; 
+}
+
+#home_content_contact_add button
+{
+    font-weight: bold; 
+    width: 90px; 
+    height: 23px; 
+    margin-top: 2px;
+}
+
+#home_content_contact_add *.error
+{
+    color: red; 
+    font-weight: bold; 
+    font-size: 0.8em;
+}
+
+#home_content_contact_add td div
+{
+    margin-bottom: 5px;
+}
+
+#home_content_contact_add img
+{
+    vertical-align: middle;
+}
+
+*.green_banner
+{
+    padding: 10px 10px 10px 10px;
+
+    /*background: #dfefce;*/
+    font-weight: bold;
+
+    /*border-left: 1px solid #61a832;
+    border-right: 1px solid #61a832;
+    border-bottom:2px solid #61a832;*/
+}
+
+*.green_banner_header
+{
+    padding: 5px 5px 5px 5px;
+    background:#d5f2c3;
+    border-bottom: 1px solid #61a832;    
+    /*background: #ffffcc;    
+    border-bottom:1px solid #EBAE7F;  */
+    
+}
+
+*.blue_banner_header
+{
+    padding: 5px 5px 5px 5px;
+    background:#cde6fe;
+    border-bottom: 1px solid #3693dd;    
+}
+
+*.group:hover
+{
+    /*background: #fbf9e2*/
+    /*background:#edf8fb;*/
+}
+
+*.group div
+{
+    color: #000000;
+}
+
+
+*.group a
+{
+    font-size: 1.5em; 
+    font-weight: bold; 
+    text-decoration: none; 
+    color: #045fba;
+}
+
+*.group a:hover
+{
+    text-decoration: underline;
+}
+
+*.group *.desc
+{
+}
+
+
+
+*.group *.details
+{
+    color: #000000; 
+    font-size:0.9em;
+}
+
+*.mini_menu
+{
+    color: #cccccc;
+    vertical-align: middle;
+    
+}
+
+*.mini_menu a
+{
+    color: #045fba;
+    font-weight: bold;
+    font-size: 0.9em;
+    
+}
+
+*.mini_menu a:hover
+{
+    text-decoration: underline;
+    color: #045fba;
+}
+
+*.mini_menu a.action_link
+{
+    color: #ce4f00;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+*.mini_menu a.action_link:hover
+{
+    text-decoration: underline;
+}
+
+/*******************************************************************
+ * Create group form
+ */ 
+ 
+#prompt_table td
+{
+
+ vertical-align: top;
+}
+#prompt_table td div
+{
+ font-size: 1.1em;    
+ margin-top: 15px;
+ margin-right: 10px;
+} 
+
+#prompt_table td input
+{
+ font-weight: normal;
+ width: 320px;
+ height: 25px;
+ font-size: 1.2em;
+}
+
+#prompt_table *.error
+{
+ font-weight: bold;
+ color: red;
+ margin-top: 0px;
+ font-size: 0.8em;
+}
+ 
+ 
+ 
+*.prompt_header
+{
+    padding: 5px 5px 5px 5px;
+    background:#d5f2c3;
+    border-bottom: 1px solid #61a832;
+}
+
+*.prompt_container
+{
+    font-size: 14pt;
+    color: #000000;
+    font-weight: bold;
+    width: 100%;
+}
+
+#create_group_form
+{
+    font-weight: normal;
+}
+
+*.create_group_label
+{
+    font-weight: bold;
+    width: 30%;
+}
+*.example
+{
+    font-style: italic;
+    font-size: .8em;
+    font-weight: normal;
+}
+
+*.create_group_button
+{
+    font-weight: bold;
+}
+/*******************************************************************
+ * Group content
+ */
+ 
+#group_header
+{
+    
+}
+
+#group_description
+{
+ 
+    font-size: 0.9em;
+    color: black;
+
+    margin-top: 3px;
+    width: 50%;
+    float: left;
+}
+
+#group_menu
+{
+    float: right;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#group_menu li
+{
+    vertical-align: middle;
+    float: left;
+    margin-left: 10px;
+}
+
+#group_menu li div
+{
+    margin-top: 3px;
+}
+
+#group_menu li div a, #group_menu li div a:visited
+{
+    color: #045fba;
+    font-weight: normal;
+}
+
+#group_menu li div a:hover
+{
+    text-decoration: underline;
+}
+
+#group_menu li button
+{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#group_chat_container
+{
+    float: left;
+}
+
+*.group_chat_container_default
+{
+    width: 79%;
+}
+
+*.group_chat_container_maxed
+{
+    width: 100%;
+}
+
+#group_members
+{
+    background: white;
+    /*border: 1px solid #dddddd;*/
+    border: 1px solid #bbbbbb;    
+    width: 20%;
+    float: right;
+    overflow: auto;    
+    
+    font-size: 0.8em;
+    color: #333333;
+    
+}
+
+#group_members button
+{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#group_members_table
+{
+    width: 100%;
+}
+
+*.permissions_header
+{
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 5px 5px 5px 5px;    
+}
+
+*.permissions_setting_cell
+{
+   text-align: center;
+}
+
+*.permissions_setting_cell a
+{
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+*.permissions_setting_cell a:hover
+{
+    text-decoration: underline;
+}
+
+*.default_permissions_setting_cell
+{
+   text-align: center;
+   padding: 0px 10px 0px 10px;
+   margin: 15px 15px 15px 15px;
+}
+
+*.group_members_header
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    /*margin: 5px 5px 5px 5px;*/
+    
+    font-family: helvetica;
+    padding: 2px 3px 2px 5px;
+    color: #ffffff;
+    background: url("/static/images/group_member_header_bg.png") repeat-x scroll left top;
+    /*background: #2771d5;*/
+    height: 19px;
+}
+
+*.group_members_light
+{
+    background: #ffffff;
+}
+
+*.group_members_dark
+{
+    background: #ebf2ff;
+}
+
+*.group_member
+{
+    margin: 0px 0px 0px 5px;
+}
+
+*.group_member a
+{
+    color: #333333;
+    text-decoration: none;
+}
+
+*.group_member a:hover
+{
+    text-decoration: underline;
+}
+
+*.ignore_member
+{
+    color: #aaaaaa;
+}
+
+*.ignore_member a
+{
+    color: #aaaaaa;
+}
+
+*.ignore_member:visited
+{
+    color: #aaaaaa;
+}
+
+
+*.group_member_img
+{
+    margin: 0px 0px 0px 5px;
+}
+
+*.group_member_img_cell
+{
+    width: 22px;
+}
+
+#chat_control_icon
+{
+    position: relative;
+    top: 42%;
+    font-size: 1.3em;
+
+}
+
+#chat_control:hover
+{
+    color: #333333;
+}
+
+#chat_control
+{
+
+    float: right;
+    width: 10px;
+    cursor: pointer;
+    color: #cccccc;    
+}
+
+#chat_input_container
+{
+
+    height: 50px;    
+    padding: 1px 10px 1px 1px;   
+
+}
+
+#chat_input_table
+{
+    width: 100%;
+}
+
+#chat_input_button
+{
+    font-size: 1.5em;
+}
+
+#chat_input
+{
+
+    /*border: 1px solid #dddddd;    */
+    border: 1px solid #bbbbbb;        
+    background: white;  
+    height: 50px;
+    width: 100%;
+    overflow: auto;
+    font-size: 0.9em;
+
+}
+
+/*******************************************************************
+ * Chat transcript content
+ */
+#chat_transcript
+{
+ /*border: 1px solid #dddddd;*/
+ border: 1px solid #bbbbbb;
+ background: white;
+ /*margin-right: 10px;*/
+ margin-bottom: 10px;
+ font-size: .9em;
+ 
+ padding: 0px 5px 0px 5px;
+ overflow: auto;
+
+
+ 
+}
+
+*.chat_transcript_info
+{
+    font-size: .8em;
+    color: #888888;
+    font-weight: normal;
+}
+
+*.chat_transcript_name
+{
+    margin-top: 10px;
+    font-weight: bold;
+    color: #0066cc;
+}
+
+*.chat_transcript_msg
+{
+    padding-left: 19px;
+    color: #333333;
+    /*border-bottom: 1px dotted #cccccc;*/
+    padding-bottom: 10px;
+}
+
+*.chat_transcript_msg_delete
+{
+    font-size: .8em;
+    color: #888888;
+    font-weight: normal;
+}
+
+*.chat_transcript_msg_error
+{
+    padding-left: 19px;
+    color: red;
+    /*border-bottom: 1px dotted #cccccc;*/
+    padding-bottom: 10px;
+}
+
+
+*.small_channel_img
+{
+    width: 15px;
+    height: 15px;
+}
+
+/*******************************************************************
+ * Account/profile page
+ */
+*.info_label
+{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+*.info_text
+{
+    font-size: 1em;
+    font-weight: normal;
+}
+
+#profile_info
+{
+}
+
+#contacts_table
+{
+    width: 100%;
+    border: 2px solid #000;
+    font-size: 0.9em;
+}
+
+
+#contacts_table *.header, #contacts_table *.header:hover
+{
+    background: #444444;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-bottom: 1px solid #000;
+}
+
+#contacts_table tr:hover
+{
+    background: #fbf9e2;
+}
+
+#contacts_table tr.selected
+{
+    background: #cde6fe;
+}
+
+#contacts_table td
+{
+    height: 2em;
+    padding: 5px 5px 5px 15px;
+}
+
+#contacts_table td.default_col
+{
+    width: 10%;
+    border-right: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+#contacts_table td.default_col input
+{
+    margin-left: 20px;
+}
+
+#contacts_table td.type_col
+{
+    width: 30%;
+    border-right: 1px solid #d1d1d1;    
+    border-bottom: 1px solid #d1d1d1;    
+}
+
+#contacts_table td.details_col
+{
+    width: 60%;
+    border-bottom: 1px solid #d1d1d1;
+}
+
+#contacts_table *.extra
+{
+    float: left;
+    font-size: 0.9em;
+    font-style: italic;
+    font-weight: normal;
+}
+
+#user_info_table
+{
+    /*border: 1px solid #9abad7;*/
+    background: #bcd4ea;
+}
+
+#user_info_table *.header
+{
+    background: #2265cf;
+}
+
+#user_info_table *.header div
+{
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.1em;
+}
+
+#user_info_table td div input
+{
+    width: 98%;
+}
+
+#user_info_table td div textarea
+{
+    width: 98%;
+}
+
+#user_info_table td button
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#user_info_table td a
+{
+    font-weight: bold;
+    color: black;
+}
+
+#user_info_table td 
+{
+    padding: 10px 10px 10px 10px;
+}
+
+#user_info_table *.info_label
+{
+    vertical-align: top;
+}
+#user_info_table *.info_text ul li input
+{
+    width: auto;
+}
+
+*.delete
+{
+    float: right;
+}
+*.info_text ul.errorlist
+{
+    list-style-type: none;
+    font-weight: bold;
+    color: red;
+    font-size: 0.7em;
+}
+
+#cancel_profile_edit_link
+{
+    color: black;
+}
+
+/*******************************************************************
+ * Authorize SMS/Enter registration code page
+ */
+ 
+#reg_code_form_container
+{
+    text-align: center;
+}
+
+#reg_code_form_container input
+{
+    width: 98%;
+    font-weight: normal;
+    text-align: center;
+    font-size: 2em;
+}
+
+#reg_code_form a, #reg_code_form a:visited
+{
+    font-weight: normal;
+    color: #045fba;
+}
+
+#reg_code_form button
+{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#reg_code_form_container *.error ul.errorlist li
+{
+    color: red;
+    font-weight: bold;
+}
+
+/*******************************************************************
+ * Group settings page
+ */
+
+#group_contact_info
+{
+    background: #fffed3;
+    border: 1px solid #e7e6bc;
+    padding: 10px 10px 10px 10px;
+}
+
+#group_contact_info *.title
+{
+    font-weight: bold;
+    color: #ae5719;
+    font-size: 1.1em;
+}
+
+#group_contact_info ul li
+{
+    padding: 2px 5px 2px 5px;
+}
+
+#group_info_table
+{
+    /*border: 1px solid #9abad7;*/
+    background: #bcd4ea;
+}
+
+#group_info_table *.header
+{
+    background: #2265cf;
+}
+
+#group_info_table *.header div
+{
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.1em;
+}
+
+#group_info_table td div input
+{
+    width: 98%;
+}
+
+#group_info_table td div textarea
+{
+    width: 98%;
+}
+
+#group_info_table td button
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#group_info_table td a
+{
+    font-weight: bold;
+    color: black;
+}
+
+#group_info_table td 
+{
+    padding: 10px 10px 10px 10px;
+}
+
+#group_info_table *.info_label
+{
+    vertical-align: top;
+}
+
+#group_info_table *.info_text ul li input
+{
+    width: auto;
+}
+
+/*******************************************************************
+ * Change password page
+ */
+ 
+#change_password_container
+{
+    text-align: center;
+}
+
+#change_password_form div
+{
+    text-align: left;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+#change_password_form *.error
+{
+    color: red;
+    font-size: 0.5em;
+    font-weight: bold;
+}
+
+#change_password_form input
+{
+    width: 98%;
+    font-weight: normal;
+    text-align: center;
+    font-size: 2em;
+}
+
+#change_password_form button
+{
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#change_password_form a, #change_password_form a:visited
+{
+    font-weight: normal;
+    color: #045fba;
+}
+
+
+
+/*******************************************************************
+ * Group invite page
+ */
+#group_invite_container #header
+{
+    padding: 2px 2px 2px 2px;        
+    color: #ffffff;
+    background: #01aff1;
+}
+
+#group_invite_container #header *.title
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    float: left;
+}
+
+#group_invite_container #header *.right_content
+{
+    width: auto;
+    margin-top: 2px;
+    float: right;
+}
+
+#group_invite_container #header *.right_content a
+{
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#group_invite_container #header *.right_content a:hover
+{
+    text-decoration: underline;
+}
+
+#group_invite_container *.content
+{
+    padding: 10px 10px 10px 10px;
+}
+
+#group_invite_container *.content *.sub_header
+{
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+*.gray_box
+{
+    background:#ededed; 
+    border: 1px solid #cccccc;
+    padding: 5px 10px 5px 10px;
+}
+
+*.gray_box:hover
+{
+    background: #d8fbd5;
+    border: 1px solid #8bc785;
+}
+*.gray_box *.sub_title
+{
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+*.gray_box table td div
+{
+    margin: 2px 10px 2px 10px;
+}
+
+*.gray_box button
+{
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#group_invite_errorbox, #group_import_errorbox
+{
+    padding: 2px 2px 2px 2px;
+    color: black;
+    border-bottom: 2px solid #ce4f00;
+    background: #fbf9e2;
+}
+
+#group_invite_errorbox li, #group_import_errorbox li
+{
+    list-style-type: disc;    
+    font-weight: normal;
+
+}
+
+#group_invite_errorbox div, #group_import_errorbox div
+{
+    margin-left: 45px;
+}
+
+#group_invite_errorbox_msg, #group_import_errorbox_msg
+{
+    font-weight: bold;
+    color: red;
+}
+
+#group_invite_errorbox span, #group_import_errorbox span
+{
+    background: #ce4f00;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    padding: 2px 10px 2px 10px;
+    
+}
+
+#address_book_table_container
+{
+    height: 400px;
+    overflow: auto;
+    border: 1px solid #cccccc;    
+}
+
+#address_book_table
+{
+
+    height: 100%;    
+    width: 100%;    
+    font-size: 0.9em;
+}
+
+#address_book_table *.header
+{
+    background: #444444;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1em;
+    border-bottom: 1px solid #000;
+}
+
+#address_book_table *.input
+{
+    text-align: center;
+}
+
+#address_book_table td
+{
+    padding: 2px 2px 2px 2px;
+}
+
+#address_book_table *.addr_book_row:hover
+{
+    background: #d8fbd5;
+}
+
+#address_book_table *.addr_book_details
+{
+    font-size: 0.9em;
+}
+
+/*******************************************************************
+ * Group history page
+ */
+
+#history_delete
+{
+    font-size: .6em;
+    color: #888888;
+    font-weight: normal;
+}
+
+#history_delete a
+{
+    color: #888888;
+}
+
+#history_members_container
+{
+}
+
+*.history_members_contents
+{
+    clear: both;
+    width: 300px;
+    background: white;
+    margin-top: 10px;
+}
+#history_right_nav
+{
+    /*
+    border: 12px solid #52a518;
+    background: white;
+    padding: 5px 10px 10px 10px;
+    */
+    border: 1px solid #98ccdc;
+    background: white;
+    padding: 5px 10px 10px 10px;
+
+    width: 300px;
+    min-height: 100px;
+    right:20px;
+    top: 75px;
+    position:fixed;
+    z-index:120;
+}
+
+
+*.history_members_header
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+*.history_members_subheader
+{
+    font-size: 0.9em;
+}
+
+*.history_member
+{
+    margin-left: 10px;
+}
+
+
+*.history_members_header a
+{
+    color: #045fba;
+}
+
+*.history_members_header a:visited
+{
+    color: #045fba;
+}
+
+#search_container
+{
+    font-size: 10px;
+    float: right;
+}
+
+/*******************************************************************
+ * Directory page
+ */
+ 
+*.content_left_nav
+{
+    width: 15%;
+    height: 100%;
+    float: left;
+    text-align: right;
+ }
+
+*.content_left_nav ul li div
+{
+
+    left: 10px;
+    margin: 4px 10px 4px 0px;
+}
+
+*.content_left_nav ul li.focused
+{
+    color: #045fba;
+    font-weight: bold;
+    position: relative;
+    left: 1px;
+}
+
+
+*.content_left_nav ul li div a
+{
+    text-decoration: none;
+}
+
+*.content_left_nav ul li div a:hover
+{
+    text-decoration: underline;
+}
+
+*.content_main
+{
+    width: 80%;
+    height: 100%;
+    min-height: 300px;
+    float: left;
+    
+    background: #fafafa;
+    border-left: 3px solid #52a518;
+    padding: 0px 10px 10px 10px;
+}
+
+/*******************************************************************
+ * Sign-up page
+ */
+ 
+
+#signup_table td
+{
+
+    vertical-align: top;
+}
+#signup_table td div
+{
+    font-size: 1.1em;    
+    margin-top: 15px;
+    margin-right: 10px;
+} 
+
+#signup_table td input
+{
+    font-weight: normal;
+    width: 320px;
+    height: 25px;
+    font-size: 1.2em;
+}
+
+*.large_button
+{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#signup_table *.error
+{
+    font-weight: bold;
+    color: red;
+    margin-top: 0px;
+    font-size: 0.8em;
+}
+
+/*******************************************************************
+ * Add primary contact sign-up workflow
+ */
+
+ #signup_primary_contact_table
+ {
+     width: 100%;
+ }
+ 
+ #signup_primary_contact_table td
+ {
+     vertical-align: top;
+ }
+ #signup_primary_contact_table td div
+ {
+     margin-left: 10px;
+     margin-top: 15px;
+     margin-right: 10px;
+ }
+ 
+ #signup_primary_contact_table td *.error
+ {
+     font-weight: bold;
+     color: red;
+     margin-top: 2px;
+     font-size: 0.8em;
+ }
+
+ #signup_primary_contact_table td span
+ {
+     margin-left: 10px;
+     margin-top: 15px;
+     margin-right: 10px;
+ }
+ 
+ #signup_primary_contact_table td input
+ {
+     font-weight: normal;
+     font-size: 1.2em;
+     width: 320px;
+     height: 25px;
+ }
+ 
+ #signup_primary_contact_table td select
+ {
+     font-weight: normal;
+ }
+
+/*******************************************************************
+ * Enter group passcode form
+ */
+
+#passcode_form
+{
+    width: 100%;
+    text-align: center;
+}
+
+#passcode_form input
+{
+    font-size: 1.2em;
+    font-weight: normal;
+    text-align: center;
+    width: 90%;
+    height: 30px;
+}
+
+#passcode_form *.error
+{
+    font-weight: bold;
+    color: red;
+    margin-top: 2px;
+    font-size: 0.8em;
+}
+
+#passcode_form button
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+
+
+/*******************************************************************
+ * Group preview page
+ */
+ 
+*.preview_members_contents
+{
+ clear: both;
+ width: 250px;
+ background: white;
+ margin-top: 10px;
+ font-size: 0.8em;
+}
+
+#preview_right_nav
+{
+ border: 1px solid #98ccdc;
+ background: white;
+ padding: 5px 10px 10px 10px;
+
+ width: 250px;
+ min-height: 100px;
+ float: right;
+
+}
+ 
+ 
+*.preview_members_header
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+*.preview_members_subheader
+{
+    font-size: 0.9em;
+}
+
+*.preview_member
+{
+    margin-left: 10px;
+}
+
+
+*.preview_members_header a
+{
+    color: #045fba;
+}
+
+*.preview_members_header a:visited
+{
+    color: #045fba;
+}
+
+/*******************************************************************
+ * Group member settings page
+ */
+ 
+#group_member_settings_table_container
+{
+ 
+}
+
+#group_member_settings_table_container *.title
+{
+    font-weight: bold;
+    font-size: 1em;
+}
+
+#group_member_settings_table_container *.sub_title
+{
+    font-weight: normal;
+    font-style: italic;
+    font-size: .7em;
+}
+
+#group_member_settings_table
+{
+
+    font-size: 0.9em;
+
+}
+
+#group_member_settings_table td
+{
+    padding: 0px 10px 0px 0px;
+}
+
+/*******************************************************************
+ * Sidebar (feedback form)
+ */
+#sidebar
+{
+    height:auto;
+    left:0;
+    position:absolute;
+    top:25%;
+    width:auto;
+}
+
+#sidebar_contents
+{
+    border-top: 1px solid #818181;
+    border-bottom: 1px solid #818181;    
+    background-color:#e65555;
+    float:left;
+    overflow:hidden !important;
+}
+
+#sidebar_inner_contents
+{
+    border-top: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 10px 10px 10px 10px;
+}
+
+#sidebar_inner_contents h2
+{
+    font-weight: bold;
+}
+
+#sidebar_inner_contents *.desc
+{
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+#sidebar_inner_contents button
+{
+    font-weight: bold;
+}
+
+#sidebar_inner_contents input
+{
+    width: 95%;
+}
+
+#sidebar_inner_contents textarea
+{
+    width: 96%;
+    height: 125px;
+}
+
+#sidebar_inner_contents a
+{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#feedback_tab
+{
+    float:left;
+        
+    background:transparent url('/static/images/feedback.gif') no-repeat scroll 0 0;
+    height: 106px;
+    width: 30px;
+    
+} 
+
+*.closed_tab
+{
+    margin-left: -4px;
+    cursor: pointer;
+}
+
+*.closed_tab:hover
+{
+    margin-left: 0px;
+    cursor: pointer;
+}
+
+*.open_tab
+{
+    margin-left: 0px;
+    cursor: pointer;
+}
+
+#sidebar_contents
+{
+    background-color:#ce3939;
+    float:left;
+    overflow:hidden !important;
+    width:290px;
+}
+
+#ignore_status
+{
+    color: green;
+    font-weight: bold;
+}
+
+*.action_item_button
+{
+    width: 100px;
+    font-weight: bold; 
+    font-size: 1.1em;
+}
+
+#group_content_contact_add td div
+{
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+/*******************************************************************
+ * Standalone group invite
+ */
+
+#invite_tabs
+{
+    text-align: center;
+    font-size: 0.8em;
+    border-bottom: 1px solid #aaaaaa;
+    font-weight: normal;
+    width: 90%;
+    margin: auto;
+}
+
+#invite_content
+{
+    width: 90%;
+    margin: auto;
+}
+
+#invite_tabs ul
+{
+    position: relative;
+    left: 13%;
+    width: 90%;
+    top: 1px;
+}
+
+
+#invite_tabs li
+{
+    float: left;
+    border-right: 1px solid #aaaaaa;
+    border-top: 1px solid #aaaaaa;        
+    border-bottom: 1px solid #aaaaaa;            
+    background: #eeeeee;
+}
+
+#invite_tabs a
+{
+    color: #333333;
+    text-decoration: none;
+    display: block;
+    padding: 4px 6px 4px 6px;
+    outline:none; 
+}
+
+#invite_tabs li a:hover
+{
+    color: #000000;
+    background: #aaaaaa;
+}
+
+
+
+#invite_tabs li.focused
+{
+    background: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    border-bottom: 1px solid #ffffff;
+}
+
+
+
+
+#invite_tabs li.focused a
+{
+
+    color: #000000;
+}
+
+#invite_tabs li.focused a:hover
+{
+    background: white;
+}
+
+
+#invite_tabs li div
+{
+
+}
+
+#invite_content
+{
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+#invite_content table
+{
+    margin: auto;
+}
+
+#invite_content table td div
+{
+    margin-right: 8px;
+    margin-bottom: 5px;
+}
+
+#invite_content *.invite_content_container
+{
+    width: 80%;
+    margin: auto;
+    padding: 1.5em 0.5em 1em 0.5em; 
+}
+
+#invite_content *.invite_content_box
+{
+    background:#D8FBD5 none repeat scroll 0 0;
+    border:1px solid #8BC785;
+    padding: 0.5em 0.5em 1em 0.5em;
+}
+
+#invite_content *.invite_content_box_plain
+{
+    padding: 0.5em 0.5em 1em 0.5em;    
+}
+
+
+*.invite_content_box *.example
+{
+    font-size: 0.6em;
+    color: #555555;
+    font-weight: normal;
+    font-style: normal;
+}
+
+*.logo_choose_link
+{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+*.logo_choose 
+{
+    border: 5px solid #aaaaaa;
+}
+
+*.logo_choose:hover
+{
+    border: 5px solid #01aff1;
+}
+
+/*******************************************************************
+ * Widget preview
+ */
+
+#customize_widget_container
+{
+    width: 34%;
+    min-height: 100px;
+    float: left;
+    font-weight: normal;
+}
+
+#customize_widget_container div
+{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#customize_widget_container *.preview_header
+{
+    margin-top: 15px;
+    font-weight: bold;
+    color: #045FBA;
+}
+
+
+#customize_widget_container *.field
+{
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+
+#selected_theme
+{
+    height: 53px;
+    width: 55px;
+    border: 5px solid #7ea6e0;
+    position: absolute;
+    top: 52;
+    left: 10;
+
+}
+
+#preview_widget_container
+{
+    width: 66%;
+    min-height: 100px;
+    float: left;
+    text-align: center;
+
+}
+
+#preview_widget_container *.preview_header
+{
+    margin-top: 10px;
+    font-weight: normal;
+    color: #cccccc;
+    font-size: 1.3em;
+    margin-bottom: 5px;
+    
+}
+
+#customize_widget_container select
+{
+    font-size: 0.8em;
+    width: 150px;
+}
+
+#size_container
+{
+    height: 38px;
+}
+
+*.custom_input
+{
+    font-size: 0.7em;
+    width: 30px;
+}
+
+#more_options_table
+{
+    font-weight: normal;
+    width: 200px;
+}
+
+
+#more_options_table td
+{
+}
+
+#more_options_table *.selected_color
+{
+    height: 15px;
+    width: 15px;
+    background-color: red;
+    cursor: pointer;
+    border: 1px solid #999999;
+    background:transparent url(/static/images/widget/custom_color_control.gif) repeat scroll 0 0;
+}
+
+#embed_code_container
+{
+    font-weight: normal;
+    text-align: center;
+    width: 100%;
+}
+
+#embed_code
+{
+    font-size: 1.3em;
+    width: 80%;
+}
+
+#embed_tabs
+{
+    text-align: center;
+    font-size: 0.8em;
+    border-bottom: 1px solid #aaaaaa;
+    font-weight: normal;
+    width: 92%;
+    margin: auto;
+}
+
+#embed_tabs ul
+{
+    position: relative;
+    left: 10px;
+    width: 92%;
+    top: 1px;
+}
+
+
+#embed_tabs li
+{
+    float: left;
+    border-right: 1px solid #aaaaaa;
+    border-top: 1px solid #aaaaaa;        
+    border-bottom: 1px solid #aaaaaa;            
+    background: #eeeeee;
+}
+
+#embed_tabs a
+{
+    color: #333333;
+    text-decoration: none;
+    display: block;
+    padding: 4px 6px 4px 6px;
+    outline:none; 
+}
+
+#embed_tabs li a:hover
+{
+    color: #000000;
+    background: #aaaaaa;
+}
+
+
+
+#embed_tabs li.focused
+{
+    background: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    border-bottom: 1px solid #ffffff;
+}
+
+
+
+
+#embed_tabs li.focused a
+{
+
+    color: #000000;
+}
+
+#embed_tabs li.focused a:hover
+{
+    background: white;
+}
+
+
+/*******************************************************************
+ * share link
+ */
+#share_link
+{
+    width: 95%;
+    font-size: 0.8em;
+    text-align: right;
+    margin-top: 2px;
+    margin-right: 10px;
+}
