@@ -1,12 +1,18 @@
+<html>
+<head>
+<title>talk</title>
 <link type="text/css" rel="stylesheet" href="/static/chat.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src='/_ah/channel/jsapi'></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
+</head>
 
-<div id="group" style="height: 433px; ">
+<body>
+<div id="group" >
 
-  <div id="group_chat_container" class="group_chat_container_default" style="height: 398px; ">
+  <div id="group_chat_container" class="group_chat_container_default" >
     
-    <div id="chat_transcript" style="height: 334px; ">
+    <div id="chat_transcript" >
 	{% for message in messages %}
 	  <div class="chat_transcript_name">
 	    <img 
@@ -34,7 +40,7 @@
         <tbody>
           <tr>
             <td style="width: 100%;">
-              <textarea id="chat_input"></textarea>
+              <textarea id="chat_input" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('chat_input_button').click();return false};"></textarea>
             </td>
             <td style="padding-left: 10px;">
               <button id="chat_input_button" style="height: 33px; width: 70px;">
@@ -47,7 +53,7 @@
     </div>
   </div>
 
-  <div id="group_members" style="height: 398px; ">
+  <div id="group_members" >
     <div id="group_member_table_container">
       <table id="group_members_table" cellpadding="0" cellspacing="0">
         <tbody>
@@ -71,3 +77,48 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+onOpened = function(){
+	alert('onOpened.')
+	$.ajax({
+		type: "POST",
+		url: "/talk/online",
+		success: function(msg){
+			alert('online success!');
+		}
+	});
+}
+
+onMessage = function(m){
+	alert('onMessage.');
+	message = JSON.parse(m.data);
+	alert(message.msg);
+	$("#chat_transcript").load("/talk/history");
+	alert('load complete!');
+}
+
+onError = function(){
+	alert('onError.');
+}
+
+onClose = function(){
+	alert('onClose.');
+	$.ajax({
+		type: "POST",
+		url: "/talk/offline",
+		success: function(msg){
+			alert('offline success!');
+		}
+	});
+}
+
+channel = new goog.appengine.Channel('{{ token }}');
+socket = channel.open();
+socket.onopen = onOpened;
+socket.onmessage = onMessage;
+socket.onerror = onError;
+socket.onclose = onClose;
+</script>
+</body>
+</html>
