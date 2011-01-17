@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django import http
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
+from django.utils import simplejson
 
 from google.appengine.api import users, memcache, taskqueue
 from google.appengine.ext import db
@@ -52,10 +53,13 @@ def rate(request):
         return HttpResponse(status=400)
     ip = request.META['REMOTE_ADDR']
     success = entry.add_rate(ip)
-    if success:
-        return HttpResponse(success)
+    if success['success']:
+        memcache.delete('top3')
+        memcache.delete('entries')
+        json = simplejson.dumps({"success": True, "rate_count": success['rate_count']})
+        return HttpResponse(json, mimetype='application/json')
     else:
-        return HttpResponse(success)
+        return HttpResponse(simplejson.dumps({"success": False, "rate_count": success['rate_count']}), mimetype='application/json')
 
 def feed(request):
     """最新文章订阅。"""
