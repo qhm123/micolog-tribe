@@ -1,5 +1,6 @@
 
 <link type="text/css" rel="stylesheet" href="/static/chat.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script src='/_ah/channel/jsapi'></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
 
@@ -10,10 +11,6 @@
     <div id="chat_transcript" >
 	{% for message in messages %}
 	  <div class="chat_transcript_name">
-	    <img 
-	        class="small_channel_img"
-	        title="Message sent from jabber/google talk"
-	        src="/static/images/gtalk_icon_small_whitebg.gif">
 	    {{ message.user }}
 	    <span class="chat_transcript_info">
 	      sent an instant message
@@ -61,7 +58,7 @@
             </td>
             <td class="group_members_dark">
               <div class="group_member ">
-                {{ user.nickname }}
+                {{ user.user }}
               </div>
             </td>
           </tr>
