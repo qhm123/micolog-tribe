@@ -33,34 +33,39 @@ def get_webemail(isnew=False):
 def index(request):
     """主页"""
     
-    messages = talk_models.TalkLog.all().order('-time').fetch(limit=10)
-    messages = sorted(messages, key=lambda e:(e.time,), reverse=False)
-    users = talk_models.TalkStatus.all()
-    
-    # 创建channel，并将channelID放入memcache。 
-    user = db.users.get_current_user()
-    if user:
-        email = user.email()
-    else:
-        email = get_webemail(True)
-    
-    channel_ids = memcache.get('channel_ids')
-    if channel_ids is None:
-        channel_ids = [email]
-        memcache.add('channel_ids', channel_ids)
-    else:
-        if email not in channel_ids:
-            channel_ids.append(email)
-            memcache.set('channel_ids', channel_ids)
+    try:
+        messages = talk_models.TalkLog.all().order('-time').fetch(limit=10)
+        messages = sorted(messages, key=lambda e:(e.time,), reverse=False)
+        users = talk_models.TalkStatus.all()
         
-    token = channel.create_channel(email)
-    
-    template = loader.get_template('talk/templates/index.html')
-    context = Context({
-        'messages': messages,
-        'users': users,
-        'token': token,
-    })
+        # 创建channel，并将channelID放入memcache。 
+        user = db.users.get_current_user()
+        if user:
+            email = user.email()
+        else:
+            email = get_webemail(True)
+        
+        channel_ids = memcache.get('channel_ids')
+        if channel_ids is None:
+            channel_ids = [email]
+            memcache.add('channel_ids', channel_ids)
+        else:
+            if email not in channel_ids:
+                channel_ids.append(email)
+                memcache.set('channel_ids', channel_ids)
+            
+        token = channel.create_channel(email)
+        logging.error(email)
+        
+        template = loader.get_template('talk/templates/index.html')
+        context = Context({
+            'messages': messages,
+            'users': users,
+            'token': token,
+        })
+    except Exception, e:
+        logging.error('error talk index.')
+        logging.error(e.msg)
     
     return http.HttpResponse(template.render(context))
 
@@ -74,8 +79,14 @@ def send(request):
             # 发送到机器人
             user = db.users.get_current_user()
             if user:
+                blog = Blog.all().filter('user =', user).get()
+                if blog:
+                    msg = '%s|%s:%s' % (user, blog.name, msg)
+                else:
+                    msg = 'unkown:' + msg
                 grouptalk.send(msg, user.email())
             else:
+                msg = 'web:' + msg
                 grouptalk.send(msg)
             
             # 发送到web客户端
@@ -95,13 +106,19 @@ def recieve(request):
     try:
         message = xmpp.Message(request.POST)
         sender_mail = message.sender.split('/')[0]
-        grouptalk.send(message.body, sender_mail)
+        
+        blog = Blog.all().filter('user =', db.users.User(sender_mail)).get()
+        if blog:
+            msg = '%s|%s:%s' % (sender_mail, blog.name, message.body)
+        else:
+            msg = 'unkown:' + message.body
+        grouptalk.send(msg, sender_mail)
 #        message.reply(sender_mail)
         
         # 发送到web客户端
         channel_ids = memcache.get('channel_ids')
         if channel_ids:
-            json = simplejson.dumps({'msg': message.body,})
+            json = simplejson.dumps({'msg': msg,})
             for channel_id in channel_ids:
                 channel.send_message(channel_id, json)
     except:
@@ -111,12 +128,16 @@ def recieve(request):
         
 def online(request):
     
-    user = db.users.get_current_user()
-    if user:
-        sender = user.email()
-    else:
-        sender = get_webemail()
-    grouptalk.send('%s is online.' % sender, sender=None)
+    try:
+        user = db.users.get_current_user()
+        if user:
+            sender = user.email()
+        else:
+            sender = get_webemail()
+        grouptalk.send('%s is online.' % sender, sender=None)
+    except Exception, e:
+        logging.error(e.msg)
+        logging.error('error in online.')
     
     return http.HttpResponse()
 

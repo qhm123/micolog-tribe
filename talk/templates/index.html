@@ -1,4 +1,3 @@
-<script src='/_ah/channel/jsapi'></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
 
 <div id="group" >
@@ -8,7 +7,7 @@
     <div id="chat_transcript" >
 	{% for message in messages %}
 	  <div class="chat_transcript_name">
-	    {{ message.user }}
+	    {{ message.user }}|{{ message.blogname }}
 	    <span class="chat_transcript_info">
 	      sent an instant message
 	    </span>
@@ -18,7 +17,7 @@
 	  </div>
 	  <div class="chat_transcript_msg">
 	    <span id="msg_content_35">
-	      {{ message.msg }}
+	      <pre>{{ message.msg }}</pre>
 	    </span>
 	  </div>
 	{% endfor %}
@@ -82,7 +81,6 @@ onOpened = function(){
 onMessage = function(m){
 	alert('onMessage.');
 	message = JSON.parse(m.data);
-	alert(message.msg);
 	$("#chat_transcript").load("/talk/history");
 	alert('load complete!');
 }
@@ -101,11 +99,12 @@ onClose = function(){
 		}
 	});
 }
-
-channel = new goog.appengine.Channel('{{ token }}');
-socket = channel.open();
-socket.onopen = onOpened;
-socket.onmessage = onMessage;
-socket.onerror = onError;
-socket.onclose = onClose;
+$(document).ready(function(){
+	channel = new goog.appengine.Channel('{{ token }}');
+	socket = channel.open();
+	socket.onopen = onOpened;
+	socket.onmessage = onMessage;
+	socket.onerror = onError;
+	socket.onclose = onClose;
+});
 </script>

@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	layout();
+	$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
 
 	$('#chat_input_button').click(function() {
 		content = $('#chat_input').val();
@@ -14,6 +15,7 @@ $(document).ready(function() {
 			success : function(msg) {
 				$("#chat_transcript").load("/talk/history");
 				$('#chat_input').val('');
+				$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
 			}
 		});
 	});
@@ -35,7 +37,7 @@ function resizeContentHeight(element_name, dependents, offsets) {
 		dependents = [];
 	}
 	// 距离底部偏移
-	var offset = 202;
+	var offset = 302;
 	var parent = $(element_name);
 	var height = window.innerHeight
 			|| (window.document.documentElement.clientHeight || window.document.body.clientHeight);

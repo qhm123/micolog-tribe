@@ -9,13 +9,20 @@ class TalkLog(BaseModel):
     """消息记录模型。"""
     
     user = db.UserProperty()
-    msg = db.StringProperty()
+    msg = db.TextProperty()
     time = db.DateTimeProperty(auto_now_add=True)
     
     @classmethod
     def add(cls, user, msg):
         log = TalkLog(user=user, msg=msg)
         log.put()
+        
+    @property
+    def blogname(self):
+        blog = Blog.all().filter('user =', self.user).get()
+        if blog:
+            return blog.name
+        return ''
 
 class TalkStatus(BaseModel):
     """聊天状态信息"""

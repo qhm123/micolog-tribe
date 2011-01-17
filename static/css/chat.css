@@ -367,7 +367,6 @@ button:hover {
 *.chat_transcript_name {
 	margin-top: 10px;
 	font-weight: bold;
-	color: #0066cc;
 }
 
 *.chat_transcript_msg {
