@@ -1,0 +1,47 @@
+<div id="catnav">
+	<ul id="nav-tag">
+		{% for tag in tags %}
+		<li class="cat-item">
+			<a id="tag-{{ tag.key }}" href="#" title="数量：{{ tag.tagged_count }}">
+				{{ tag.tag|escape }}
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+
+<div id="main">
+	<div id="content">
+		<ul id="showcontent">
+			<!-- bloglist load content -->
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function($){
+		$('#showcontent').load('/blogshow/bloglist');
+		
+		$('#nav-tag li a').each(function(){
+			$(this).click(function(){
+				anchorid = $(this).attr('id');
+				tagkey = anchorid.substring(4, anchorid.length);
+				$('#showcontent').load('/blogshow/bloglist?tagkey=' + tagkey);
+				anchorid = $(this).attr('id');
+				select(anchorid);
+			});
+		});
+		
+		function select(anchorid){
+			$('#nav-tag li a').each(function(i){
+				if($(this).attr('id') == anchorid){
+					$(this).addClass("nav-selected");
+				}
+				else{
+					$(this).removeClass("nav-selected");
+				}
+			});
+		}
+	});
+</script>

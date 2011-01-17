@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+	<channel>
+		<title>Micolog部落</title>
+		<atom:link href="http://micolog-tribe.appspot.com/feed" rel="self" type="application/rss+xml" />
+		<link>http://micolog-tribe.appspot.com</link>
+		<description>Micologer聚集地</description>
+		<lastBuildDate></lastBuildDate>
+		<language>zh-cn</language>
+		<sy:updatePeriod>daily</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+		<generator>Micolog-Tribe</generator>
+			{% for entry in entries %}
+			<item>
+				<title>{{entry.title|escape}}</title>
+				<link>{{entry.link|escape}}</link>
+				<comments>{{entry.link|escape}}#comments</comments>
+				<pubDate>{{entry.date|date:"Y.m.d H:i"}}</pubDate>
+				<dc:creator>{{entry.feed.title|escape}}</dc:creator>
+				<guid isPermaLink="false">{{entry.link|escape}}</guid>
+				<description><![CDATA[{{entry.description|escape}}]]></description>
+				<content:encoded><![CDATA[{{entry.content|safe}}]]></content:encoded>
+				<wfw:commentRss>{{ entry.feed.feed_url }}/comments</wfw:commentRss>
+				<slash:comments></slash:comments>
+			</item>
+			{%endfor%}
+	</channel>
+</rss>
