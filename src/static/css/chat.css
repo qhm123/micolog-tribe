@@ -29,7 +29,7 @@ button:hover {
 }
 
 #chat_input{
-	
+	width: 99%;
 }
 
 /*******************************************************************
@@ -302,7 +302,7 @@ button:hover {
 }
 
 *.group_chat_container_default {
-	width: 79%;
+	width: 80%;
 }
 
 *.group_chat_container_maxed {
@@ -311,7 +311,6 @@ button:hover {
 
 #group_members {
 	/*border: 1px solid #dddddd;*/
-	border: 1px solid #bbbbbb;
 	background: url(http://localhost:8080/static/images/blacktrans.png);
 	width: 20%;
 	float: right;
@@ -326,6 +325,7 @@ button:hover {
 
 #group_members_table {
 	width: 100%;
+	margin: 0;
 }
 
 *.group_member {
@@ -352,8 +352,6 @@ button:hover {
  * Chat transcript content
  */
 #chat_transcript { /*border: 1px solid #dddddd;*/
-	border: 1px solid #bbbbbb;
-	/*margin-right: 10px;*/
 	margin-bottom: 10px;
 	font-size: .9em;
 	padding: 0px 5px 0px 5px;

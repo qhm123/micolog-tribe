@@ -18,16 +18,16 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="/static/jquery.raty.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function($){
-		$('#showcontent').load('{% url blogshow.views.bloglist %}');
+		$('#showcontent').load('/blogshow/bloglist');
 		
 		$('#nav-tag li a').each(function(){
 			$(this).click(function(){
 				anchorid = $(this).attr('id');
 				tagkey = anchorid.substring(4, anchorid.length);
-				$('#showcontent').load('{% url blogshow.views.bloglist %}?tagkey=' + tagkey);
+				$('#showcontent').load('/blogshow/bloglist?tagkey=' + tagkey);
 				anchorid = $(this).attr('id');
 				select(anchorid);
 			});

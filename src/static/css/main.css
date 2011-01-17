@@ -1,0 +1,754 @@
+/************************************************
+* Resets *
+************************************************/
+html,body,div,p,span,h1,h2,h3,h4,h5,h6,img,ul,ol,dl,li,dt,dd,blockquote,pre,form,fieldset,label,input,table,th,td,a {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	color: #fff;
+}
+
+:focus {
+	outline: 0;
+}
+
+body {
+	line-height: 1;
+}
+
+ul,ol {
+	list-style: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size: 1em;
+}
+
+/************************************************
+* General elements *
+************************************************/
+body {
+	background: #000 url(/static/images/bodybg.jpg) top center no-repeat fixed;
+	padding-bottom: 20px;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial,
+		Helvetica, sans-serif;
+	text-align: center;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: Rockwell, Georgia, Palatino Linotype, Palatino,
+		"Times New Roman", Times, serif;
+}
+
+h1,h2,h3,h4,h5,h6,p,li,dt,dd,blockquote,label,th,td,a {
+	text-shadow: 0 0 4px #444;
+}
+
+a {
+	color: #a8ef9d;
+	text-decoration: none;
+}
+
+a:hover {
+	
+}
+
+a img {
+	border: 0;
+}
+
+blockquote {
+	font-style: italic;
+	background: url(/static/images/whitetrans.png);
+	padding: .4em 1em .7em 1em;
+	margin: .7em 0 .3em 0;
+}
+
+code {
+	font-size: 1.1em;
+	font-family: "Bitstream Vera Sans Mono", Monaco, "Lucida Console",
+		monospace;
+}
+
+kbd,tt {
+	font-size: 1.2em;
+}
+
+hr {
+	border: 1px solid #a8ef9d;
+}
+
+pre {
+	overflow: auto;
+	width: 600px;
+	background: url(/static/images/blacktrans.png);
+	padding: 1em 1.5em;
+	margin: 1em 0;
+	font-size: 1.2em;
+	white-space: pre-wrap; /* css3 */
+}
+
+dl {
+	
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	padding-left: 1em;
+}
+
+table {
+	margin: .5em 0;
+}
+
+table th {
+	color: #a8ef9d;
+}
+
+table td,table th {
+	padding: .5em .7em;
+}
+
+table th {
+	background: url(/static/images/whitetrans.png);
+	text-transform: uppercase;
+	border-bottom: 1px transparent;
+}
+
+table td {
+	background: url(/static/images/blacktrans.png);
+	vertical-align: middle;
+}
+
+table tr.even td {
+	background: url(/static/images/blacktrans2.png);
+}
+
+table tr:hover td {
+	background: url(/static/images/whitetrans.png);
+}
+
+fieldset {
+	padding: 1.2em;
+	border: 1px dashed #a8ef9d;
+}
+
+legend {
+	padding: .2em .8em;
+	font-size: 1.2em;
+	text-transform: capitalize;
+}
+
+input,textarea,select {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial,
+		Helvetica, sans-serif;
+	margin: .2em 0;
+	color: #222;
+	font-size: 1em;
+}
+
+input.adminbar-input {
+	margin: 0;
+}
+
+input,textarea {
+	padding: .3em;
+}
+
+input.radio,input.checkbox {
+	background: #fff;
+	padding: 2px;
+}
+
+form label {
+	font-weight: bold;
+	display: block;
+}
+
+form label.subscribe-label {
+	display: inline;
+}
+
+/************************************************
+* General *
+************************************************/
+#wrapper {
+	margin: 0 auto 10px auto;
+	padding: 0;
+	text-align: left;
+	width: 893px;
+}
+
+.clear {
+	clear: both;
+}
+
+.cleared {
+	overflow: hidden;
+	width: 100%;
+}
+
+/************************************************
+* Header *
+************************************************/
+#header,#catnav {
+	overflow: hidden;
+	width: 100%;
+}
+
+#header #logo {
+	float: left;
+	width: 480px;
+	margin: 20px 0 10px 0;
+}
+
+#header #logo img {
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin: 5px 10px 10px 0;
+}
+
+#header #logo h1 a {
+	color: #fff;
+	font-size: 2em;
+	font-weight: normal;
+	text-shadow: 0 0 6px #555;
+}
+
+#header #logo h1 a:hover {
+	color: #a8ef9d;
+}
+
+#header #logo #desc {
+	font-size: .8em;
+	color: #ddd;
+	margin-top: .6em;
+	line-height: 1.2em;
+}
+
+#catnav {
+	background: url(/static/images/blacktrans.png);
+}
+
+#nav li {
+	float: left;
+	background: url(/static/images/blacktrans.png);
+	line-height: 2em;
+	margin: 5px 0 5px 5px;
+}
+
+#nav li:hover {
+	background: url(/static/images/blacktrans2.png);
+}
+
+#nav li a {
+	display: block;
+	margin: 0;
+	font-size: 0.8em;
+	padding: 0 13px;
+}
+
+#nav li a:hover {
+	color: #afdaff;
+	text-decoration: none;
+	display: block;
+}
+
+#nav li:hover ul,#nav li.sfhover ul {
+	left: auto;
+}
+
+#nav li:hover,#nav li.sfhover {
+	position: static;
+	/* prevents IE7 drop-down menu bug (focus on a page element prevents nested menus from disappearing) */
+}
+
+/*以下几个根据nav改编。*/
+#catnav-tag {
+	background: url(/static/images/blacktrans.png);
+}
+
+#nav-tag li {
+	float: left;
+	background: url(/static/images/blacktrans.png);
+	line-height: 2em;
+	margin: 5px 0 5px 5px;
+}
+
+#nav-tag li:hover {
+	background: url(/static/images/blacktrans2.png);
+}
+
+#nav-tag li a {
+	display: block;
+	margin: 0;
+	font-size: 0.8em;
+	padding: 0 13px;
+}
+
+#nav-tag li a:hover {
+	color: #afdaff;
+	text-decoration: none;
+	display: block;
+}
+
+/*nav选中效果，toggle该class。*/
+.nav-selected {
+	color: #afdaff;
+	text-decoration: none;
+	display: block;
+}
+
+/************************************************
+* Content *
+************************************************/
+#main {
+	padding: 0px 0 20px 0;
+}
+
+#content {
+	float: left;
+	overflow: hidden;
+	width: 893px;
+}
+
+#content.full {
+	width: 980px;
+}
+
+h2#contentdesc {
+	font-weight: normal;
+	font-size: 1.3em;
+	padding: 10px 0 2px;
+}
+
+h2#contentdesc span {
+	color: #a8ef9d;
+}
+
+.post {
+	padding: 0 0 10px 0;
+}
+
+.posttop {
+	background: url(/static/images/blacktrans.png);
+	padding: 10px;
+}
+
+.posttop h2.posttitle a {
+	color: #afdaff;
+	font-size: 1.4em;
+}
+
+.posttop h2.posttitle a:hover {
+	color: #a8ef9d;
+	border-bottom: 1px dashed #a8ef9d;
+}
+
+.postmetatop {
+	overflow: hidden;
+	width: 100%;
+	font-size: 1em;
+	padding-top: 0px;
+	line-height: 1.5em;
+}
+
+.icon {
+	float: left;
+}
+
+.icon img {
+	width: 16px;
+	height: 16px;
+}
+
+.postmetatop .categs {
+	float: left;
+	width: 450px;
+	padding-left: 5px;
+	line-height: 16px;
+}
+
+.postmetatop .categs a:hover {
+	color: #afdaff;
+}
+
+.postmetatop .date {
+	float: right;
+	text-align: right;
+}
+
+.postmetatop .date span {
+	background: url(/static/images/date.png) left no-repeat;
+	padding-left: 20px;
+}
+
+.postcontent {
+	color: #fff;
+	margin: .8em 0;
+	font-size: 1.2em;
+	line-height: 1.5em;
+}
+
+.postcontent h1 {
+	padding: .8em 0;
+	font-size: 1.5em;
+}
+
+.postcontent h2 {
+	padding: .8em 0;
+	font-size: 1.4em;
+}
+
+.postcontent h3 {
+	padding: .8em 0;
+	font-size: 1.3em;
+}
+
+.postcontent h4 {
+	padding: .8em 0;
+	font-size: 1.2em;
+}
+
+.postcontent h5 {
+	padding: .8em 0;
+	font-size: 1.1em;
+}
+
+.postcontent h6 {
+	padding: .8em 0;
+	font-size: 1em;
+}
+
+.postcontent p {
+	padding: .6em 0 .2em 0;
+}
+
+.postcontent a {
+	border-bottom: 1px dashed #a8ef9d;
+}
+
+.postcontent a:hover {
+	background: url(/static/images/blacktrans.png);
+}
+
+.postcontent a img {
+	background: none;
+	border-bottom: 0;
+}
+
+.postcontent ul,.postcontent ol {
+	padding: .4em 0 .5em 2em;
+}
+
+.postcontent ul li {
+	list-style: disc;
+}
+
+.postcontent ol li {
+	list-style: decimal;
+}
+
+.postmetabottom {
+	background: url(/static/images/whitetrans.png);
+	overflow: hidden;
+	width: 100%;
+	padding: 0px 0 10px;
+	font-size: 0.8em;
+	line-height: 1.1em;
+}
+
+.postmetabottom a {
+	color: #fff;
+}
+
+.postmetabottom a:hover {
+	color: #afdaff;
+}
+
+.postmetabottom .tags {
+	float: left;
+	width: 440px;
+	background: url(/static/images/tags.png) left 1px no-repeat;
+	margin-left: 10px;
+	padding-left: 20px;
+	line-height: 16px;
+}
+
+.postmetabottom .readmore {
+	float: left;
+	width: 160px;
+	padding-right: 10px;
+}
+
+.postmetabottom .readmore span {
+	background: url(/static/images/more.png) left 4px no-repeat;
+	padding-left: 17px;
+}
+
+.postmetaauthor {
+	background: url(/static/images/blacktrans.png);
+	padding: 10px;
+	font-size: 0.8em;
+	line-height: 1.1em;
+	margin-top: 20px;
+}
+
+.postmetaauthor .authorpic {
+	float: left;
+	width: 60px;
+}
+
+.postmetaauthor .authordesc {
+	float: right;
+	width: 540px;
+}
+
+.postmetaauthor .authordesc p.theauthor {
+	line-height: 1.4em;
+	font-weight: bold;
+}
+
+.postmetaauthor .authordesc p.thedesc {
+	line-height: 1.4em;
+	padding: .8em 0 .2em 0;
+}
+
+.postmetaauthor .authordesc a {
+	color: #afdaff;
+	border-bottom: 1px dashed #afdaff;
+}
+
+.postmetaauthor .authordesc a:hover {
+	background: url(/static/images/blacktrans.png);
+}
+
+/*投票相关style*/
+.thumbup {
+	float: left;
+	position: relative;
+	width: 70px;
+}
+
+.thumbup .thumbupclicked {
+	background-position: 0px -48px;
+}
+
+.thumbup a {
+	background: url(/static/images/thumbs24.png) no-repeat;
+	cursor: pointer;
+	display: block;
+	width: 24px;
+	height: 24px;
+	float: left;
+}
+
+.thumbup span {
+	color: #294;
+	float: left;
+	margin-top: -2px;
+}
+
+.thumbup a:hover {
+	background-position: 0px -48px;
+}
+
+/*标语*/
+h2#slogon {
+	font-weight: normal;
+	font-size: 1.3em;
+	width: 100%;
+	text-align: center;
+	padding: 6px 0;
+}
+
+/************************************************
+* Footer *
+************************************************/
+#footer {
+	background: url(/static/images/blacktrans.png);
+	clear: both;
+	overflow: hidden;
+	width: 893px;
+	font-size: 0.8em;
+}
+
+#footer .foot1 {
+	float: left;
+	width: 310px;
+	margin: 10px 0 0 10px;
+	display: inline;
+}
+
+#footer .foot2 {
+	float: left;
+	width: 310px;
+	margin: 10px 15px 0 15px;
+}
+
+#footer .foot3 {
+	float: left;
+	width: 310px;
+	margin: 10px 0 0 0;
+}
+
+#footer h3 {
+	font-weight: normal;
+	font-size: 1.4em;
+	margin-bottom: .4em;
+}
+
+#footer h4 {
+	font-weight: normal;
+	font-size: 1em;
+	margin: .8em 0 .2em 0;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+}
+
+#footer p {
+	line-height: 1.5em;
+	color: #eee;
+	padding: .2em 0 .8em 0;
+}
+
+#footer ul li {
+	padding: 10px;
+	margin-bottom: 10px;
+	background: url(/static/images/blacktrans.png);
+}
+
+#footer li a {
+	display: block;
+	font-weight: normal;
+	padding: 2px 5px;
+}
+
+#footer a:hover {
+	background: url(/static/images/blacktrans.png);
+}
+
+#credits {
+	clear: both;
+	overflow: hidden;
+	width: 893px;
+	margin-top: .7em;
+	font-size: 0.7em;
+	line-height: 1.4em;
+}
+
+#credits a {
+	color: #ddd;
+}
+
+#credits a:hover {
+	background: url(/static/images/blacktrans.png);
+	color: #fff;
+}
+
+#credits #creditsleft {
+	float: left;
+	width: 500px;
+	color: #aaa;
+}
+
+#credits #creditsright {
+	float: right;
+	width: 300px;
+	text-align: right;
+	color: #aaa;
+}
+/************************************************
+* Blog show *
+************************************************/
+ul#showcontent {
+	list-style: none;
+}
+
+ul#showcontent li {
+	min-width: 204px;
+	width: 25% !important;;
+	float: left;
+}
+
+ul#showcontent li a {
+	background: url(/static/images/image-shadow2.png) no-repeat center center;
+	min-width: 204px;
+	width: 25% !important;;
+	height: 142px;
+	float: left;
+	margin-bottom: 4em;
+}
+
+ul#showcontent li img {
+	opacity: 0.9;
+	display: block;
+	margin: 8px auto 0;
+}
+
+ul#showcontent li a:hover img {
+	opacity: 1.0;
+}
+
+ul#showcontent a {
+	text-decoration: none;
+	font-family: 'Microsoft YaHei', "Lucida Sans", "Trebuchet MS",
+		sans-serif;
+}
+
+ul#showcontent li span {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	padding: 5px 0;
+	color: #AC8B72;
+}
+
+ul#showcontent li div {
+	color: #AC8B72;
+	display: inline;
+	float: left;
+	font-size: 12px;
+	height: 20px;
+	line-height: 30px;
+	margin: 0 0 0 20px;
+}
+
+/************************************************
+* welcome *
+************************************************/
+#footer ul li {
+	float: left;
+	padding: 5px;
+	margin-bottom: 0px;
+	background: none;
+}
+
+#spinner {
+	width: 128px;
+	height: 15px;
+	position: absolute;
+	background: url(/static/images/spinner.gif);
+	top: 175px;
+	left: 50%;
+	margin-left: -64px;
+	display: none;
+}
+
+.showrate img {
+	float: left;
+}
+
+#addblogtable input{
+	width: 390px;
+}
+
+.text-center{
+	float: left;
+	height: 130px;
+	line-height: 130px;
+}
