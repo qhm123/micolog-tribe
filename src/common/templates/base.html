@@ -40,12 +40,12 @@
 					RSS聚合
 				</a>
 			</li>
-			<!-- too slow
 			<li class="cat-item">
-				<a id="cat_chat" href="#" title="RSS聚合">
+				<a id="cat_chat" href="#" title="GTalk群聊">
 					GTalk群聊
 				</a>
 			</li>
+			<!-- 
 			<li class="cat-item">
 				<a id="cat_about" href="#" title="部落手册">
 					部落手册
@@ -98,10 +98,14 @@
 					select(anchorid);
 			    });
 			    $('#cat_chat').click(function(){
-					$('#content').load('{% url welcome.views.gtalk %}');
+					$('#content').load('{% url talk.views.index %}');
+					anchorid = $(this).attr('id');
+					select(anchorid);
 			    });
 			    $('#cat_about').click(function(){
 					$('#content').load('{% url welcome.views.about %}');
+					anchorid = $(this).attr('id');
+					select(anchorid);
 			    });
 			});
 			

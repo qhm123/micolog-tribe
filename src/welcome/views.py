@@ -27,13 +27,6 @@ def about(request):
     
     return HttpResponse(template.render(context))
 
-def gtalk(request):  
-    template = loader.get_template('welcome/templates/chat.html')
-    context = Context({
-    })
-    
-    return HttpResponse(template.render(context))
-
 def add(request):
     """添加一个博客。"""
     
