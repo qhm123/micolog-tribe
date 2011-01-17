@@ -180,11 +180,11 @@ class Entry(BaseModel):
         """给Entry投一票。会进行IP检测，如果IP存在与该博客的IP列表，则投票失败。"""
         
         if ip in self.rate_ips:
-            return False
+            return {"success": False, "rate_count": self.rate_count}
         self.rate_count += 1
         self.rate_ips.append(ip)
         self.put()
-        return True
+        return {"success": True, "rate_count": self.rate_count}
         
 class Category(BaseModel):
     """博客分类模式，已经废弃不用。"""
