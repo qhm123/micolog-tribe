@@ -37,7 +37,7 @@ function resizeContentHeight(element_name, dependents, offsets) {
 		dependents = [];
 	}
 	// 距离底部偏移
-	var offset = 302;
+	var offset = 252;
 	var parent = $(element_name);
 	var height = window.innerHeight
 			|| (window.document.documentElement.clientHeight || window.document.body.clientHeight);

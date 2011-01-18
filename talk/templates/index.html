@@ -1,3 +1,4 @@
+{% load filters %}
 <script type="text/javascript" src="/static/js/chat.js"></script>
 
 <div id="group" >
@@ -6,18 +7,9 @@
     
     <div id="chat_transcript" >
 	{% for message in messages %}
-	  <div class="chat_transcript_name">
-	    {{ message.user }}|{{ message.blogname }}
-	    <span class="chat_transcript_info">
-	      sent an instant message
-	    </span>
-	    <span class="chat_transcript_info" id="msg_info_35">
-	      {{ message.time }}
-	    </span>
-	  </div>
 	  <div class="chat_transcript_msg">
 	    <span id="msg_content_35">
-	      <pre>{{ message.msg }}</pre>
+	      <pre>({{ message.time|timezone:8|date:"H:i:s" }}){{ message.msg }}</pre>
 	    </span>
 	  </div>
 	{% endfor %}
@@ -85,8 +77,8 @@ onMessage = function(m){
 	//alert('load complete!');
 }
 
-onError = function(){
-	alert('Error.');
+onError = function(error){
+	alert('Error. description:' + error.description + 'code:' + error.code);
 }
 
 onClose = function(){

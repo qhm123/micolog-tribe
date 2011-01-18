@@ -365,15 +365,12 @@ button:hover {
 }
 
 *.chat_transcript_name {
-	margin-top: 10px;
 	font-weight: bold;
 }
 
 *.chat_transcript_msg {
-	padding-left: 19px;
 	color: #333333;
 	/*border-bottom: 1px dotted #cccccc;*/
-	padding-bottom: 10px;
 }
 
 *.chat_transcript_msg_delete {
