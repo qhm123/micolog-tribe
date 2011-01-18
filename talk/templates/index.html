@@ -54,7 +54,7 @@
             </td>
             <td class="group_members_dark">
               <div class="group_member ">
-                {{ user.user }}
+                {{ user.user }}|{{ user.blog.name }}
               </div>
             </td>
           </tr>
@@ -68,25 +68,25 @@
 
 <script type="text/javascript">
 onOpened = function(){
-	alert('onOpened.')
+	//alert('onOpened.')
 	$.ajax({
 		type: "POST",
 		url: "/talk/online",
 		success: function(msg){
-			alert('online success!');
+			//alert('online success!');
 		}
 	});
 }
 
 onMessage = function(m){
-	alert('onMessage.');
+	//alert('onMessage.');
 	message = JSON.parse(m.data);
 	$("#chat_transcript").load("/talk/history");
-	alert('load complete!');
+	//alert('load complete!');
 }
 
 onError = function(){
-	alert('onError.');
+	alert('Error.');
 }
 
 onClose = function(){
@@ -105,6 +105,6 @@ $(document).ready(function(){
 	socket.onopen = onOpened;
 	socket.onmessage = onMessage;
 	socket.onerror = onError;
-	socket.onclose = onClose;
+	//socket.onclose = onClose;
 });
 </script>

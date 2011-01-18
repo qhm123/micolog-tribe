@@ -33,39 +33,34 @@ def get_webemail(isnew=False):
 def index(request):
     """主页"""
     
-    try:
-        messages = talk_models.TalkLog.all().order('-time').fetch(limit=10)
-        messages = sorted(messages, key=lambda e:(e.time,), reverse=False)
-        users = talk_models.TalkStatus.all()
+    messages = talk_models.TalkLog.all().order('-time').fetch(limit=10)
+    messages = sorted(messages, key=lambda e:(e.time,), reverse=False)
+    users = talk_models.TalkStatus.all()
+    
+    # 创建channel，并将channelID放入memcache。 
+    user = db.users.get_current_user()
+    if user:
+        email = user.email()
+    else:
+        email = get_webemail(True)
+    
+    channel_ids = memcache.get('channel_ids')
+    if channel_ids is None:
+        channel_ids = [email]
+        memcache.add('channel_ids', channel_ids)
+    else:
+        if email not in channel_ids:
+            channel_ids.append(email)
+            memcache.set('channel_ids', channel_ids)
         
-        # 创建channel，并将channelID放入memcache。 
-        user = db.users.get_current_user()
-        if user:
-            email = user.email()
-        else:
-            email = get_webemail(True)
-        
-        channel_ids = memcache.get('channel_ids')
-        if channel_ids is None:
-            channel_ids = [email]
-            memcache.add('channel_ids', channel_ids)
-        else:
-            if email not in channel_ids:
-                channel_ids.append(email)
-                memcache.set('channel_ids', channel_ids)
-            
-        token = channel.create_channel(email)
-        logging.error(email)
-        
-        template = loader.get_template('talk/templates/index.html')
-        context = Context({
-            'messages': messages,
-            'users': users,
-            'token': token,
-        })
-    except Exception, e:
-        logging.error('error talk index.')
-        logging.error(e.msg)
+    token = channel.create_channel(email)
+    
+    template = loader.get_template('talk/templates/index.html')
+    context = Context({
+        'messages': messages,
+        'users': users,
+        'token': token,
+    })
     
     return http.HttpResponse(template.render(context))
 
@@ -83,7 +78,7 @@ def send(request):
                 if blog:
                     msg = '%s|%s:%s' % (user, blog.name, msg)
                 else:
-                    msg = 'unkown:' + msg
+                    msg = '%s|%s:%s' % (user, 'blog', msg)
                 grouptalk.send(msg, user.email())
             else:
                 msg = 'web:' + msg
@@ -108,10 +103,11 @@ def recieve(request):
         sender_mail = message.sender.split('/')[0]
         
         blog = Blog.all().filter('user =', db.users.User(sender_mail)).get()
+        sender_user = sender_mail.split('@')[0]
         if blog:
-            msg = '%s|%s:%s' % (sender_mail, blog.name, message.body)
+            msg = '%s|%s:%s' % (sender_user, blog.name, message.body)
         else:
-            msg = 'unkown:' + message.body
+            msg = '%s|%s:%s' % (sender_user, 'blog', message.body)
         grouptalk.send(msg, sender_mail)
 #        message.reply(sender_mail)
         
@@ -128,16 +124,12 @@ def recieve(request):
         
 def online(request):
     
-    try:
-        user = db.users.get_current_user()
-        if user:
-            sender = user.email()
-        else:
-            sender = get_webemail()
-        grouptalk.send('%s is online.' % sender, sender=None)
-    except Exception, e:
-        logging.error(e.msg)
-        logging.error('error in online.')
+#    user = db.users.get_current_user()
+#    if user:
+#        sender = user.email()
+#    else:
+#        sender = get_webemail()
+#    grouptalk.send('%s is online.' % sender, sender=None)
     
     return http.HttpResponse()
 
