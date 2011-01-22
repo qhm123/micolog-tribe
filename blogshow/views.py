@@ -4,13 +4,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
+from django.conf import settings
 
-from google.appengine.api import users, images, memcache
+from google.appengine.api import users, images, memcache, mail
 
 from common import models
 from common.taggable import Tag
 from common.helper import requires_admin
-from django.core.context_processors import request
 
 
 def index(request):
@@ -57,6 +57,13 @@ def rate(request):
         return HttpResponse(status=400)
     rate = blog.add_rate(int(score), ip)
     if rate["success"]:
+        to = blog.user.email()
+        subject = u'有人给您的博客投票了，快去看看。'
+        body = u'''您在 Micolog部落 上注册的博客：%s，有人给您的博客投票了，快去看看。
+您也可以给别人的博客投票，试试看。
+http://micolog-tribe.appspot.com
+''' % (blog.name,)
+        mail.send_mail(settings.MAILSENDER, to, subject, body)
         return HttpResponse(simplejson.dumps({"success": True, "rate": rate['rate'], "rate_count": rate['rate_count'], "blogid": blogid}), mimetype='application/json')
     else:
         return HttpResponse(simplejson.dumps({"success": False, "rate": rate['rate'], "rate_count": rate['rate_count'], "blogid": blogid}), mimetype='application/json')

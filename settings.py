@@ -122,3 +122,6 @@ INSTALLED_APPS = (
 #    'django.contrib.sessions',
 #    'django.contrib.sites',
 )
+
+SHRINK_THE_WEB = {'stwaccesskeyid': '96a7847ecf72707'}
+MAILSENDER = 'micolog.tribe@gmail.com'

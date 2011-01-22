@@ -26,9 +26,8 @@ class Blog(Taggable, BaseModel):
        
     user = db.UserProperty(required=True)
     name = db.StringProperty(required=True)
-    category = db.StringProperty(required=True)         # NOTE: 废弃不用了
     link = db.StringProperty(required=True)
-    pic = db.BlobProperty(required=True)
+    pic = db.BlobProperty()
     add_date = db.DateTimeProperty(auto_now_add=True)
     rate = db.FloatProperty(default=0.0)
     rate_count = db.IntegerProperty(default=0)
@@ -42,10 +41,10 @@ class Blog(Taggable, BaseModel):
         Taggable.__init__(self)
     
     @classmethod
-    def add(cls, user, name, category, link, pic, tags='', feedurl=''):
+    def add(cls, user, name, link, tags='', feedurl=''):
         """添加一个博客。"""
         
-        blog = Blog(user=user, name=name, category=category, link=link, pic=pic)
+        blog = Blog(user=user, name=name, link=link)
         blog.feedurl = feedurl
         blog.put()
         
@@ -60,16 +59,15 @@ class Blog(Taggable, BaseModel):
             pass
                     
     @classmethod
-    def admin_add(cls, mail, name, category, link, pic, tags='', feedurl=''):
+    def admin_add(cls, mail, name, link, tags='', feedurl=''):
         """管理员添加方法。"""
         
-        Blog.add(db.users.User(mail) ,name, category, link, pic, tags, feedurl)
+        Blog.add(db.users.User(mail) ,name, link, tags, feedurl)
         
-    def update(self, name, category, link, tags, feedurl):
+    def update(self, name, link, tags, feedurl):
         """更新博客基本信息。"""
         
         self.name = name
-        self.category = category
         self.link = link
         self.tags = tags
         self.put()

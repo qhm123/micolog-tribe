@@ -3,23 +3,31 @@ $(document).ready(function() {
 	$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
 
 	$('#chat_input_button').click(function() {
+		alert('a');
 		content = $('#chat_input').val();
-		if (content.trim() == '') {
+		if (isNull(content)) {
 			alert('请输入内容！');
-			return false;
 		}
-		$.ajax({
-			type : "POST",
-			url : "/talk/send",
-			data : "content=" + content,
-			success : function(msg) {
-				$("#chat_transcript").load("/talk/history");
-				$('#chat_input').val('');
-				$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
-			}
-		});
+		else{
+			$.ajax({type: "POST",
+				url: "/talk/send",
+				data: "content=" + content,
+				success : function(msg) {
+					$("#chat_transcript").load("/talk/history");
+					$('#chat_input').val('');
+					$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
+				}
+			});	
+		}
 	});
 });
+
+function isNull(str){
+	if (str == "") return true;
+	var regu = "^[ ]+$";
+	var re = new RegExp(regu);
+	return re.test(str);
+}
 
 $(window).resize(function() {
 	layout();

@@ -135,12 +135,12 @@ def online(request):
 
 def offline(request):
     
-    user = db.users.get_current_user()
-    if user:
-        sender = user.email()
-    else:
-        sender = get_webemail()
-    grouptalk.send('%s is offline.' % sender, sender=None)
+#    user = db.users.get_current_user()
+#    if user:
+#        sender = user.email()
+#    else:
+#        sender = get_webemail()
+#    grouptalk.send('%s is offline.' % sender, sender=None)
     
     return http.HttpResponse()
         

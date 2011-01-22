@@ -17,11 +17,11 @@ $(document).ready(function($){
 		    	  if(date.success){
 					  $("#rate_count-"+date.blogid).html(date.rate_count+"人投票");
 					  $.fn.raty.start(date.rate, '#blog-'+date.blogid);
-					  alert("投票成功");
+					  alert("投票成功。");
 				  }
 				  else{
 				  	$.fn.raty.start(date.rate, '#blog-'+date.blogid);
-				  	alert("您已经透过票啦！");
+				  	alert("您已经投过票啦！");
 				  }
 				}
 		    );

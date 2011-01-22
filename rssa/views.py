@@ -8,8 +8,9 @@ from django import http
 from django.template import Context, loader
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
+from django.conf import settings
 
-from google.appengine.api import users, memcache, taskqueue
+from google.appengine.api import users, memcache, taskqueue, mail
 from google.appengine.ext import db
 
 from common import models
@@ -56,6 +57,16 @@ def rate(request):
     if success['success']:
         memcache.delete('top3')
         memcache.delete('entries')
+        
+        blog = entry.feed.blog
+        to = blog.user.email()
+        subject = u'有人给您的文章投票了，快去看看。'
+        body = u'''您在 Micolog部落 上注册的博客：%s，有人通过 文章聚合 给您的文章《%s》投票了，快去看看。
+您也可以给别人的文章投票，试试看。
+http://micolog-tribe.appspot.com
+''' % (blog.name, entry.title)
+        mail.send_mail(settings.MAILSENDER, to, subject, body)
+        
         json = simplejson.dumps({"success": True, "rate_count": success['rate_count']})
         return HttpResponse(json, mimetype='application/json')
     else:
@@ -116,11 +127,14 @@ def add_all(request):
     ---已废弃---。
     """
     
-    added_link = [feed.link for feed in models.Feed.all().fetch(limit=1000)]
+    added_blog = [feed.blog for feed in models.Feed.all().fetch(limit=1000)]
     
     for blog in models.Blog.all().fetch(limit=1000):
-        if blog.link not in added_link:
-            feed_url = blog.link + '/feed'
+        if blog not in added_blog:
+            if blog.link.endswith('/'):
+                feed_url = blog.link + 'feed'
+            else:
+                feed_url = blog.link + '/feed'
             
             fp = None
             try:

@@ -5,6 +5,7 @@ from django.template import Context, loader
 from django.core.urlresolvers import reverse
 
 from google.appengine.api import users, images
+from google.appengine.ext import db
 
 from common import models
 from common.helper import requires_admin
@@ -48,37 +49,19 @@ def add(request):
         user = users.get_current_user()
         if user:
             name = request.POST.get('name', '')
-            # TODO: 去掉category
-            category = "1"
             link = request.POST.get('link', '')
-            if 'http://' not in link:
+            if not link.startswith('http://'):
                 link = 'http://' + link
-            pic = request.FILES.get('file')
             tags = request.POST.get('tags')
-            feedurl = request.POST.get('feedurl')
-            if 'http://' not in feedurl:
-                feedurl = 'http://' + feedurl
+            feedurl = link + '/feed'
             
             blog = models.Blog.all().filter('user =', user).get()
-            
-            # 如果当前用户博客为空，且图片不为空，则添加博客上传图片
-            if not blog and pic:
-                pic = images.resize(pic.read(), 190, 130)
-                models.Blog.add(user, name, category, link, pic, tags, feedurl)
-            # 如果当前用户博客不为空，则更新博客信息
+            if not blog:
+                models.Blog.add(user, name, link, tags, feedurl)
             elif blog:
-                blog.update(name, category, link, tags, feedurl)
-                if pic:
-                    pic = images.resize(pic.read(), 190, 130)
-                    blog.update_pic(pic)
+                blog.update(name, link, tags, feedurl)
             
-        return HttpResponseRedirect(reverse('welcome.views.add'))
-
-def deal_link(link):
-    if not link.startswith('http://'):
-        link = 'http://' + link
-        
-    return link
+        return HttpResponseRedirect(reverse('welcome.views.index'))
 
 @requires_admin
 def admin_add(request):
@@ -94,17 +77,15 @@ def admin_add(request):
     else:
         name = request.POST.get('name', '')
         mail = request.POST.get('mail', '')
-        # TODO: 去掉category
-        category = "1"
         link = request.POST.get('link', '')
-        if 'http://' not in link:
+        if not link.startswith('http://'):
             link = 'http://' + link
-        pic = request.FILES.get('file')
         tags = request.POST.get('tags')
-        feedurl = request.POST.get('feedurl')
+        feedurl = link + '/feed'
         
-        # 如果当前用户博客为空，且图片不为空，则添加博客上传图片
-        pic = images.resize(pic.read(), 190, 130)
-        models.Blog.admin_add(mail, name, category, link, pic, tags, feedurl)
-            
+        models.Blog.admin_add(mail, name, link, tags, feedurl)
+        
         return HttpResponseRedirect(reverse('welcome.views.admin_add'))
+    
+    
+    

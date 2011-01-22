@@ -1,5 +1,12 @@
 {% load filters %}
-<script type="text/javascript" src="/static/js/chat.js"></script>
+<html>
+<head>
+<script src='/static/js/channel.js'></script>
+</head>
+<body>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
 
 <div id="group" >
 
@@ -23,9 +30,7 @@
               <textarea id="chat_input" onkeydown="if(event.ctrlKey&&event.keyCode==13){document.getElementById('chat_input_button').click();return false};"></textarea>
             </td>
             <td style="padding-left: 10px;">
-              <button id="chat_input_button" style="height: 33px; width: 70px;">
-                send
-              </button>
+              <input type="button" id="chat_input_button" value="发送" />
             </td>
           </tr>
         </tbody>
@@ -34,16 +39,12 @@
   </div>
 
   <div id="group_members" >
+  <!-- 
     <div id="group_member_table_container">
       <table id="group_members_table" cellpadding="0" cellspacing="0">
         <tbody>
         {% for user in users %}
           <tr title="{{ user.user }}">
-            <td class="group_member_img_cell group_members_dark">
-              <div class="group_member_img">
-                <img title="receiving messages by jabber/google talk" src="/static/images/gtalk_icon_small.gif">
-              </div>
-            </td>
             <td class="group_members_dark">
               <div class="group_member ">
                 {{ user.user }}|{{ user.blog.name }}
@@ -54,27 +55,20 @@
         </tbody>
       </table>
     </div>
+     -->
   </div>
-
-</div>
-
 <script type="text/javascript">
 onOpened = function(){
-	//alert('onOpened.')
 	$.ajax({
 		type: "POST",
 		url: "/talk/online",
 		success: function(msg){
-			//alert('online success!');
 		}
 	});
 }
 
 onMessage = function(m){
-	//alert('onMessage.');
-	message = JSON.parse(m.data);
 	$("#chat_transcript").load("/talk/history");
-	//alert('load complete!');
 }
 
 onError = function(error){
@@ -82,21 +76,107 @@ onError = function(error){
 }
 
 onClose = function(){
-	alert('onClose.');
+	alert('closed!');
 	$.ajax({
 		type: "POST",
 		url: "/talk/offline",
 		success: function(msg){
-			alert('offline success!');
 		}
 	});
 }
+
+function isNull(str){
+	if (str == "") return true;
+	var regu = "^[ ]+$";
+	var re = new RegExp(regu);
+	return re.test(str);
+}
+
 $(document).ready(function(){
 	channel = new goog.appengine.Channel('{{ token }}');
 	socket = channel.open();
 	socket.onopen = onOpened;
 	socket.onmessage = onMessage;
 	socket.onerror = onError;
-	//socket.onclose = onClose;
+	socket.onclose = onClose;
+	
+	layout();
+	$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
+
+	$('#chat_input_button').click(function() {
+		chat_input = $('#chat_input');
+		if(chat_input){
+			content = chat_input.val();
+			if (isNull(content)){
+				alert('请输入内容！');
+			}
+			else{
+				$.ajax({
+					type : "POST",
+					url : "/talk/send",
+					data : "content=" + content,
+					success : function(msg) {
+						$("#chat_transcript").load("/talk/history");
+						$('#chat_input').val('');
+						$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
+					}
+				});
+			}
+		}
+	});
+	
 });
+
+$(window).resize(function() {
+	layout();
+});
+
+function layout() {
+	if ($('#group') != null) {
+		resizeContentHeight('#group', ['#group_chat_container',
+				'#group_members']);
+	}
+}
+
+function resizeContentHeight(element_name, dependents, offsets) {
+	if (dependents == undefined) {
+		dependents = [];
+	}
+	// 距离底部偏移
+	var offset = 252;
+	var parent = $(element_name);
+	var height = window.innerHeight
+			|| (window.document.documentElement.clientHeight || window.document.body.clientHeight);
+	var desired_height = offset;
+	if (height > offset) {
+		desired_height = (height - offset);
+	}
+	var parent_offset = 0;
+	if (dependents.length > 0) {
+		var transcript = $('#chat_transcript');
+		var container_height = $('#group_chat_container').height();
+		if (container_height != (desired_height - parent_offset)) {
+			container_height = (desired_height - parent_offset);
+		}
+		var input_height = $('#chat_input_container').height();
+		var transcript_offset = 12;
+		new_height = (container_height - input_height) - transcript_offset;
+		if (transcript.height() != new_height && new_height > 0) {
+			transcript.height((container_height - input_height)
+					- transcript_offset + 'px');
+		}
+	}
+	$.each(dependents, function(n, item) {
+		child_element = $(item);
+		if (child_element.height() != (desired_height - parent_offset)) {
+			child_element.height((desired_height - parent_offset) + 'px');
+		}
+	});
+	if (parent.height() != (height - offset)) {
+		parent.height((desired_height) + 'px');
+	}
+}
 </script>
+</div>
+</body>
+</html>
