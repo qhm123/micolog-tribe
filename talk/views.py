@@ -4,8 +4,6 @@ import logging
 
 from django import http
 from django.template import Context, loader
-from django.core.urlresolvers import reverse
-from django.utils import simplejson
 
 from google.appengine.api import xmpp, channel, memcache
 from google.appengine.ext import db
@@ -85,11 +83,7 @@ def send(request):
                 grouptalk.send(msg)
             
             # 发送到web客户端
-            channel_ids = memcache.get('channel_ids')
-            if channel_ids:
-                json = simplejson.dumps({'msg': msg,})
-                for channel_id in channel_ids:
-                    channel.send_message(channel_id, json)
+            grouptalk.channel_send(msg)
         except:
             logging.error('error web send msg!')
                 
@@ -112,11 +106,7 @@ def recieve(request):
 #        message.reply(sender_mail)
         
         # 发送到web客户端
-        channel_ids = memcache.get('channel_ids')
-        if channel_ids:
-            json = simplejson.dumps({'msg': msg,})
-            for channel_id in channel_ids:
-                channel.send_message(channel_id, json)
+        grouptalk.channel_send(msg)
     except:
         logging.error('error send msg!')
         
@@ -157,6 +147,24 @@ def history(request):
     })
     
     return http.HttpResponse(template.render(context))
+
+@requires_admin
+def invite_all_users(request):
+    """邀请所有用户。"""
+    
+    blogs = Blog.all().fetch(limit=1000)
+    for blog in blogs:
+        grouptalk.invite(blog.user.email())
+        
+    return http.HttpResponse()
+
+@requires_admin
+def invite_user_test(request):
+    """邀请测试用户。"""
+    
+    grouptalk.invite('qhm123@gmail.com')
+    grouptalk.invite('qhmtest@gmail.com')
+    return http.HttpResponse()
 
 @requires_admin
 def init_talkstatus(request):

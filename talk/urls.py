@@ -8,6 +8,8 @@ urlpatterns = patterns('talk.views',
    (r'^online$', 'online'),
    (r'^offline$', 'offline'),
    (r'^history$', 'history'),
+   (r'^invite_user_test$', 'invite_user_test'),
+   (r'^invite_all_users$', 'invite_all_users'),
    (r'^init_talkstatus$', 'init_talkstatus'),
    (r'^init_talkstatus_test$', 'init_talkstatus_test'),
 )
