@@ -25,6 +25,7 @@ urlpatterns += patterns('',
     (r'^rssa/', include('rssa.urls')),
     (r'^talk/', include('talk.urls')),
     (r'^_ah/xmpp/message/chat/', 'talk.views.recieve'),
+    (r'^tools/', include('tools.urls')),
 )
 
 handler404 = 'common.views.common_404'
