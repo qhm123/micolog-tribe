@@ -3,15 +3,13 @@
 import logging
 from datetime import datetime, timedelta
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django import http
 from django.template import Context, loader
-from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.conf import settings
 
-from google.appengine.api import users, memcache, taskqueue, mail
-from google.appengine.ext import db
+from google.appengine.api import memcache, taskqueue, mail
 
 from common import models
 from feedfetch import FeedParser
