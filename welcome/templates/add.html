@@ -14,15 +14,10 @@
 {% block content %}
 	<form action="{% if showmail %}admin_add{% else %}add{% endif %}" method="post" enctype="multipart/form-data">
 		<table id="addblogtable">
-			<tr>
-				<td>博客名称<span style="color:red">*</span>：</td>
-				<td><input id="name" name="name" type="text" value="{{ blog.name }}" /></td>
-				<td>示例：鸣</td>
-			</tr>
 			{% if showmail %}
 			<tr>
 				<td>邮箱<span style="color:red">*</span>：</td>
-				<td><input id="mail" name="mail" type="text" value="" /></td>
+				<td><input id="mail" name="mail" type="text" value="admin.add@gmail.com" /></td>
 				<td>示例：</td>
 			</tr>
 			{% endif %}
@@ -38,11 +33,6 @@
 				<td>示例：http://qhm123.appspot.com/feed</td>
 			</tr>
 -->
-			<tr>
-				<td>标签：</td>
-				<td><input id="tags" name="tags" type="text" value="{{ blog.tags_string }}" /></td>
-				<td>示例：学习,生活,Python,互联网</td>
-			</tr>
 <!--
 			<tr>
 				<td>博客缩略图<span style="color:red">*</span>：</td>

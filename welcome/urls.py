@@ -7,4 +7,6 @@ urlpatterns = patterns('welcome.views',
     (r'^about$', 'about'),
     (r'^add$', 'add'),
     (r'^admin_add$', 'admin_add'),
+    (r'^refresh_tags$', 'refresh_tags'),
+    (r'^refresh_tags_worker$', 'refresh_tags_worker'),
 )
