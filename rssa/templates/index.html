@@ -20,10 +20,12 @@
 {% endfor %}
 
 <h2 id="contentdesc">最新<span>文章</span> »
-	<a target="_blank" href="/rssa/feed">[订阅|RSS]</a>
-	<!-- Feedsky FEED 订阅统计发布代码开始 -->
-	<a href="http://feed.feedsky.com/micolog-tribe" title="Micolog部落" target="_blank"><img src="http://www.feedsky.com/feed/micolog-tribe/sc/orange.gif" style="border:0" alt="" /></a>
-	<!-- Feedsky FEED 订阅统计发布代码结束 -->
+<!-- Feedsky FEED发布代码开始 -->
+<!-- FEED自动发现标记开始 -->
+<link title="RSS 2.0" type="application/rss+xml" href="http://feed.feedsky.com/micolog-tribe" rel="alternate" />
+<!-- FEED自动发现标记结束 -->
+<a href="http://feed.feedsky.com/micolog-tribe" target="_blank">订阅</a><br />
+<!-- Feedsky FEED发布代码结束 -->
 </h2>
 {% for entry in entries %}
 <div class="post" id="post-{{ entry.key.id }}">
