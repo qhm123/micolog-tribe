@@ -8,6 +8,7 @@ from google.appengine.ext import db
 from taggable import Taggable
 from rssa.feedfetch import FeedParser
 from common.timezone import UTC0, to_utc8
+import logging
 
 class Tribe(BaseModel):
     """部落全局设置模型"""
@@ -33,6 +34,7 @@ class Blog(Taggable, BaseModel):
     rate_count = db.IntegerProperty(default=0)
     rate_ips = db.StringListProperty(default=None)
     feedurl = db.StringProperty()
+    tagstring = db.StringProperty()
     
     def __init__(self, parent=None, key_name=None, app=None, **entity_values):
         """初始化，主要用于初始化Taggable。"""
@@ -48,6 +50,7 @@ class Blog(Taggable, BaseModel):
         blog.feedurl = feedurl
         blog.put()
         
+        blog.tagstring = tags
         blog.tags = tags;
         blog.put()
         
@@ -56,7 +59,7 @@ class Blog(Taggable, BaseModel):
             feedparser = FeedParser(feedurl)
             Feed.add(user, feedurl, feedparser.title, feedparser.subtitle, feedparser.link, blog)
         except:
-            pass
+            logging.error('feedparse error url%s.' % (feedurl,))
                     
     @classmethod
     def admin_add(cls, mail, name, link, tags='', feedurl=''):
@@ -69,6 +72,7 @@ class Blog(Taggable, BaseModel):
         
         self.name = name
         self.link = link
+        self.tagstring = tags
         self.tags = tags
         self.put()
         
@@ -83,7 +87,7 @@ class Blog(Taggable, BaseModel):
                     self.feedurl = feedurl
                     self.put()
                 except:
-                    pass
+                    logging.error('feedparse error url%s.' % (feedurl,))
             else:
                 try:
                     feedparser = FeedParser(feedurl)
@@ -91,7 +95,7 @@ class Blog(Taggable, BaseModel):
                     self.feedurl = feedurl
                     self.put()
                 except:
-                    pass
+                    logging.error('feedparse error url%s.' % (feedurl,))
         
     def update_pic(self, pic):
         """更新博客图片信息。"""
