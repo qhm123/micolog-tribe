@@ -16,7 +16,7 @@ from common.helper import requires_admin
 def index(request):
     """博客秀首页。"""
     
-    tags = Tag.all().fetch(limit=1000)
+    tags = Tag.all().filter('tagged_count >', 1).fetch(limit=1000)
     
     template = loader.get_template('blogshow/templates/index.html')
     context = Context({
