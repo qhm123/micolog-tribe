@@ -79,7 +79,7 @@ def send(request):
                     msg = '%s|%s: %s' % (user, 'blog', msg)
                 grouptalk.send(msg, user.email())
             else:
-                msg = 'web:' + msg
+                msg = 'web: ' + msg
                 grouptalk.send(msg)
             
             # 发送到web客户端
@@ -139,11 +139,11 @@ def history(request):
     
     # TODO: 性能优化
     messages = talk_models.TalkLog.all().order('-time').fetch(limit=10)
-    messages = sorted(messages, key=lambda e:(e.time,), reverse=False)
+    msgs = sorted(messages, key=lambda e:(e.time,), reverse=False)
     
     template = loader.get_template('talk/templates/history.html')
     context = RequestContext(request, {
-        'messages': messages,
+        'msgs': msgs,
     })
     
     return http.HttpResponse(template.render(context))

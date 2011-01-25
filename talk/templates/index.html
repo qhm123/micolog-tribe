@@ -3,6 +3,7 @@
 {% load filters %}
 
 {% block head %}
+<link type="text/css" rel="stylesheet" href="/static/css/chat.css" />
 <script src='/static/js/channel.js'></script>
 <title>成员聊天 - Micolog部落</title>
 {% endblock %}
@@ -38,5 +39,8 @@
 {% endblock %}
 
 {% block footer %}
+<script type="text/javascript">
+talk_token = '{{ token }}'
+</script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
 {% endblock %}

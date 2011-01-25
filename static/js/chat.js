@@ -33,10 +33,10 @@ function isNull(str){
 }
 
 $(document).ready(function(){
-	//layout();
+	layout();
 	$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
 	
-	channel = new goog.appengine.Channel('{{ token }}');
+	channel = new goog.appengine.Channel(talk_token);
 	socket = channel.open();
 	socket.onopen = onOpened;
 	socket.onmessage = onMessage;
@@ -68,7 +68,7 @@ $(document).ready(function(){
 });
 
 $(window).resize(function() {
-	//layout();
+	layout();
 });
 
 function layout() {

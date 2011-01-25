@@ -1,5 +1,5 @@
 {% load filters %}
-{% for message in messages %}
+{% for message in msgs %}
   <div class="chat_transcript_msg">
     <span id="msg_content_35">
       <pre>({{ message.time|timezone:8|date:"H:i:s" }}){{ message.msg }}</pre>
