@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*
 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import Context, loader
-from django.core.urlresolvers import reverse
+from django.http import HttpResponse
+from django.template import loader, RequestContext
 from django.utils import simplejson
 from django.conf import settings
 
-from google.appengine.api import users, images, memcache, mail
+from google.appengine.api import memcache, mail
 
 from common import models
 from common.taggable import Tag
 from common.helper import requires_admin
-
 
 def index(request):
     """博客秀首页。"""
@@ -19,7 +17,7 @@ def index(request):
     tags = Tag.all().filter('tagged_count >', 1).fetch(limit=1000)
     
     template = loader.get_template('blogshow/templates/index.html')
-    context = Context({
+    context = RequestContext(request, {
         "tags": tags,
     })
     
@@ -36,7 +34,7 @@ def bloglist(request):
         blogs = models.Blog.all().order('-rate').order('-rate_count').order('add_date').fetch(limit=1000)
     
     template = loader.get_template('bloglist.html')
-    context = Context({
+    context = RequestContext(request, {
         'blogs': blogs,
     })
     

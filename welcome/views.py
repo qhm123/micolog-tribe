@@ -4,21 +4,19 @@ import urllib2
 import logging
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import Context, loader
+from django.template import loader, RequestContext
 from django.core.urlresolvers import reverse
 
 from google.appengine.api import users, memcache, taskqueue
 
 from common.BeautifulSoup import BeautifulSoup
-
 from common import models
 from common.helper import requires_admin
 
-def index(request): 
+def index(request):
     
     template = loader.get_template('welcome/templates/index.html')
-    context = Context({
-    })
+    context = RequestContext(request, {})
     
     return HttpResponse(template.render(context))
 
@@ -26,7 +24,7 @@ def about(request):
     manual = models.Tribe.getManual()
     
     template = loader.get_template('welcome/templates/about.html')
-    context = Context({
+    context = RequestContext(request, {
         'manual': manual,
     })
     
@@ -43,7 +41,7 @@ def add(request):
         blog = models.Blog.all().filter('user =', user).get()
         
         template = loader.get_template('welcome/templates/add.html')
-        context = Context({
+        context = RequestContext(request, {
             "blog": blog,
             'showmail': False,
         })
@@ -79,6 +77,43 @@ def add(request):
                 blog.update(name, link, tags, feedurl)
             
         return HttpResponseRedirect(reverse('welcome.views.index'))
+
+@requires_admin
+def admin_add(request):
+    """管理员专用：管理员添加博客。"""
+    
+    if request.method == 'GET':
+        template = loader.get_template('welcome/templates/add.html')
+        context = RequestContext(request, {
+            'showmail': True,
+        })
+        
+        return HttpResponse(template.render(context))
+    else:
+        mail = request.POST.get('mail', '')
+        link = request.POST.get('link', '')
+        if not link.startswith('http://'):
+            link = 'http://' + link
+        feedurl = link + '/feed'
+        
+        try:
+            data = urllib2.urlopen(link).read()
+            soup = BeautifulSoup(data)
+            name = soup.html.head.title.text
+            
+            meta = soup.html.head.find('meta', {'name': 'Keywords'})
+            if meta:
+                tags = meta['content']
+            else:
+                tags = u''
+        except:
+            name = 'unkonw'
+            tags = u''
+            logging.error('parse html error')
+        
+        models.Blog.admin_add(mail, name, link, tags, feedurl)
+        
+        return HttpResponseRedirect(reverse('welcome.views.admin_add'))
     
 def refresh_tags(request):
     
@@ -128,43 +163,3 @@ def refresh_tags_worker(request):
     blog.update(name, link, tags, feedurl)
     
     return HttpResponse()
-
-@requires_admin
-def admin_add(request):
-    """管理员专用：管理员添加博客。"""
-    
-    if request.method == 'GET':
-        template = loader.get_template('welcome/templates/add.html')
-        context = Context({
-            'showmail': True,
-        })
-        
-        return HttpResponse(template.render(context))
-    else:
-        mail = request.POST.get('mail', '')
-        link = request.POST.get('link', '')
-        if not link.startswith('http://'):
-            link = 'http://' + link
-        feedurl = link + '/feed'
-        
-        try:
-            data = urllib2.urlopen(link).read()
-            soup = BeautifulSoup(data)
-            name = soup.html.head.title.text
-            
-            meta = soup.html.head.find('meta', {'name': 'Keywords'})
-            if meta:
-                tags = meta['content']
-            else:
-                tags = u''
-        except:
-            name = 'unkonw'
-            tags = u''
-            logging.error('parse html error')
-        
-        models.Blog.admin_add(mail, name, link, tags, feedurl)
-        
-        return HttpResponseRedirect(reverse('welcome.views.admin_add'))
-    
-
-    

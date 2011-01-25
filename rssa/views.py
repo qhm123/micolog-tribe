@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 from django.http import HttpResponse
 from django import http
-from django.template import Context, loader
+from django.template import RequestContext, loader
 from django.utils import simplejson
 from django.conf import settings
 
@@ -34,7 +34,7 @@ def index(request):
         memcache.add('entries', entries)
     
     template = loader.get_template('rssa/templates/index.html')
-    context = Context({
+    context = RequestContext(request, {
         "entries": entries,
         "hotentries": top3,
     })
@@ -76,7 +76,7 @@ def feed(request):
     entries = models.Entry.all().order('-date').fetch(10)
         
     template = loader.get_template('rssa/templates/rss.xml')
-    context = Context({
+    context = RequestContext(request, {
         "entries": entries,
     })
     

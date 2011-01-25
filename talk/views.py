@@ -3,7 +3,7 @@
 import logging
 
 from django import http
-from django.template import Context, loader
+from django.template import RequestContext, loader
 
 from google.appengine.api import xmpp, channel, memcache
 from google.appengine.ext import db
@@ -54,7 +54,7 @@ def index(request):
     token = channel.create_channel(email)
     
     template = loader.get_template('talk/templates/index.html')
-    context = Context({
+    context = RequestContext(request, {
         'messages': messages,
         'users': users,
         'token': token,
@@ -142,7 +142,7 @@ def history(request):
     messages = sorted(messages, key=lambda e:(e.time,), reverse=False)
     
     template = loader.get_template('talk/templates/history.html')
-    context = Context({
+    context = RequestContext(request, {
         'messages': messages,
     })
     

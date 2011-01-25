@@ -52,7 +52,7 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -86,18 +86,26 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.load_template_source',
 )
 
+#AUTHENTICATION_BACKENDS = (
+##    'appengine_django.auth.backends.ModelBackend',
+#)
+#
+#AUTH_USER_MODULE = (
+#    'appengine_django.auth.models',
+#)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'google.appengine.ext.appstats.recording.AppStatsDjangoMiddleware',
-#    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
 #    'django.middleware.doc.XViewMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-#   'django.core.context_processors.auth',
+    'django.core.context_processors.auth',
     'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
+#    'django.core.context_processors.i18n',
 #    'django.core.context_processors.media',  # 0.97 only.
 #    'django.core.context_processors.request',
 )
@@ -118,7 +126,7 @@ INSTALLED_APPS = (
      'rssa',
      'talk',
      'tools',
-#    'django.contrib.auth',
+     'django.contrib.auth',
 #    'django.contrib.contenttypes',
 #    'django.contrib.sessions',
 #    'django.contrib.sites',
