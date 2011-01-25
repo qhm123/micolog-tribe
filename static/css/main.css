@@ -80,7 +80,6 @@ hr {
 }
 
 pre {
-	overflow: auto;
 	background: url(/static/images/blacktrans.png);
 	font-size: 1.2em;
 	white-space: pre-wrap; /* css3 */

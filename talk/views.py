@@ -32,7 +32,7 @@ def index(request):
     """主页"""
     
     messages = talk_models.TalkLog.all().order('-time').fetch(limit=10)
-    messages = sorted(messages, key=lambda e:(e.time,), reverse=False)
+    msgs = sorted(messages, key=lambda e:(e.time,), reverse=False)
     users = talk_models.TalkStatus.all()
     
     # 创建channel，并将channelID放入memcache。 
@@ -55,7 +55,7 @@ def index(request):
     
     template = loader.get_template('talk/templates/index.html')
     context = RequestContext(request, {
-        'messages': messages,
+        'msgs': msgs,
         'users': users,
         'token': token,
     })
@@ -74,9 +74,9 @@ def send(request):
             if user:
                 blog = Blog.all().filter('user =', user).get()
                 if blog:
-                    msg = '%s|%s:%s' % (user, blog.name, msg)
+                    msg = '%s|%s: %s' % (user, blog.name, msg)
                 else:
-                    msg = '%s|%s:%s' % (user, 'blog', msg)
+                    msg = '%s|%s: %s' % (user, 'blog', msg)
                 grouptalk.send(msg, user.email())
             else:
                 msg = 'web:' + msg
@@ -99,9 +99,9 @@ def recieve(request):
         blog = Blog.all().filter('user =', db.users.User(sender_mail)).get()
         sender_user = sender_mail.split('@')[0]
         if blog:
-            msg = '%s|%s:%s' % (sender_user, blog.name, message.body)
+            msg = '%s|%s: %s' % (sender_user, blog.name, message.body)
         else:
-            msg = '%s|%s:%s' % (sender_user, 'blog', message.body)
+            msg = '%s|%s: %s' % (sender_user, 'blog', message.body)
         grouptalk.send(msg, sender_mail)
 #        message.reply(sender_mail)
         

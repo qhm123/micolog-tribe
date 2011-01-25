@@ -4,15 +4,14 @@
 
 {% block head %}
 <script src='/static/js/channel.js'></script>
+<title>成员聊天 - Micolog部落</title>
 {% endblock %}
 
 {% block content %}
-<div id="group" >
-
+<div id="group">
   <div id="group_chat_container" class="group_chat_container_default" >
-    
     <div id="chat_transcript" >
-	{% for message in messages %}
+	{% for message in msgs %}
 	  <div class="chat_transcript_msg">
 	    <span id="msg_content_35">
 	      <pre>({{ message.time|timezone:8|date:"H:i:s" }}){{ message.msg }}</pre>
@@ -20,7 +19,6 @@
 	  </div>
 	{% endfor %}
     </div>
-    
     <div id="chat_input_container">
       <table id="chat_input_table">
         <tbody>
@@ -36,145 +34,9 @@
       </table>
     </div>
   </div>
-
-  <div id="group_members" >
-  <!-- 
-    <div id="group_member_table_container">
-      <table id="group_members_table" cellpadding="0" cellspacing="0">
-        <tbody>
-        {% for user in users %}
-          <tr title="{{ user.user }}">
-            <td class="group_members_dark">
-              <div class="group_member ">
-                {{ user.user }}|{{ user.blog.name }}
-              </div>
-            </td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
-    </div>
-     -->
-  </div>
-<script type="text/javascript">
-onOpened = function(){
-	$.ajax({
-		type: "POST",
-		url: "/talk/online",
-		success: function(msg){
-		}
-	});
-}
-
-onMessage = function(m){
-	$("#chat_transcript").load("/talk/history");
-}
-
-onError = function(error){
-	alert('Error. description:' + error.description + 'code:' + error.code);
-}
-
-onClose = function(){
-	alert('closed!');
-	$.ajax({
-		type: "POST",
-		url: "/talk/offline",
-		success: function(msg){
-		}
-	});
-}
-
-function isNull(str){
-	if (str == "") return true;
-	var regu = "^[ ]+$";
-	var re = new RegExp(regu);
-	return re.test(str);
-}
-
-$(document).ready(function(){
-	channel = new goog.appengine.Channel('{{ token }}');
-	socket = channel.open();
-	socket.onopen = onOpened;
-	socket.onmessage = onMessage;
-	socket.onerror = onError;
-	socket.onclose = onClose;
-	
-	layout();
-	$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
-
-	$('#chat_input_button').click(function() {
-		chat_input = $('#chat_input');
-		if(chat_input){
-			content = chat_input.val();
-			if (isNull(content)){
-				alert('请输入内容！');
-			}
-			else{
-				$.ajax({
-					type : "POST",
-					url : "/talk/send",
-					data : "content=" + content,
-					success : function(msg) {
-						$("#chat_transcript").load("/talk/history");
-						$('#chat_input').val('');
-						$("#chat_transcript").scrollTop($("#chat_transcript")[0].scrollHeight);
-					}
-				});
-			}
-		}
-	});
-	
-});
-
-$(window).resize(function() {
-	layout();
-});
-
-function layout() {
-	if ($('#group') != null) {
-		resizeContentHeight('#group', ['#group_chat_container',
-				'#group_members']);
-	}
-}
-
-function resizeContentHeight(element_name, dependents, offsets) {
-	if (dependents == undefined) {
-		dependents = [];
-	}
-	// 距离底部偏移
-	var offset = 252;
-	var parent = $(element_name);
-	var height = window.innerHeight
-			|| (window.document.documentElement.clientHeight || window.document.body.clientHeight);
-	var desired_height = offset;
-	if (height > offset) {
-		desired_height = (height - offset);
-	}
-	var parent_offset = 0;
-	if (dependents.length > 0) {
-		var transcript = $('#chat_transcript');
-		var container_height = $('#group_chat_container').height();
-		if (container_height != (desired_height - parent_offset)) {
-			container_height = (desired_height - parent_offset);
-		}
-		var input_height = $('#chat_input_container').height();
-		var transcript_offset = 12;
-		new_height = (container_height - input_height) - transcript_offset;
-		if (transcript.height() != new_height && new_height > 0) {
-			transcript.height((container_height - input_height)
-					- transcript_offset + 'px');
-		}
-	}
-	$.each(dependents, function(n, item) {
-		child_element = $(item);
-		if (child_element.height() != (desired_height - parent_offset)) {
-			child_element.height((desired_height - parent_offset) + 'px');
-		}
-	});
-	if (parent.height() != (height - offset)) {
-		parent.height((desired_height) + 'px');
-	}
-}
-</script>
 </div>
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript" src="/static/js/chat.js"></script>
 {% endblock %}

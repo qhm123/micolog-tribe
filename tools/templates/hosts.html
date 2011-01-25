@@ -1,6 +1,14 @@
+{% extends "common/templates/base.html" %}
+
+{% block head %}
+<title>部落工具 - Micolog部落</title>
+{% endblock %}
+
+{% block content %}
 <p>
 # Micolog部落Hosts<br/>
 {% for link in links %}
 {{ ip }} {{ link }}<br/>
 {% endfor %}
 </p>
+{% endblock %}
