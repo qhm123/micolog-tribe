@@ -11,12 +11,22 @@ from google.appengine.api import users, memcache, taskqueue
 
 from common.BeautifulSoup import BeautifulSoup
 from common import models
+from talk.models import TalkLog
 from common.helper import requires_admin
 
 def index(request):
     
+    blog = models.Blog.all().order('-add_date').get()
+    entries = models.Entry.all().order('-date').fetch(limit=5)
+    talks = TalkLog.all().order('-time').fetch(limit=5)
+    msgs = (':'.join(talk.msg.split(':')[1:]) for talk in talks)
+    
     template = loader.get_template('welcome/templates/index.html')
-    context = RequestContext(request, {})
+    context = RequestContext(request, {
+        'blog': blog,
+        'entries': entries,
+        'msgs': msgs,
+    })
     
     return HttpResponse(template.render(context))
 

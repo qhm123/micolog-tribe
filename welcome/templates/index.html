@@ -5,5 +5,22 @@
 {% endblock %}
 
 {% block content %}
-最新动态：
+<div class="postcontent">
+<h1>最新动态：</h1>
+新人<a target="_blank" href="{{ blog.link }}">“{{ blog.user }}|{{ blog.name }}”</a>入住，大家前去<a target="_blank" href="{{ blog.link }}">围观</a>！
+
+<h1>大家在写：</h1>
+<ul>
+{% for entry in entries %}
+	<li><a href="{{ entry.link }}">{{ entry.title }}</a></li>
+{% endfor %}
+</ul>
+
+<h1>大家在说：</h1>
+<ul>
+{% for msg in msgs %}
+	<li>{{ msg }}</li>
+{% endfor %}
+</ul>
+</div>
 {% endblock %}
