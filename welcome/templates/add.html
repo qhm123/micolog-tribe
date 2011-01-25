@@ -1,14 +1,7 @@
 {% extends "common/templates/base.html" %}
 
 {% block head %}
-<title>博客秀 | Micolog部落</title>
-{% endblock %}
-
-{% block pagetitle %}
-<a href="/blogshow">博客秀</a>
-{% endblock %}
-
-{% block headerbanner %}
+<title>部落入住 | Micolog部落</title>
 {% endblock %}
 
 {% block content %}
@@ -26,25 +19,6 @@
 				<td><input id="link" name="link" type="text" value="{{ blog.link }}" /></td>
 				<td>示例：http://qhm123.appspot.com</td>
 			</tr>
-<!--
-			<tr>
-				<td>Feed地址<span style="color:red">*</span>：</td>
-				<td><input id="link" name="feedurl" type="text" value="{{ blog.feedurl }}" /></td>
-				<td>示例：http://qhm123.appspot.com/feed</td>
-			</tr>
--->
-<!--
-			<tr>
-				<td>博客缩略图<span style="color:red">*</span>：</td>
-				<td><input id="file" name="file" type="file" /></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>当前缩略图：</td>
-				<td><img id="curimg" src="/blogshow/img/{{ blog.key.id }}" alt="当前截图" width="190px" height="130px" /></td>
-				<td><div class="text-center">示例：</div><img src="/static/images/1.png" alt="示例截图" width="190px" height="130px" /></td>
-			</tr>
--->
 			<tr>
 				<td align="center" colspan="3"><input id="submit" name="submit" type="submit" value="提交" /></td>
 			</tr>

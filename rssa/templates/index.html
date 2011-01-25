@@ -1,3 +1,12 @@
+{% extends "common/templates/base.html" %}
+
+{% block head %}
+<!-- FEED自动发现标记开始 -->
+<link title="RSS 2.0" type="application/rss+xml" href="http://feed.feedsky.com/micolog-tribe" rel="alternate" />
+<!-- FEED自动发现标记结束 -->
+{% endblock %}
+
+{% block content %}
 <h2 id="contentdesc">每周<span>推荐</span> »</h2>
 {% for entry in hotentries %}
 <div class="post" id="hotpost-{{ entry.key.id }}">
@@ -21,9 +30,6 @@
 
 <h2 id="contentdesc">最新<span>文章</span> »
 <!-- Feedsky FEED发布代码开始 -->
-<!-- FEED自动发现标记开始 -->
-<link title="RSS 2.0" type="application/rss+xml" href="http://feed.feedsky.com/micolog-tribe" rel="alternate" />
-<!-- FEED自动发现标记结束 -->
 <a href="http://feed.feedsky.com/micolog-tribe" target="_blank">订阅</a><br />
 <!-- Feedsky FEED发布代码结束 -->
 </h2>
@@ -48,3 +54,4 @@
 {% endfor %}
 
 <script type="text/javascript" src="/static/js/rssa.js"></script>
+{% endblock %}

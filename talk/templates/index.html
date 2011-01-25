@@ -1,13 +1,12 @@
+{% extends "common/templates/base.html" %}
+
 {% load filters %}
-<html>
-<head>
+
+{% block head %}
 <script src='/static/js/channel.js'></script>
-</head>
-<body>
+{% endblock %}
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-
-
+{% block content %}
 <div id="group" >
 
   <div id="group_chat_container" class="group_chat_container_default" >
@@ -178,5 +177,4 @@ function resizeContentHeight(element_name, dependents, offsets) {
 }
 </script>
 </div>
-</body>
-</html>
+{% endblock %}
