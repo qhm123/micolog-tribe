@@ -53,7 +53,7 @@ def rpc_handler(request):
 #    response['Content-length'] = str(len(response.content))
     return response
 
-server = SimpleXMLRPCDispatcher()
+server = SimpleXMLRPCDispatcher(allow_none=False, encoding=None)
 server.register_introspection_functions()
         
 def ping(name, site_url, entry_url, rss_url):
