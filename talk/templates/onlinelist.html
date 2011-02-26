@@ -1,0 +1,3 @@
+{% for item in online_list %}
+	{{ item.talkstauts.user }} | {{ item.talkstauts.blog.name }} | {% if item.online %}<span style="color:red;">{{ item.online }}</span>{% else %}{{ item.online }}{% endif %}<br />
+{% endfor %}

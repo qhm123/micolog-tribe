@@ -111,6 +111,15 @@ def recieve(request):
         logging.error('error send msg!')
         
     return http.HttpResponse()
+
+def online_list(request):
+    
+    template = loader.get_template('talk/templates/onlinelist.html')
+    context = RequestContext(request, {
+        'online_list': grouptalk.online_list(),
+    })
+    
+    return http.HttpResponse(template.render(context))
         
 def online(request):
     

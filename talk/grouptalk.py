@@ -36,5 +36,11 @@ def recieve():
 def invite(jid):
     xmpp.send_invite(jid)
     
+def online_list():
+    talkstautses = talk_models.TalkStatus.all().fetch(limit=1000)
+    
+    return [{"talkstauts": talkstauts, 
+             "online": xmpp.get_presence(talkstauts.user.email())} for talkstauts in talkstautses]
+    
 if __name__ == '__main__':
     send()

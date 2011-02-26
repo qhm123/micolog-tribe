@@ -1,0 +1,7 @@
+.project
+.pydevproject
+/.settings/
+/.google_appengine/
+.settings
+.google_appengine
+*.pyc
