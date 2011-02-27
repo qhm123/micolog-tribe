@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*
 
-from xmlrpclib import datetime
-
 from appengine_django.models import BaseModel
 from google.appengine.ext import db
 
@@ -43,15 +41,16 @@ class Blog(Taggable, BaseModel):
         Taggable.__init__(self)
     
     @classmethod
-    def add(cls, user, name, link, tags='', feedurl=''):
+    def add(cls, user, name, pic, link, tags='', feedurl=''):
         """添加一个博客。"""
         
         blog = Blog(user=user, name=name, link=link)
         blog.feedurl = feedurl
         blog.put()
         
+        blog.pic = db.Blob(pic)
         blog.tagstring = tags
-        blog.tags = tags;
+        blog.tags = tags
         blog.put()
         
         # TODO: 检测feedurl是否可以解析，不可以解析弹出错误报告。
@@ -168,11 +167,7 @@ class Entry(BaseModel):
             entry.perid = perid
             entry.title = title
             entry.link = link
-            
-            #Tue, 09 Nov 2010 08:33:11 +0000
-            #entry.date = datetime.datetime.strptime(updated, '%a, %d %b %Y %H:%M:%S +0000')
-            # NOTE: Micolog默认feed是utc0， 所以这里对应转换成utc8， 考虑改进
-            entry.date = to_utc8(datetime.datetime(updated[0], updated[1], updated[2], updated[3], updated[4], updated[5], tzinfo=UTC0()))
+            entry.date = updated
             entry.description = description
             entry.content = content
             entry.feed = feed
