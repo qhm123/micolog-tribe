@@ -61,10 +61,10 @@ class Blog(Taggable, BaseModel):
             logging.error('feedparse error url%s.' % (feedurl,))
                     
     @classmethod
-    def admin_add(cls, mail, name, link, tags='', feedurl=''):
+    def admin_add(cls, mail, name, pic, link, tags='', feedurl=''):
         """管理员添加方法。"""
         
-        Blog.add(db.users.User(mail) ,name, link, tags, feedurl)
+        Blog.add(db.users.User(mail), name, pic, link, tags, feedurl)
         
     def update(self, name, link, tags, feedurl):
         """更新博客基本信息。"""

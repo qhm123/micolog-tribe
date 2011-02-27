@@ -128,6 +128,13 @@ def admin_add(request):
         feedurl = link + '/feed'
         
         try:
+            img = urllib2.urlopen("http://www.shrinktheweb.com/xino.php?stwembed=1&stwaccesskeyid=96a7847ecf72707&stwsize=lg&stwurl=%s" %link).read()
+        except Exception, e:
+            logging.error('fetch shrinktheweb failed, url is %s' % link)
+            logging.error(e)
+            img = ''
+        
+        try:
             data = urllib2.urlopen(link).read()
             soup = BeautifulSoup(data)
             name = soup.html.head.title.text
@@ -142,7 +149,7 @@ def admin_add(request):
             tags = u''
             logging.error('parse html error')
         
-        models.Blog.admin_add(mail, name, link, tags, feedurl)
+        models.Blog.admin_add(mail, name, img, link, tags, feedurl)
         
         return HttpResponseRedirect(reverse('welcome.views.admin_add'))
     
