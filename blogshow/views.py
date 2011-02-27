@@ -6,6 +6,7 @@ from django.utils import simplejson
 from django.conf import settings
 
 from google.appengine.api import memcache, mail
+from google.appengine.ext import db
 
 from common import models
 from common.taggable import Tag
@@ -55,13 +56,26 @@ def rate(request):
         return HttpResponse(status=400)
     rate = blog.add_rate(int(score), ip)
     if rate["success"]:
+        voter = u'有人'
+        user = db.users.get_current_user()
+        if user:
+            vote_blog = models.Blog.all().filter('user =', user).get()
+            if vote_blog:
+                voter = '%s|%s' % (user, vote_blog.name)
+                voter_link = vote_blog.link
+            else:
+                voter = '%s|%s' % (user, 'blog')
+                voter_link = "http://micolog-tribe.qhm123.com"
+        else:
+            voter_link = '#'
+        
         to = blog.user.email()
         subject = u'有人给您的博客投票了，快去看看。'
-        body = u'''您在 Micolog部落 上注册的博客：%s，有人给您的博客投票了，快去看看。
-您也可以给别人的博客投票，试试看。
-http://micolog-tribe.appspot.com
-''' % (blog.name,)
-        mail.send_mail(settings.MAILSENDER, to, subject, body)
+        html = u'''您在<a href="http://micolog-tribe.qhm123.com" target="_blank">Micolog部落</a>上注册的博客：<a href="%s" target="_blank">%s</a>。<br/>
+<a href="%s" target="_blank">%s</a>给您的博客投票了，快去<a href="http://micolog-tribe.qhm123.com/blogshow" target="_blank">看看</a>。<br/>
+您也可以给别人的博客投票，<a href="http://micolog-tribe.qhm123.com/blogshow" target="_blank">试试看</a>。<br/>
+''' % (blog.link, blog.name, voter_link, voter)
+        mail.send_mail(settings.MAILSENDER, to, subject, u"body", html=html)
         return HttpResponse(simplejson.dumps({"success": True, "rate": rate['rate'], "rate_count": rate['rate_count'], "blogid": blogid}), mimetype='application/json')
     else:
         return HttpResponse(simplejson.dumps({"success": False, "rate": rate['rate'], "rate_count": rate['rate_count'], "blogid": blogid}), mimetype='application/json')
@@ -87,6 +101,14 @@ def refresh_db_blog(request):
     for blog in models.Blog.all().fetch(limit=1000):
         blog.rate = 0.0
         blog.rate_count = 0
+        blog.rate_ips = []
+        blog.put()
+    return HttpResponse()
+
+@requires_admin
+def refresh_blog_rateips(request):
+    
+    for blog in models.Blog.all().fetch(limit=1000):
         blog.rate_ips = []
         blog.put()
     return HttpResponse()

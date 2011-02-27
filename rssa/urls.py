@@ -10,4 +10,5 @@ urlpatterns = patterns('rssa.views',
     (r'^fetch_feed$', 'fetch_feed'),
     (r'^fetch_feed_worker$', 'fetch_feed_worker'),
     (r'^refresh_db_feedentry', 'refresh_db_feedentry'),
+    (r'^refresh_entry_rateips$', 'refresh_entry_rateips'),
 )
