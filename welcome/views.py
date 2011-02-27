@@ -66,6 +66,13 @@ def add(request):
             feedurl = link + '/feed'
             
             try:
+                img = urllib2.urlopen("http://www.shrinktheweb.com/xino.php?stwembed=1&stwaccesskeyid=96a7847ecf72707&stwsize=lg&stwurl=%s" %link).read()
+            except Exception, e:
+                logging.error('fetch shrinktheweb failed, url is %s' % link)
+                logging.error(e)
+                img = ''
+                
+            try:
                 data = urllib2.urlopen(link).read()
                 soup = BeautifulSoup(data)
                 name = soup.html.head.title.text
@@ -82,11 +89,25 @@ def add(request):
             
             blog = models.Blog.all().filter('user =', user).get()
             if not blog:
-                models.Blog.add(user, name, link, tags, feedurl)
+                models.Blog.add(user, name, img, link, tags, feedurl)
             elif blog:
                 blog.update(name, link, tags, feedurl)
+                blog.update_pic(img)
             
         return HttpResponseRedirect(reverse('welcome.views.index'))
+
+@requires_admin
+def refresh_thumbnail(request):
+    blogs = models.Blog.all().fetch(limit=1000)
+    for blog in blogs:
+        link = blog.link
+        try:
+            img = urllib2.urlopen("http://www.shrinktheweb.com/xino.php?stwembed=1&stwaccesskeyid=96a7847ecf72707&stwsize=lg&stwurl=%s" %link).read()
+            blog.update_pic(img)
+        except:
+            logging.error("admin refresh all thumbnail failed in link %s" %link)
+            
+    return HttpResponse()
 
 @requires_admin
 def admin_add(request):
