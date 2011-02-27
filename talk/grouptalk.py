@@ -26,7 +26,7 @@ def send(msg, sender=None):
 def channel_send(msg):
     channel_ids = memcache.get('channel_ids')
     if channel_ids:
-        json = simplejson.dumps({'msg': msg,})
+        json = simplejson.dumps({'msg': msg, })
         for channel_id in channel_ids:
             channel.send_message(channel_id, json)
         
@@ -36,10 +36,30 @@ def recieve():
 def invite(jid):
     xmpp.send_invite(jid)
     
+def is_command(str):
+    if str.startswith('//'):
+        return True
+    return False
+    
+def exec_command(message, str):
+    cmd = str[2:]
+    if cmd == "help":
+        msg = """help:
+        //online - 显示所有在线成员。"""
+    elif cmd == "online":
+        msg = "\n".join(get_online_list())
+    else:
+        msg = "command is invalid. 你可以输入//help 获得帮助。"
+    message.reply(msg)
+    
+def get_online_list():
+    talkstautses = talk_models.TalkStatus.all().fetch(limit=1000)
+    return ["%s|%s" % (talkstate.user, talkstate.blog.name) for talkstate in talkstautses if xmpp.get_presence(talkstate.user.email())]
+    
 def online_list():
     talkstautses = talk_models.TalkStatus.all().fetch(limit=1000)
     
-    return [{"talkstauts": talkstauts, 
+    return [{"talkstauts": talkstauts,
              "online": xmpp.get_presence(talkstauts.user.email())} for talkstauts in talkstautses]
     
 if __name__ == '__main__':

@@ -1,0 +1,5 @@
+{% load filters %}
+
+{% for talk in talks %}
+{{ talk.time|timezone:8|date:"Y.m.d H:i:s" }} - {{ talk.msg }} - {{ talk.user }} <br />
+{% endfor %}

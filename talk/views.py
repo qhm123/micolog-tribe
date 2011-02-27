@@ -12,6 +12,7 @@ from common.helper import requires_admin
 import models as talk_models
 from common.models import Blog
 import grouptalk
+from talk.models import TalkLog
 
 def get_webemail(isnew=False):
     """获取webemail地址。"""
@@ -94,8 +95,12 @@ def recieve(request):
     
     try:
         message = xmpp.Message(request.POST)
-        sender_mail = message.sender.split('/')[0]
+
+        if grouptalk.is_command(message.body):
+            grouptalk.exec_command(message, message.body)
+            return http.HttpResponse()
         
+        sender_mail = message.sender.split('/')[0]
         blog = Blog.all().filter('user =', db.users.User(sender_mail)).get()
         sender_user = sender_mail.split('@')[0]
         if blog:
@@ -103,9 +108,6 @@ def recieve(request):
         else:
             msg = '%s|%s: %s' % (sender_user, 'blog', message.body)
         grouptalk.send(msg, sender_mail)
-#        message.reply(sender_mail)
-        
-        # 发送到web客户端
         grouptalk.channel_send(msg)
     except:
         logging.error('error send msg!')
@@ -117,6 +119,17 @@ def online_list(request):
     template = loader.get_template('talk/templates/onlinelist.html')
     context = RequestContext(request, {
         'online_list': grouptalk.online_list(),
+    })
+    
+    return http.HttpResponse(template.render(context))
+
+def talkhistory(request):
+    
+    talks = TalkLog.all().order('time').fetch(limit=2000)
+    
+    template = loader.get_template('talk/templates/talkhistory.html')
+    context = RequestContext(request, {
+        'talks': talks,
     })
     
     return http.HttpResponse(template.render(context))
@@ -185,6 +198,16 @@ def init_talkstatus(request):
     for blog in blogs:
         talk_models.TalkStatus.add(user=blog.user, blog=blog)
 
+    return http.HttpResponse()
+
+@requires_admin
+def init_TalkLog(request):
+    
+    db.delete(talk_models.TalkLog.all().fetch(limit=2000))
+    
+    for i in range(10):
+        talk_models.TalkLog.add(user=db.users.User("qhm123@gmail.com"), msg="msg %d" % i)
+        
     return http.HttpResponse()
 
 @requires_admin
