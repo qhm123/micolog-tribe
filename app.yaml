@@ -1,5 +1,5 @@
 application: micolog-tribe
-version: 2
+version: 3
 runtime: python
 api_version: 1
 
@@ -14,6 +14,11 @@ inbound_services:
 - mail
 
 handlers:
+- url: /favicon\.ico
+  static_files: static/favicon.ico
+  upload: static/favicon.ico
+  mime_type: image/x-icon
+
 - url: /static
   static_dir: static
   expiration: "30d"
