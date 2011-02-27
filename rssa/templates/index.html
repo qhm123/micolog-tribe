@@ -1,5 +1,7 @@
 {% extends "common/templates/base.html" %}
 
+{% load filters %}
+
 {% block head %}
 <!-- FEED自动发现标记开始 -->
 <link title="RSS 2.0" type="application/rss+xml" href="http://feed.feedsky.com/micolog-tribe" rel="alternate" />
@@ -16,7 +18,7 @@
 			<div class="thumbup"><a id="hotthumbup-{{ entry.key.id }}" class="thumba"></a><span>[{{ entry.rate_count}}票]</span></div>
 			<!-- <div class="icon"><img src="{{ entry.feed.link }}/favicon.ico" alt="icon" /></div> -->
 			<div class="categs"><a href="#" onclick="toggleHotItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
-			<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>
+			<div class="date"><span>{{ entry.date|timezone:8|date:"Y.m.d H:i" }}</span></div>
 		</div>
 	</div>
 
@@ -41,7 +43,7 @@
 			<div class="thumbup"><a id="thumbup-{{ entry.key.id }}" class="thumba"></a><span>[{{ entry.rate_count}}票]</span></div>
 			<!-- <div class="icon"><img src="{{ entry.feed.link }}/favicon.ico" alt="icon" /></div> -->
 			<div class="categs"><a href="#" onclick="toggleItemByID({{ entry.key.id }});return false;">{{ entry.title }}</a> &mdash; {{ entry.feed.title }}</div>
-			<div class="date"><span>{{ entry.date|date:"Y.m.d H:i" }}</span></div>
+			<div class="date"><span>{{ entry.date|timezone:8|date:"Y.m.d H:i" }}</span></div>
 		</div>
 	</div>
 
