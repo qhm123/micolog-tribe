@@ -35,10 +35,11 @@ class AuthLoginUrlsNode(Node):
     self.create_login_url = create_login_url
 
   def render(self, context):
+    redirect = self.redirect.resolve(context, True)
     if self.create_login_url:
-      return users.create_login_url(self.redirect)
+      return users.create_login_url(redirect)
     else:
-      return users.create_logout_url(self.redirect)
+      return users.create_logout_url(redirect)
 
 
 def auth_login_urls(parser, token):
@@ -50,7 +51,7 @@ def auth_login_urls(parser, token):
   """
   bits = list(token.split_contents())
   if len(bits) == 2:
-    redirect = bits[1]
+    redirect = parser.compile_filter(bits[1])
   else:
     redirect = "/"
   login = bits[0] == "auth_login_url"
