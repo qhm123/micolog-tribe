@@ -15,7 +15,7 @@ from common.helper import requires_admin
 def index(request):
     """博客秀首页。"""
     
-    tags = Tag.all().filter('tagged_count >', 1).fetch(limit=1000)
+    tags = Tag.all().filter('isshow', True).filter('tagged_count >', 1).fetch(limit=1000)
     
     template = loader.get_template('blogshow/templates/index.html')
     context = RequestContext(request, {
@@ -110,6 +110,14 @@ def refresh_blog_rateips(request):
     
     for blog in models.Blog.all().fetch(limit=1000):
         blog.rate_ips = []
+        blog.put()
+    return HttpResponse()
+
+@requires_admin
+def refresh_blog_isshow_property(request):
+    
+    for blog in models.Blog.all().fetch(limit=1000):
+        blog.isshow = True
         blog.put()
     return HttpResponse()
 

@@ -39,3 +39,8 @@ indexes:
   - name: rate_count
     direction: desc
   - name: add_date
+
+- kind: Tag
+  properties:
+  - name: isshow
+  - name: tagged_count

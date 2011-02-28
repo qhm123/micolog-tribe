@@ -33,6 +33,7 @@ class Blog(Taggable, BaseModel):
     rate_ips = db.StringListProperty(default=None)
     feedurl = db.StringProperty()
     tagstring = db.StringProperty()
+    isshow = db.BooleanProperty(default=True)
     
     def __init__(self, parent=None, key_name=None, app=None, **entity_values):
         """初始化，主要用于初始化Taggable。"""
