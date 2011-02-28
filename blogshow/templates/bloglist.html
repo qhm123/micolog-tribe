@@ -4,7 +4,7 @@
 		<a target="_blank" href="{{ blog.link }}">
 			<img src="/blogshow/img/{{ blog.key.id }}" alt="{{ blog.name }}" height="130" width="190" />
 <!--			<img src="http://images.shrinktheweb.com/xino.php?stwembed=1&stwaccesskeyid=96a7847ecf72707&stwsize=lg&stwurl={{ blog.link }}" alt="{{ blog.name }}" height="130" width="190" />-->
-			<span>{{ blog.name }}</span>
+			<span>{{ blog.name|safe }}</span>
 		</a>
 	</li>
 {% endfor %}
